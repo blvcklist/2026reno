@@ -85,18 +85,18 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      width: 212px;
-      height: 90px;
+      width: clamp(140px, 11vw, 212px);
+      height: clamp(60px, 4.7vw, 90px);
     }
 
     .nav-logo img {
-      width: 212px;
-      height: 90px;
+      width: clamp(140px, 11vw, 212px);
+      height: clamp(60px, 4.7vw, 90px);
       object-fit: contain;
     }
 
     .nav-btn {
-      font-size: 32px;
+      font-size: clamp(16px, 1.67vw, 32px);
       font-weight: 700;
       color: #ccc;
       padding: 0 20px;
@@ -133,7 +133,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 875px;
+      height: min(875px, 80vh);
     }
 
     /* Curved Edges */
@@ -142,7 +142,7 @@
       position: absolute;
       left: 0;
       width: 100%;
-      height: 200px;
+      height: clamp(80px, 10.4vw, 200px);
       z-index: 3;
       pointer-events: none;
     }
@@ -154,7 +154,7 @@
     /* Carousel */
     .hero__carousel {
       position: absolute;
-      top: 101px;
+      top: clamp(0px, 5.3vw, 101px);
       left: 0;
       width: max-content;
       display: flex;
@@ -180,14 +180,14 @@
     .hero__slide {
       flex-shrink: 0;
       width: calc(33.333vw - 16px);
-      height: 875px;
+      height: min(875px, 80vh);
       position: relative;
       overflow: hidden;
     }
 
     .hero__slide img {
       width: 100%;
-      height: 875px;
+      height: min(875px, 80vh);
       object-fit: cover;
       position: absolute;
       bottom: 0;
@@ -214,7 +214,7 @@
     }
 
     .hero__slide-slogan {
-      font-size: 24px;
+      font-size: clamp(14px, 1.25vw, 24px);
       font-weight: 300;
       line-height: 1.6;
       letter-spacing: -0.48px;
@@ -258,23 +258,23 @@
 
     .advertising__title {
       position: absolute;
-      top: 240px;
-      left: 64px;
-      font-size: 120px;
+      top: clamp(120px, 12.5vw, 240px);
+      left: clamp(24px, 3.33vw, 64px);
+      font-size: clamp(48px, 6.25vw, 120px);
       font-weight: 700;
       line-height: 1;
-      letter-spacing: -2.4px;
+      letter-spacing: -0.02em;
       color: #101820;
     }
 
     .advertising__subtitle {
       position: absolute;
-      top: 560px;
-      left: 64px;
-      font-size: 32px;
+      top: clamp(260px, 29.2vw, 560px);
+      left: clamp(24px, 3.33vw, 64px);
+      font-size: clamp(16px, 1.67vw, 32px);
       font-weight: 400;
       line-height: 1;
-      letter-spacing: -0.64px;
+      letter-spacing: -0.02em;
       color: #101820;
     }
 
@@ -319,7 +319,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       font-family: 'Pretendard', sans-serif;
-      font-size: 56px;
+      font-size: clamp(24px, 2.9vw, 56px);
       font-weight: 300;
       color: #fff;
       white-space: nowrap;
@@ -345,23 +345,23 @@
 
     .agency__title {
       position: absolute;
-      top: 240px;
-      left: 64px;
-      font-size: 120px;
+      top: clamp(120px, 12.5vw, 240px);
+      left: clamp(24px, 3.33vw, 64px);
+      font-size: clamp(48px, 6.25vw, 120px);
       font-weight: 700;
       line-height: 1;
-      letter-spacing: -2.4px;
+      letter-spacing: -0.02em;
       color: #101820;
     }
 
     .agency__subtitle {
       position: absolute;
-      top: 560px;
-      left: 64px;
-      font-size: 32px;
+      top: clamp(260px, 29.2vw, 560px);
+      left: clamp(24px, 3.33vw, 64px);
+      font-size: clamp(16px, 1.67vw, 32px);
       font-weight: 400;
       line-height: 1;
-      letter-spacing: -0.64px;
+      letter-spacing: -0.02em;
       color: #101820;
     }
 
@@ -370,8 +370,8 @@
       bottom: 15%;
       left: 50%;
       transform: translateX(-50%) scale(0.5);
-      width: 1400px;
-      height: 600px;
+      width: min(1400px, 90vw);
+      height: clamp(300px, 31.25vw, 600px);
       perspective: 1800px;
       opacity: 0;
       transition: opacity 1s ease, transform 1s ease;
@@ -386,8 +386,8 @@
     .agency__card {
       position: absolute;
       top: 0;
-      width: 420px;
-      height: 600px;
+      width: clamp(200px, 21.875vw, 420px);
+      height: clamp(300px, 31.25vw, 600px);
       border-radius: 16px;
       overflow: hidden;
       transform-style: preserve-3d;
@@ -428,19 +428,19 @@
 
     .weare__heading {
       position: absolute;
-      top: 271px;
-      left: 64px;
-      right: 64px;
+      top: clamp(120px, 14.1vw, 271px);
+      left: clamp(24px, 3.33vw, 64px);
+      right: clamp(24px, 3.33vw, 64px);
       display: flex;
       justify-content: space-between;
       align-items: baseline;
     }
 
     .weare__title {
-      font-size: 160px;
+      font-size: clamp(48px, 8.33vw, 160px);
       font-weight: 700;
       line-height: 1;
-      letter-spacing: -3.2px;
+      letter-spacing: -0.02em;
       color: #101820;
     }
 
@@ -449,18 +449,18 @@
     }
 
     .weare__title-right {
-      font-size: 160px;
+      font-size: clamp(48px, 8.33vw, 160px);
       font-weight: 700;
       line-height: 1;
-      letter-spacing: -3.2px;
+      letter-spacing: -0.02em;
       color: #101820;
     }
 
     .weare__desc {
       position: absolute;
-      top: 511px;
-      left: 64px;
-      font-size: 32px;
+      top: clamp(280px, 26.6vw, 511px);
+      left: clamp(24px, 3.33vw, 64px);
+      font-size: clamp(16px, 1.67vw, 32px);
       font-weight: 400;
       line-height: 1.4;
       letter-spacing: -0.64px;
@@ -493,34 +493,34 @@
     }
 
     .weare__record-label {
-      font-size: 32px;
+      font-size: clamp(16px, 1.67vw, 32px);
       font-weight: 400;
       line-height: 1;
-      letter-spacing: -0.64px;
+      letter-spacing: -0.02em;
       color: #8c9091;
     }
 
     .weare__record-item:nth-child(2) .weare__record-label,
     .weare__record-item:nth-child(3) .weare__record-label {
-      font-size: 24px;
-      letter-spacing: -0.48px;
+      font-size: clamp(14px, 1.25vw, 24px);
+      letter-spacing: -0.02em;
     }
 
     .weare__record-value {
-      font-size: 120px;
+      font-size: clamp(48px, 6.25vw, 120px);
       font-weight: 700;
       line-height: 1;
-      letter-spacing: -2.4px;
+      letter-spacing: -0.02em;
       color: #101820;
       display: flex;
       justify-content: center;
       overflow: hidden;
-      height: 120px;
+      height: clamp(48px, 6.25vw, 120px);
     }
 
     .weare__digit {
       display: inline-block;
-      height: 120px;
+      height: clamp(48px, 6.25vw, 120px);
       overflow: hidden;
     }
 
@@ -530,7 +530,7 @@
     }
 
     .weare__digit-inner span {
-      height: 120px;
+      height: clamp(48px, 6.25vw, 120px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -541,7 +541,7 @@
     /* ==================== FOOTER ==================== */
     .footer {
       background: #222;
-      padding: 75px 80px 76px;
+      padding: clamp(40px, 3.9vw, 75px) clamp(24px, 4.17vw, 80px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -551,7 +551,7 @@
     .footer__awards {
       width: 100%;
       display: flex;
-      gap: 40px;
+      gap: clamp(16px, 2.08vw, 40px);
       align-items: center;
     }
 
@@ -595,7 +595,7 @@
 
     .footer__info-left {
       display: flex;
-      gap: 64px;
+      gap: clamp(24px, 3.33vw, 64px);
       align-items: flex-start;
     }
 
@@ -645,7 +645,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 13px 40px 13px 60px;
+      padding: 13px clamp(24px, 2.08vw, 40px) 13px clamp(24px, 3.125vw, 60px);
       border: 1px solid #ddd;
       border-radius: 30px;
       background: none;
@@ -659,7 +659,7 @@
     }
 
     .footer__btn-text {
-      font-size: 24px;
+      font-size: clamp(16px, 1.25vw, 24px);
       font-weight: 700;
       line-height: 1.4;
       color: #ddd;
@@ -684,32 +684,21 @@
     @media (max-width: 768px) {
       /* --- Nav --- */
       .nav-btn { display: none; }
-      .nav-logo,
-      .nav-logo img { width: 140px; height: 60px; }
       .nav { left: 16px; right: 16px; }
 
       /* --- Hero --- */
       .hero__visual { height: 60vh; }
-      .hero__carousel { top: 0; }
       .hero__slide,
       .hero__slide img { height: 60vh; width: calc(80vw - 16px); }
-      .hero__curve-top,
-      .hero__curve-bottom { height: 100px; }
-      .hero__slide-slogan { font-size: 16px; }
       .hero__title-line { font-size: 12vw; }
 
       /* --- Advertising --- */
       .advertising { height: 300vh; }
-      .advertising__title { font-size: 48px; top: 160px; left: 24px; }
-      .advertising__subtitle { font-size: 18px; top: 320px; left: 24px; }
       .advertising__visual { width: 90vw; margin-left: -45vw; }
-      .advertising__visual-text { font-size: 28px; }
 
       /* --- Agency --- */
       .agency { height: auto; min-height: 100vh; }
       .agency__sticky { position: relative; }
-      .agency__title { font-size: 48px; top: 120px; left: 24px; }
-      .agency__subtitle { font-size: 18px; top: 280px; left: 24px; }
       .agency__cards {
         position: relative;
         bottom: auto;
@@ -741,10 +730,7 @@
 
       /* --- We Are --- */
       .weare { height: auto; min-height: 100vh; padding-bottom: 60px; }
-      .weare__heading { top: 120px; left: 24px; right: 24px; flex-direction: column; gap: 8px; }
-      .weare__title,
-      .weare__title-right { font-size: 64px; }
-      .weare__desc { top: 300px; left: 24px; right: 24px; font-size: 16px; }
+      .weare__heading { flex-direction: column; gap: 8px; }
       .weare__record {
         position: relative;
         top: auto;
@@ -752,19 +738,13 @@
         flex-direction: column;
         gap: 40px;
       }
-      .weare__record-value { font-size: 64px; height: 64px; }
-      .weare__record-label { font-size: 18px; }
-      .weare__digit { height: 64px; }
-      .weare__digit-inner span { height: 64px; }
 
       /* --- Footer --- */
-      .footer { padding: 40px 24px; }
       .footer__awards { flex-direction: column; gap: 20px; }
       .footer__info { flex-direction: column; gap: 32px; }
       .footer__info-left { flex-direction: column; gap: 24px; }
       .footer__details-row { flex-direction: column; gap: 4px; }
-      .footer__btn { align-self: stretch; justify-content: center; padding: 12px 24px; }
-      .footer__btn-text { font-size: 18px; }
+      .footer__btn { align-self: stretch; justify-content: center; }
     }
   </style>
 </head>
@@ -1219,14 +1199,14 @@
         const expandT = rawProgress <= expandStart ? 0 : Math.min((rawProgress - expandStart) / (expandEnd - expandStart), 1);
         const easeE = 1 - Math.pow(1 - expandT, 3);
 
-        const startW = isMobile() ? window.innerWidth * 0.9 : 952;
+        const startW = Math.min(952, window.innerWidth * 0.496);
         const endW = window.innerWidth;
         const w = lerp(startW, endW, easeE);
         const radius = lerp(40, 0, easeE);
         const borderW = lerp(1, 0, easeE);
 
         const navBottom = 64 + 90;
-        const startH = isMobile() ? 400 : 648;
+        const startH = Math.min(648, window.innerHeight * 0.6);
         const endH = vh - navBottom;
         const h = lerp(startH, endH, easeE);
 
@@ -1283,17 +1263,23 @@
       const cardsContainer = document.querySelector('.agency__cards');
       const section = document.querySelector('.agency');
 
-      const gap = 320;
-      const startX = (1400 - 420) / 2;
-      const baseX = (1400 - (420 + gap * 2)) / 2;
-      const targets = [baseX, baseX + gap, baseX + gap * 2];
+      function getCardLayout() {
+        var cw = Math.min(1400, window.innerWidth * 0.9);
+        var cardW = Math.min(420, window.innerWidth * 0.21875);
+        var g = Math.min(320, cw * 0.2286);
+        var sx = (cw - cardW) / 2;
+        var bx = (cw - (cardW + g * 2)) / 2;
+        return { gap: g, startX: sx, baseX: bx, targets: [bx, bx + g, bx + g * 2] };
+      }
+      var layout = getCardLayout();
+      window.addEventListener('resize', function() { layout = getCardLayout(); if (!isMobile()) applyState(); });
       const endRotateY = -25;
       var spread = false;
 
       // 초기 위치: 중앙에 모아두기
       if (!isMobile()) {
         cards.forEach((card, i) => {
-          card.style.left = startX + 'px';
+          card.style.left = layout.startX + 'px';
           card.style.zIndex = cards.length - i;
           card.style.opacity = 1;
           card.style.transform = 'rotateY(0deg) scale(1) translateY(0px)';
@@ -1318,12 +1304,12 @@
           if (spread) {
             var cos = Math.cos(Math.abs(endRotateY) * Math.PI / 180);
             var scale = 1 / cos;
-            card.style.left = targets[i] + 'px';
+            card.style.left = layout.targets[i] + 'px';
             card.style.transform = 'rotateY(' + endRotateY + 'deg) scale(' + scale + ') translateY(' + hoverY + 'px)';
             card.style.boxShadow = '0 40px 60px rgba(0, 0, 0, 0.2)';
             card.style.transitionDelay = (i * 0.1) + 's';
           } else {
-            card.style.left = startX + 'px';
+            card.style.left = layout.startX + 'px';
             card.style.transform = 'rotateY(0deg) scale(1) translateY(0px)';
             card.style.boxShadow = '0 10px 15px rgba(0, 0, 0, 0.05)';
             card.style.transitionDelay = ((cards.length - 1 - i) * 0.1) + 's';
@@ -1368,7 +1354,7 @@
       var record = document.querySelector('.weare__record');
       var values = document.querySelectorAll('.weare__record-value');
       var animated = false;
-      var H = isMobile() ? 64 : 120;
+      var H = Math.max(48, Math.min(120, window.innerWidth * 0.0625));
       var CYCLES = 3;
       var digitAnims = [];
 
