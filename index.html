@@ -367,11 +367,11 @@
 
     .agency__cards {
       position: absolute;
-      bottom: 240px;
+      bottom: 15%;
       left: 50%;
       transform: translateX(-50%) scale(0.5);
-      width: 1920px;
-      height: 800px;
+      width: 1400px;
+      height: 600px;
       perspective: 1800px;
       opacity: 0;
       transition: opacity 1s ease, transform 1s ease;
@@ -386,8 +386,8 @@
     .agency__card {
       position: absolute;
       top: 0;
-      width: 640px;
-      height: 800px;
+      width: 420px;
+      height: 600px;
       border-radius: 16px;
       overflow: hidden;
       transform-style: preserve-3d;
@@ -469,7 +469,7 @@
 
     .weare__record {
       position: absolute;
-      top: 761px;
+      top: 50%;
       left: 0;
       width: 100%;
       display: flex;
@@ -679,6 +679,93 @@
       line-height: 1.5;
       color: #c1c1c1;
     }
+
+    /* ==================== RESPONSIVE (Mobile) ==================== */
+    @media (max-width: 768px) {
+      /* --- Nav --- */
+      .nav-btn { display: none; }
+      .nav-logo,
+      .nav-logo img { width: 140px; height: 60px; }
+      .nav { left: 16px; right: 16px; }
+
+      /* --- Hero --- */
+      .hero__visual { height: 60vh; }
+      .hero__carousel { top: 0; }
+      .hero__slide,
+      .hero__slide img { height: 60vh; width: calc(80vw - 16px); }
+      .hero__curve-top,
+      .hero__curve-bottom { height: 100px; }
+      .hero__slide-slogan { font-size: 16px; }
+      .hero__title-line { font-size: 12vw; }
+
+      /* --- Advertising --- */
+      .advertising { height: 300vh; }
+      .advertising__title { font-size: 48px; top: 160px; left: 24px; }
+      .advertising__subtitle { font-size: 18px; top: 320px; left: 24px; }
+      .advertising__visual { width: 90vw; margin-left: -45vw; }
+      .advertising__visual-text { font-size: 28px; }
+
+      /* --- Agency --- */
+      .agency { height: auto; min-height: 100vh; }
+      .agency__sticky { position: relative; }
+      .agency__title { font-size: 48px; top: 120px; left: 24px; }
+      .agency__subtitle { font-size: 18px; top: 280px; left: 24px; }
+      .agency__cards {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+        height: auto;
+        perspective: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 340px 24px 60px;
+        opacity: 1;
+        transition: none;
+      }
+      .agency__cards.is-visible { transform: none; }
+      .agency__card {
+        position: relative !important;
+        width: 100% !important;
+        max-width: 400px;
+        height: auto !important;
+        aspect-ratio: 4/5;
+        transform: none !important;
+        left: auto !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+      }
+      .agency__card img { height: auto; }
+
+      /* --- We Are --- */
+      .weare { height: auto; min-height: 100vh; padding-bottom: 60px; }
+      .weare__heading { top: 120px; left: 24px; right: 24px; flex-direction: column; gap: 8px; }
+      .weare__title,
+      .weare__title-right { font-size: 64px; }
+      .weare__desc { top: 300px; left: 24px; right: 24px; font-size: 16px; }
+      .weare__record {
+        position: relative;
+        top: auto;
+        margin-top: 420px;
+        flex-direction: column;
+        gap: 40px;
+      }
+      .weare__record-value { font-size: 64px; height: 64px; }
+      .weare__record-label { font-size: 18px; }
+      .weare__digit { height: 64px; }
+      .weare__digit-inner span { height: 64px; }
+
+      /* --- Footer --- */
+      .footer { padding: 40px 24px; }
+      .footer__awards { flex-direction: column; gap: 20px; }
+      .footer__info { flex-direction: column; gap: 32px; }
+      .footer__info-left { flex-direction: column; gap: 24px; }
+      .footer__details-row { flex-direction: column; gap: 4px; }
+      .footer__btn { align-self: stretch; justify-content: center; padding: 12px 24px; }
+      .footer__btn-text { font-size: 18px; }
+    }
   </style>
 </head>
 <body>
@@ -866,6 +953,8 @@
   </footer>
 
   <script>
+    function isMobile() { return window.innerWidth <= 768; }
+
     (function () {
       const canvas = document.getElementById('particleCanvas');
       const ctx = canvas.getContext('2d');
@@ -1130,14 +1219,14 @@
         const expandT = rawProgress <= expandStart ? 0 : Math.min((rawProgress - expandStart) / (expandEnd - expandStart), 1);
         const easeE = 1 - Math.pow(1 - expandT, 3);
 
-        const startW = 952;
+        const startW = isMobile() ? window.innerWidth * 0.9 : 952;
         const endW = window.innerWidth;
         const w = lerp(startW, endW, easeE);
         const radius = lerp(40, 0, easeE);
         const borderW = lerp(1, 0, easeE);
 
         const navBottom = 64 + 90;
-        const startH = 648;
+        const startH = isMobile() ? 400 : 648;
         const endH = vh - navBottom;
         const h = lerp(startH, endH, easeE);
 
@@ -1194,20 +1283,22 @@
       const cardsContainer = document.querySelector('.agency__cards');
       const section = document.querySelector('.agency');
 
-      const gap = 480;
-      const startX = (1984 - 640) / 2;
-      const baseX = (1984 - (640 + gap * 2)) / 2;
+      const gap = 320;
+      const startX = (1400 - 420) / 2;
+      const baseX = (1400 - (420 + gap * 2)) / 2;
       const targets = [baseX, baseX + gap, baseX + gap * 2];
       const endRotateY = -25;
       var spread = false;
 
       // 초기 위치: 중앙에 모아두기
-      cards.forEach((card, i) => {
-        card.style.left = startX + 'px';
-        card.style.zIndex = cards.length - i;
-        card.style.opacity = 1;
-        card.style.transform = 'rotateY(0deg) scale(1) translateY(0px)';
-      });
+      if (!isMobile()) {
+        cards.forEach((card, i) => {
+          card.style.left = startX + 'px';
+          card.style.zIndex = cards.length - i;
+          card.style.opacity = 1;
+          card.style.transform = 'rotateY(0deg) scale(1) translateY(0px)';
+        });
+      }
 
       // 자동 페이드인
       const observer = new IntersectionObserver((entries) => {
@@ -1221,6 +1312,7 @@
       observer.observe(section);
 
       function applyState() {
+        if (isMobile()) return;
         cards.forEach((card, i) => {
           var hoverY = (spread && card.classList.contains('is-hovered')) ? -200 : 0;
           if (spread) {
@@ -1259,6 +1351,7 @@
 
       // wheel 이벤트로 토글
       section.addEventListener('wheel', function (e) {
+        if (isMobile()) return;
         if (!cardsContainer.classList.contains('is-visible')) return;
         if (e.deltaY > 0 && !spread) {
           spread = true;
@@ -1275,7 +1368,7 @@
       var record = document.querySelector('.weare__record');
       var values = document.querySelectorAll('.weare__record-value');
       var animated = false;
-      var H = 120;
+      var H = isMobile() ? 64 : 120;
       var CYCLES = 3;
       var digitAnims = [];
 
