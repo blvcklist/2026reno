@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RENOCOMMS - Real Evolution, New Opportunity</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background: #101820;
+      overflow-x: hidden;
+    }
+
+    /* ==================== HERO ==================== */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: #101820;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* --- Title --- */
+    .hero__title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding-top: 40px;
+      position: relative;
+    }
+
+    .hero__title-line {
+      font-size: 10.4vw;
+      font-weight: 700;
+      color: #ccc;
+      text-align: center;
+      line-height: 0.8;
+      letter-spacing: -0.2vw;
+      white-space: nowrap;
+      visibility: hidden;
+    }
+
+    .hero__title-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* --- Navigation Header --- */
+    .nav {
+      position: fixed;
+      top: 40%;
+      left: 40px;
+      right: 40px;
+      transform: translateY(-50%);
+      height: 90px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      transition: top 0.6s ease, transform 0.6s ease;
+    }
+
+    .nav.is-scrolled {
+      top: 64px;
+      transform: translateY(0);
+    }
+
+    .nav-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 212px;
+      height: 90px;
+    }
+
+    .nav-logo img {
+      width: 212px;
+      height: 90px;
+      object-fit: contain;
+    }
+
+    .nav-btn {
+      font-size: 32px;
+      font-weight: 700;
+      color: #ccc;
+      padding: 0 20px;
+      line-height: 1.5;
+      cursor: pointer;
+      transition: color 0.6s ease;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      color: #fff;
+    }
+
+    .nav.is-dark .nav-btn {
+      color: #101820;
+    }
+
+    .nav.is-dark .nav-btn:hover {
+      color: #000;
+    }
+
+    .nav.is-dark .nav-logo img {
+      filter: brightness(0) saturate(100%);
+      transition: filter 0.6s ease;
+    }
+
+    .nav-logo img {
+      transition: filter 0.6s ease;
+    }
+
+    /* --- Main Visual --- */
+    .hero__visual {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 875px;
+    }
+
+    /* Curved Edges */
+    .hero__curve-top,
+    .hero__curve-bottom {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .hero__curve-bottom {
+      bottom: -100px;
+    }
+
+    /* Carousel */
+    .hero__carousel {
+      position: absolute;
+      top: 101px;
+      left: 0;
+      width: max-content;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      z-index: 2;
+      animation: slide 30s linear infinite;
+    }
+
+    .hero__carousel:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .hero__slide {
+      flex-shrink: 0;
+      width: calc(33.333vw - 16px);
+      height: 875px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__slide img {
+      width: 100%;
+      height: 875px;
+      object-fit: cover;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .hero__slide-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(16, 24, 32, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 1;
+    }
+
+    .hero__slide:hover .hero__slide-overlay {
+      opacity: 1;
+    }
+
+    .hero__slide-slogan {
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1.6;
+      letter-spacing: -0.48px;
+      color: #fff;
+      text-align: center;
+      white-space: pre-line;
+    }
+
+    /* --- Fade In Animation --- */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 2s ease forwards;
+    }
+
+    .fade-in--delay-2 { animation-delay: 4s; }
+    .fade-in--delay-3 { animation-delay: 5s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ==================== ADVERTISING ==================== */
+    .advertising {
+      position: relative;
+      width: 100%;
+      height: 400vh;
+      background: #ccc;
+    }
+
+    .advertising__sticky {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .advertising__title {
+      position: absolute;
+      top: 240px;
+      left: 64px;
+      font-size: 120px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -2.4px;
+      color: #101820;
+    }
+
+    .advertising__subtitle {
+      position: absolute;
+      top: 560px;
+      left: 64px;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.64px;
+      color: #101820;
+    }
+
+    .advertising__visual {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -476px;
+      width: 952px;
+      height: 648px;
+      border-radius: 40px;
+      border: 1px solid #fff;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(200px);
+      transform-origin: center bottom;
+    }
+
+    .advertising__visual-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .advertising__visual-slide--second {
+      z-index: 1;
+      transform: translateY(100%);
+    }
+
+    .advertising__visual-slide--second img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .advertising__visual-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Pretendard', sans-serif;
+      font-size: 56px;
+      font-weight: 300;
+      color: #fff;
+      white-space: nowrap;
+      opacity: 0.8;
+      letter-spacing: -1px;
+    }
+
+    /* ==================== AGENCY ==================== */
+    .agency {
+      position: relative;
+      width: 100%;
+      height: 200vh;
+      background: #fff;
+    }
+
+    .agency__sticky {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .agency__title {
+      position: absolute;
+      top: 240px;
+      left: 64px;
+      font-size: 120px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -2.4px;
+      color: #101820;
+    }
+
+    .agency__subtitle {
+      position: absolute;
+      top: 560px;
+      left: 64px;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.64px;
+      color: #101820;
+    }
+
+    .agency__cards {
+      position: absolute;
+      bottom: 240px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.5);
+      width: 1920px;
+      height: 800px;
+      perspective: 1800px;
+      opacity: 0;
+      transition: opacity 1s ease, transform 1s ease;
+      transition-delay: 2.5s;
+    }
+
+    .agency__cards.is-visible {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    .agency__card {
+      position: absolute;
+      top: 0;
+      width: 640px;
+      height: 800px;
+      border-radius: 16px;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), left 0.8s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.8s ease;
+    }
+
+    .agency__card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+    }
+
+    /* Scroll reveal */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .scroll-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-reveal--delay-1 { transition-delay: 1.5s; }
+    .scroll-reveal--delay-2 { transition-delay: 2s; }
+    .scroll-reveal--delay-3 { transition-delay: 2.5s; }
+
+    /* ==================== WE ARE ==================== */
+    .weare {
+      position: relative;
+      width: 100%;
+      height: 1200px;
+      background: #fff;
+    }
+
+    .weare__heading {
+      position: absolute;
+      top: 271px;
+      left: 64px;
+      right: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .weare__title {
+      font-size: 160px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -3.2px;
+      color: #101820;
+    }
+
+    .weare__title span {
+      font-weight: 300;
+    }
+
+    .weare__title-right {
+      font-size: 160px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -3.2px;
+      color: #101820;
+    }
+
+    .weare__desc {
+      position: absolute;
+      top: 511px;
+      left: 64px;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: -0.64px;
+      color: #101820;
+    }
+
+    .weare__record {
+      position: absolute;
+      top: 761px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .weare__record.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .weare__record-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .weare__record-label {
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.64px;
+      color: #8c9091;
+    }
+
+    .weare__record-item:nth-child(2) .weare__record-label,
+    .weare__record-item:nth-child(3) .weare__record-label {
+      font-size: 24px;
+      letter-spacing: -0.48px;
+    }
+
+    .weare__record-value {
+      font-size: 120px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -2.4px;
+      color: #101820;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      height: 120px;
+    }
+
+    .weare__digit {
+      display: inline-block;
+      height: 120px;
+      overflow: hidden;
+    }
+
+    .weare__digit-inner {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .weare__digit-inner span {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+
+    /* ==================== FOOTER ==================== */
+    .footer {
+      background: #222;
+      padding: 75px 80px 76px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .footer__awards {
+      width: 100%;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .footer__award {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .footer__award-icon {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .footer__award-icon--ict {
+      width: 41px;
+      height: 54px;
+    }
+
+    .footer__award-text {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: -0.32px;
+      color: #c1c1c1;
+    }
+
+    .footer__divider {
+      width: 100%;
+      height: 1px;
+      background: #333;
+    }
+
+    .footer__info {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer__info-left {
+      display: flex;
+      gap: 64px;
+      align-items: flex-start;
+    }
+
+    .footer__logo {
+      position: relative;
+      width: 140px;
+      height: 61px;
+    }
+
+    .footer__logo-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 68.75%;
+      object-fit: contain;
+    }
+
+    .footer__logo-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 99.35%;
+      height: 16.46%;
+      object-fit: contain;
+    }
+
+    .footer__details {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 16px;
+      color: #ddd;
+      line-height: 1.5;
+    }
+
+    .footer__details-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer__details-row strong {
+      font-weight: 700;
+    }
+
+    .footer__btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 40px 13px 60px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      background: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .footer__btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .footer__btn-text {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: #ddd;
+      white-space: nowrap;
+    }
+
+    .footer__btn-icon {
+      width: 24px;
+      height: 24px;
+      stroke: #ddd;
+      fill: none;
+    }
+
+    .footer__copyright {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #c1c1c1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+    <nav class="nav fade-in fade-in--delay-2">
+      <div class="nav-btn">ADVERTISING BUSINESS DIV.</div>
+      <div class="nav-logo">
+        <img src="https://www.figma.com/api/mcp/asset/65954d34-c75b-4e2e-84fc-33be2517953f" alt="RENO COMMS">
+      </div>
+      <div class="nav-btn">AGENCY BUSINESS DIV.</div>
+    </nav>
+
+  <section class="hero">
+    <!-- Title -->
+    <div class="hero__title">
+      <div class="hero__title-line" id="titleLine1">REAL EVOLUTION</div>
+      <div class="hero__title-line" id="titleLine2">NEW OPPORTUNITY</div>
+      <canvas class="hero__title-canvas" id="particleCanvas"></canvas>
+    </div>
+
+  
+    <!-- Main Visual Area -->
+    <div class="hero__visual fade-in fade-in--delay-3">
+      <!-- Curved Edges -->
+      <img class="hero__curve-top" src="https://www.figma.com/api/mcp/asset/71841429-5ee4-434e-94df-acc092ad04b3" alt="">
+      <img class="hero__curve-bottom" src="https://www.figma.com/api/mcp/asset/71841429-5ee4-434e-94df-acc092ad04b3" alt="">
+
+      <!-- Carousel (duplicated for seamless loop) -->
+      <div class="hero__carousel">
+        <div class="hero__slide">
+          <img src="https://www.figma.com/api/mcp/asset/8e258b2d-5858-48ab-9860-8e2316effde6" alt="Portfolio 3">
+          <div class="hero__slide-overlay">
+            <p class="hero__slide-slogan">Beyond Digital,</br>Into the AI Era.</p>
+          </div>
+        </div>
+        <div class="hero__slide">
+          <img src="https://www.figma.com/api/mcp/asset/02c903bd-ad11-47ea-a012-0c62d34a99ce" alt="Portfolio 1">
+          <div class="hero__slide-overlay">
+            <p class="hero__slide-slogan">사람과 브랜드, 생각과 기술을 잇는 새로운 가치</br>진정한 혁신, 새로운 기회</br>리노가 만듭니다.</p>
+          </div>
+        </div>
+        <div class="hero__slide">
+          <img src="https://www.figma.com/api/mcp/asset/43cdb188-5c1f-4ec1-b657-f5dcf446f50d" alt="Portfolio 2">
+          <div class="hero__slide-overlay">
+            <p class="hero__slide-slogan">전략적인 UX, 실행되는 마케팅</br>경험을 설계하고 성과를 만듭니다.</p>
+          </div>
+        </div>
+        <!-- Duplicate -->
+        <div class="hero__slide">
+          <img src="https://www.figma.com/api/mcp/asset/8e258b2d-5858-48ab-9860-8e2316effde6" alt="Portfolio 3">
+          <div class="hero__slide-overlay">
+            <p class="hero__slide-slogan">Beyond Digital,</br>Into the AI Era.</p>
+          </div>
+        </div>
+        <div class="hero__slide">
+          <img src="https://www.figma.com/api/mcp/asset/02c903bd-ad11-47ea-a012-0c62d34a99ce" alt="Portfolio 1">
+          <div class="hero__slide-overlay">
+            <p class="hero__slide-slogan">사람과 브랜드, 생각과 기술을 잇는 새로운 가치</br>진정한 혁신, 새로운 기회</br>리노가 만듭니다.</p>
+          </div>
+        </div>
+        <div class="hero__slide">
+          <img src="https://www.figma.com/api/mcp/asset/43cdb188-5c1f-4ec1-b657-f5dcf446f50d" alt="Portfolio 2">
+          <div class="hero__slide-overlay">
+            <p class="hero__slide-slogan">전략적인 UX, 실행되는 마케팅</br>경험을 설계하고 성과를 만듭니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ==================== ADVERTISING ==================== -->
+  <section class="advertising" data-theme="light">
+    <div class="advertising__sticky">
+      <h2 class="advertising__title scroll-reveal scroll-reveal--delay-1">
+        <p>ADVERTISING</p>
+        <p>BUSINESS DIV.</p>
+      </h2>
+      <p class="advertising__subtitle scroll-reveal scroll-reveal--delay-2">우리의 상상은 현실이 된다</p>
+
+      <div class="advertising__visual">
+        <img class="advertising__visual-slide" src="https://www.figma.com/api/mcp/asset/31fa53ab-91cb-4f97-8bde-a44363afab27" alt="LOTTE Cinema Screen 1">
+        <div class="advertising__visual-slide advertising__visual-slide--second">
+          <img src="https://www.figma.com/api/mcp/asset/13154089-ef8b-45fa-89a6-ada0464f70ae" alt="GOLFZON">
+          <span class="advertising__visual-text">GOLFZON</span>
+        </div>
+        <span class="advertising__visual-text">LOTTE CINEMA</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== AGENCY ==================== -->
+  <section class="agency" data-theme="light">
+    <div class="agency__sticky">
+      <h2 class="agency__title scroll-reveal scroll-reveal--delay-1">
+        <p>AGENCY</p>
+        <p>BUSINESS DIV.</p>
+      </h2>
+      <p class="agency__subtitle scroll-reveal scroll-reveal--delay-2">AI 생태계의 내일을 설계합니다</p>
+
+      <div class="agency__cards">
+        <div class="agency__card">
+          <img src="https://www.figma.com/api/mcp/asset/a3ec0f26-3573-434a-86da-b1555818cf0c" alt="TV CHOSUN">
+        </div>
+        <div class="agency__card">
+          <img src="https://www.figma.com/api/mcp/asset/6a5f9b9c-fe83-41e4-8184-27a6fba40466" alt="Character App">
+        </div>
+        <div class="agency__card">
+          <img src="https://www.figma.com/api/mcp/asset/0897d507-e59b-4f5d-8ef6-a388e32d50bb" alt="Daegu App">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WE ARE ==================== -->
+  <section class="weare" data-theme="light">
+    <div class="weare__heading scroll-reveal scroll-reveal--delay-1">
+      <h2 class="weare__title">WE <span>ARE</span></h2>
+      <p class="weare__title-right">RENO</p>
+    </div>
+    <p class="weare__desc scroll-reveal scroll-reveal--delay-2">리노는 2004부터 22년 동안 웹의 기준을 만들어 오고 있습니다.<br>매년 눈부신 성과를 이루며 성장하고 혁신합니다.</p>
+    <div class="weare__record">
+      <div class="weare__record-item">
+        <p class="weare__record-label">since</p>
+        <p class="weare__record-value" data-value="2004"></p>
+      </div>
+      <div class="weare__record-item">
+        <p class="weare__record-label">years</p>
+        <p class="weare__record-value" data-value="22"></p>
+      </div>
+      <div class="weare__record-item">
+        <p class="weare__record-label">sales</p>
+        <p class="weare__record-value" data-value="17B"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="footer__awards">
+      <div class="footer__award">
+        <img class="footer__award-icon" src="https://www.figma.com/api/mcp/asset/736dc420-dd6d-462b-b325-720518ad1518" alt="WEB AWARD">
+        <p class="footer__award-text">WEB AWARD<br>KOREA 2025 Gold 부문</p>
+      </div>
+      <div class="footer__award">
+        <img class="footer__award-icon" src="https://www.figma.com/api/mcp/asset/736dc420-dd6d-462b-b325-720518ad1518" alt="WEB AWARD">
+        <p class="footer__award-text">WEB AWARD<br>KOREA 2025 Silver 부문</p>
+      </div>
+      <div class="footer__award">
+        <img class="footer__award-icon footer__award-icon--ict" src="https://www.figma.com/api/mcp/asset/27a36537-37c4-4ff3-9c2a-3ae575df3e17" alt="ICT AWARD">
+        <p class="footer__award-text">ICT AWARD<br>KOREA 2025 GOLD PRIZE</p>
+      </div>
+    </div>
+
+    <div class="footer__divider"></div>
+
+    <div class="footer__info">
+      <div class="footer__info-left">
+        <div class="footer__logo">
+          <img class="footer__logo-top" src="https://www.figma.com/api/mcp/asset/cc0392fe-f760-4d9b-b40b-61c85a2c5cdd" alt="RENO">
+          <img class="footer__logo-bottom" src="https://www.figma.com/api/mcp/asset/ef21c2d7-52fc-4a40-97f7-85cb40d9e9c5" alt="COMMUNICATIONS">
+        </div>
+        <div class="footer__details">
+          <div class="footer__details-row">
+            <span>서울특별시 송파구 동남로 155 리노컴즈빌딩</span>
+            <span>www.renocomms.com</span>
+            <span><strong>대표번호</strong> 02-3445-1750</span>
+          </div>
+          <div class="footer__details-row">
+            <span><strong>대표이사</strong> 김덕구</span>
+            <span><strong>사업자등록번호</strong> 220-86-92530</span>
+          </div>
+        </div>
+      </div>
+      <a class="footer__btn" href="#">
+        <span class="footer__btn-text">회사소개서</span>
+        <svg class="footer__btn-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="footer__divider"></div>
+
+    <p class="footer__copyright">Copyright ⓒ RENOCOMMS. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    (function () {
+      const canvas = document.getElementById('particleCanvas');
+      const ctx = canvas.getContext('2d');
+      const titleContainer = document.querySelector('.hero__title');
+      const line1 = document.getElementById('titleLine1');
+      const line2 = document.getElementById('titleLine2');
+
+      let particles = [];
+      let animationStarted = false;
+      const PARTICLE_SIZE = 2;
+      const DENSITY = 3;
+
+      function resize() {
+        const rect = titleContainer.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      }
+
+      function getTextPixels(text, fontSize, centerX, centerY) {
+        const offscreen = document.createElement('canvas');
+        offscreen.width = canvas.width;
+        offscreen.height = canvas.height;
+        const offCtx = offscreen.getContext('2d');
+
+        offCtx.fillStyle = '#cccccc';
+        offCtx.font = `700 ${fontSize}px Pretendard, sans-serif`;
+        offCtx.textAlign = 'center';
+        offCtx.textBaseline = 'middle';
+        offCtx.letterSpacing = `${-fontSize * 0.02}px`;
+        offCtx.fillText(text, centerX, centerY);
+
+        const imageData = offCtx.getImageData(0, 0, offscreen.width, offscreen.height);
+        const pixels = [];
+
+        for (let y = 0; y < offscreen.height; y += DENSITY) {
+          for (let x = 0; x < offscreen.width; x += DENSITY) {
+            const i = (y * offscreen.width + x) * 4;
+            if (imageData.data[i + 3] > 128) {
+              pixels.push({ x, y });
+            }
+          }
+        }
+        return pixels;
+      }
+
+      function createParticles() {
+        particles = [];
+        resize();
+
+        const style1 = window.getComputedStyle(line1);
+        const style2 = window.getComputedStyle(line2);
+        const fontSize1 = parseFloat(style1.fontSize);
+        const fontSize2 = parseFloat(style2.fontSize);
+
+        const rect1 = line1.getBoundingClientRect();
+        const rect2 = line2.getBoundingClientRect();
+        const containerRect = titleContainer.getBoundingClientRect();
+
+        const cy1 = rect1.top - containerRect.top + rect1.height / 2;
+        const cy2 = rect2.top - containerRect.top + rect2.height / 2;
+        const cx = canvas.width / 2;
+
+        const pixels1 = getTextPixels('REAL EVOLUTION', fontSize1, cx, cy1);
+        const pixels2 = getTextPixels('NEW OPPORTUNITY', fontSize2, cx, cy2);
+
+        pixels1.forEach(p => {
+          particles.push({
+            targetX: p.x,
+            targetY: p.y,
+            x: -Math.random() * canvas.width,
+            y: p.y + (Math.random() - 0.5) * 200,
+            size: PARTICLE_SIZE + Math.random() * 1,
+            delay: 0.5 + Math.random() * 0.8,
+            alpha: 0,
+          });
+        });
+
+        pixels2.forEach(p => {
+          particles.push({
+            targetX: p.x,
+            targetY: p.y,
+            x: canvas.width + Math.random() * canvas.width,
+            y: p.y + (Math.random() - 0.5) * 200,
+            size: PARTICLE_SIZE + Math.random() * 1,
+            delay: 1.0 + Math.random() * 0.8,
+            alpha: 0,
+          });
+        });
+      }
+
+      function animate() {
+        if (!animationStarted) return;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const now = (performance.now() / 1000);
+        let allDone = true;
+
+        for (const p of particles) {
+          const elapsed = now - p.startTime;
+          if (elapsed < p.delay) {
+            allDone = false;
+            continue;
+          }
+
+          const duration = 2.5;
+          const t = Math.min((elapsed - p.delay) / duration, 1);
+          const ease = 1 - Math.pow(1 - t, 3);
+
+          p.x = p.originX + (p.targetX - p.originX) * ease;
+          p.y = p.originY + (p.targetY - p.originY) * ease;
+          p.alpha = ease;
+
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = '#cccccc';
+          ctx.fillRect(p.x, p.y, p.size, p.size);
+
+          if (t < 1) allDone = false;
+        }
+
+        if (allDone) {
+          ctx.globalAlpha = 1;
+          const style1 = window.getComputedStyle(line1);
+          const style2 = window.getComputedStyle(line2);
+          const fontSize1 = parseFloat(style1.fontSize);
+          const fontSize2 = parseFloat(style2.fontSize);
+          const rect1 = line1.getBoundingClientRect();
+          const rect2 = line2.getBoundingClientRect();
+          const containerRect = titleContainer.getBoundingClientRect();
+          const cy1 = rect1.top - containerRect.top + rect1.height / 2;
+          const cy2 = rect2.top - containerRect.top + rect2.height / 2;
+          const cx = canvas.width / 2;
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = '#cccccc';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+
+          ctx.font = `700 ${fontSize1}px Pretendard, sans-serif`;
+          ctx.letterSpacing = `${-fontSize1 * 0.02}px`;
+          ctx.fillText('REAL EVOLUTION', cx, cy1);
+
+          ctx.font = `700 ${fontSize2}px Pretendard, sans-serif`;
+          ctx.letterSpacing = `${-fontSize2 * 0.02}px`;
+          ctx.fillText('NEW OPPORTUNITY', cx, cy2);
+          return;
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      function start() {
+        createParticles();
+        const startTime = performance.now() / 1000;
+        particles.forEach(p => {
+          p.startTime = startTime;
+          p.originX = p.x;
+          p.originY = p.y;
+        });
+        animationStarted = true;
+        requestAnimationFrame(animate);
+      }
+
+      window.addEventListener('load', () => {
+        setTimeout(start, 300);
+      });
+
+      window.addEventListener('resize', () => {
+        createParticles();
+        const startTime = performance.now() / 1000 - 10;
+        particles.forEach(p => {
+          p.startTime = startTime;
+          p.originX = p.targetX;
+          p.originY = p.targetY;
+          p.x = p.targetX;
+          p.y = p.targetY;
+          p.alpha = 1;
+        });
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const style1 = window.getComputedStyle(line1);
+        const style2 = window.getComputedStyle(line2);
+        const fontSize1 = parseFloat(style1.fontSize);
+        const fontSize2 = parseFloat(style2.fontSize);
+        const rect1 = line1.getBoundingClientRect();
+        const rect2 = line2.getBoundingClientRect();
+        const containerRect = titleContainer.getBoundingClientRect();
+        const cy1 = rect1.top - containerRect.top + rect1.height / 2;
+        const cy2 = rect2.top - containerRect.top + rect2.height / 2;
+        const cx = canvas.width / 2;
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = '#cccccc';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = `700 ${fontSize1}px Pretendard, sans-serif`;
+        ctx.letterSpacing = `${-fontSize1 * 0.02}px`;
+        ctx.fillText('REAL EVOLUTION', cx, cy1);
+        ctx.font = `700 ${fontSize2}px Pretendard, sans-serif`;
+        ctx.letterSpacing = `${-fontSize2 * 0.02}px`;
+        ctx.fillText('NEW OPPORTUNITY', cx, cy2);
+      });
+    })();
+
+    // ===== Nav Scroll Fix & Color Change =====
+    (function () {
+      const nav = document.querySelector('.nav');
+      const lightSections = document.querySelectorAll('[data-theme="light"]');
+
+      function updateNav() {
+        if (window.scrollY > 100) {
+          nav.classList.add('is-scrolled');
+        } else {
+          nav.classList.remove('is-scrolled');
+        }
+
+        const navRect = nav.getBoundingClientRect();
+        const navCenter = navRect.top + navRect.height / 2;
+        let onLight = false;
+
+        lightSections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          if (navCenter >= rect.top && navCenter <= rect.bottom) {
+            onLight = true;
+          }
+        });
+
+        if (onLight) {
+          nav.classList.add('is-dark');
+        } else {
+          nav.classList.remove('is-dark');
+        }
+      }
+
+      window.addEventListener('scroll', updateNav);
+      window.addEventListener('resize', updateNav);
+    })();
+
+    // ===== Advertising Visual Scroll Animation =====
+    (function () {
+      const visual = document.querySelector('.advertising__visual');
+      const visualText = document.querySelector('.advertising__visual-text');
+      const section = document.querySelector('.advertising');
+
+      function lerp(a, b, t) { return a + (b - a) * t; }
+
+      function update() {
+        const rect = section.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const scrolled = -rect.top;
+        const totalScroll = section.offsetHeight - vh;
+
+        const rawProgress = Math.max(0, Math.min(scrolled / totalScroll, 1));
+
+        // Phase 1: fade in & rise
+        const fadeEnd = 0.35;
+        const fadeT = Math.min(rawProgress / fadeEnd, 1);
+        const easeF = 1 - Math.pow(1 - fadeT, 3);
+        const opacity = easeF;
+        const translateY = lerp(200, 0, easeF);
+
+        // Phase 2 (0.2~0.5): expand width
+        const expandStart = 0.2, expandEnd = 0.5;
+        const expandT = rawProgress <= expandStart ? 0 : Math.min((rawProgress - expandStart) / (expandEnd - expandStart), 1);
+        const easeE = 1 - Math.pow(1 - expandT, 3);
+
+        const startW = 952;
+        const endW = window.innerWidth;
+        const w = lerp(startW, endW, easeE);
+        const radius = lerp(40, 0, easeE);
+        const borderW = lerp(1, 0, easeE);
+
+        const navBottom = 64 + 90;
+        const startH = 648;
+        const endH = vh - navBottom;
+        const h = lerp(startH, endH, easeE);
+
+        // First image text: fade in & rise during expand phase
+        const textStart = 0.3, textEnd = 0.5;
+        const textT = rawProgress <= textStart ? 0 : Math.min((rawProgress - textStart) / (textEnd - textStart), 1);
+        const easeT = 1 - Math.pow(1 - textT, 3);
+        const textOpacity = easeT;
+        const textY = lerp(40, 0, easeT);
+        const textScale = lerp(0.6, 1, easeT);
+
+        visual.style.opacity = opacity;
+        visual.style.transform = `translateY(${translateY}px)`;
+        visual.style.width = w + 'px';
+        visual.style.height = h + 'px';
+        visual.style.marginLeft = (-w / 2) + 'px';
+        visual.style.borderRadius = radius + 'px';
+        visual.style.borderWidth = borderW + 'px';
+
+        visualText.style.opacity = textOpacity;
+        visualText.style.transform = `translate(-50%, calc(-50% + ${textY}px)) scale(${textScale})`;
+      }
+
+      window.addEventListener('scroll', update);
+      window.addEventListener('resize', update);
+    })();
+
+    // ===== Advertising Visual Carousel (scroll-driven, vertical) =====
+    (function () {
+      const secondSlide = document.querySelector('.advertising__visual-slide--second');
+      const section = document.querySelector('.advertising');
+
+      function update() {
+        const rect = section.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const scrolled = -rect.top;
+        const totalScroll = section.offsetHeight - vh;
+        const progress = Math.max(0, Math.min(scrolled / totalScroll, 1));
+
+        // Starts after expand completes (0.5) through 0.85
+        const shiftStart = 0.5, shiftEnd = 0.85;
+        const shiftT = progress <= shiftStart ? 0 : Math.min((progress - shiftStart) / (shiftEnd - shiftStart), 1);
+        const easeShift = 1 - Math.pow(1 - shiftT, 3);
+        secondSlide.style.transform = `translateY(${(1 - easeShift) * 100}%)`;
+      }
+
+      window.addEventListener('scroll', update);
+      window.addEventListener('resize', update);
+    })();
+
+    // ===== Agency Cards Spread Animation =====
+    (function () {
+      const cards = document.querySelectorAll('.agency__card');
+      const cardsContainer = document.querySelector('.agency__cards');
+      const section = document.querySelector('.agency');
+
+      const gap = 480;
+      const startX = (1984 - 640) / 2;
+      const baseX = (1984 - (640 + gap * 2)) / 2;
+      const targets = [baseX, baseX + gap, baseX + gap * 2];
+      const endRotateY = -25;
+      var spread = false;
+
+      // 초기 위치: 중앙에 모아두기
+      cards.forEach((card, i) => {
+        card.style.left = startX + 'px';
+        card.style.zIndex = cards.length - i;
+        card.style.opacity = 1;
+        card.style.transform = 'rotateY(0deg) scale(1) translateY(0px)';
+      });
+
+      // 자동 페이드인
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            cardsContainer.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      observer.observe(section);
+
+      function applyState() {
+        cards.forEach((card, i) => {
+          var hoverY = (spread && card.classList.contains('is-hovered')) ? -200 : 0;
+          if (spread) {
+            var cos = Math.cos(Math.abs(endRotateY) * Math.PI / 180);
+            var scale = 1 / cos;
+            card.style.left = targets[i] + 'px';
+            card.style.transform = 'rotateY(' + endRotateY + 'deg) scale(' + scale + ') translateY(' + hoverY + 'px)';
+            card.style.boxShadow = '0 40px 60px rgba(0, 0, 0, 0.2)';
+            card.style.transitionDelay = (i * 0.1) + 's';
+          } else {
+            card.style.left = startX + 'px';
+            card.style.transform = 'rotateY(0deg) scale(1) translateY(0px)';
+            card.style.boxShadow = '0 10px 15px rgba(0, 0, 0, 0.05)';
+            card.style.transitionDelay = ((cards.length - 1 - i) * 0.1) + 's';
+          }
+        });
+
+        if (spread) {
+          cardsContainer.classList.add('is-spread');
+        } else {
+          cardsContainer.classList.remove('is-spread');
+        }
+      }
+
+      // Hover
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.classList.add('is-hovered');
+          if (spread) applyState();
+        });
+        card.addEventListener('mouseleave', () => {
+          card.classList.remove('is-hovered');
+          if (spread) applyState();
+        });
+      });
+
+      // wheel 이벤트로 토글
+      section.addEventListener('wheel', function (e) {
+        if (!cardsContainer.classList.contains('is-visible')) return;
+        if (e.deltaY > 0 && !spread) {
+          spread = true;
+          applyState();
+        } else if (e.deltaY < 0 && spread) {
+          spread = false;
+          applyState();
+        }
+      });
+    })();
+
+    // ===== We Are Record Slot Animation =====
+    (function () {
+      var record = document.querySelector('.weare__record');
+      var values = document.querySelectorAll('.weare__record-value');
+      var animated = false;
+      var H = 120;
+      var CYCLES = 3;
+      var digitAnims = [];
+
+      values.forEach(function (el) {
+        var val = el.dataset.value;
+
+        val.split('').forEach(function (char, i) {
+          var isLetter = isNaN(parseInt(char));
+          var wrapper = document.createElement('div');
+          wrapper.className = 'weare__digit';
+
+          var inner = document.createElement('div');
+          inner.className = 'weare__digit-inner';
+
+          var isLetter = isNaN(parseInt(char));
+          // 0~9 반복 x CYCLES
+          for (var c = 0; c < CYCLES; c++) {
+            for (var n = 0; n <= 9; n++) {
+              var s = document.createElement('span');
+              s.textContent = n;
+              inner.appendChild(s);
+            }
+          }
+          if (isLetter) {
+            // 마지막 0~9 한 번 더 + 최종 문자
+            for (var n = 0; n <= 9; n++) {
+              var s = document.createElement('span');
+              s.textContent = n;
+              inner.appendChild(s);
+            }
+            var s = document.createElement('span');
+            s.textContent = char;
+            inner.appendChild(s);
+            var totalSpans = CYCLES * 10 + 10 + 1;
+          } else {
+            var digit = parseInt(char);
+            for (var n = 0; n <= digit; n++) {
+              var s = document.createElement('span');
+              s.textContent = n;
+              inner.appendChild(s);
+            }
+            var totalSpans = CYCLES * 10 + digit + 1;
+          }
+
+          var targetY = (totalSpans - 1) * H;
+
+          digitAnims.push({
+            el: inner,
+            targetY: targetY,
+            delay: i * 200,
+            duration: 1800 + i * 400
+          });
+
+          wrapper.appendChild(inner);
+          el.appendChild(wrapper);
+        });
+      });
+
+      function easeOutExpo(t) {
+        return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
+      }
+
+      function startSlot() {
+        var startTime = null;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var allDone = true;
+
+          digitAnims.forEach(function (anim) {
+            var elapsed = timestamp - startTime - anim.delay;
+            if (elapsed < 0) {
+              anim.el.style.transform = 'translateY(0)';
+              allDone = false;
+              return;
+            }
+            var t = Math.min(elapsed / anim.duration, 1);
+            var eased = easeOutExpo(t);
+            var y = eased * anim.targetY;
+            anim.el.style.transform = 'translateY(' + (-y) + 'px)';
+            if (t < 1) allDone = false;
+          });
+
+          if (!allDone) {
+            requestAnimationFrame(step);
+          }
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      // weare 섹션 진입 감지 → heading/desc 페이드인 후 record 페이드인 → 슬롯 시작
+      var weareSection = document.querySelector('.weare');
+      var triggered = false;
+
+      var sectionObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !triggered) {
+            triggered = true;
+            sectionObserver.unobserve(weareSection);
+            // heading: 1.5s delay + 0.8s transition = 2.3s
+            // desc: 2s delay + 0.8s transition = 2.8s
+            // record: desc 완료 후 페이드인
+            setTimeout(function () {
+              record.classList.add('is-visible');
+              // record 페이드인(0.8s) 완료 후 슬롯 시작
+              setTimeout(startSlot, 800);
+            }, 2800);
+          }
+        });
+      }, { threshold: 0.15 });
+      sectionObserver.observe(weareSection);
+    })();
+
+    // ===== Scroll Reveal =====
+    (function () {
+      const reveals = document.querySelectorAll('.scroll-reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      reveals.forEach(el => observer.observe(el));
+    })();
+  </script>
+
+</body>
+</html>
