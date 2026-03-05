@@ -152,47 +152,54 @@
       bottom: -100px;
     }
 
-    /* Carousel */
+    /* Carousel – 3D Cylinder */
     .hero__carousel {
       position: absolute;
       top: clamp(0px, 5.3vw, 101px);
       left: 0;
-      width: max-content;
-      display: flex;
-      gap: 16px;
-      align-items: center;
+      width: 100%;
+      height: min(875px, 80vh);
       z-index: 2;
-      animation: slide 30s linear infinite;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      perspective: 1800px;
+      overflow: hidden;
     }
 
-    .hero__carousel:hover {
-      animation-play-state: paused;
+    .hero__carousel:active {
+      cursor: grabbing;
     }
 
-    @keyframes slide {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+    .hero__carousel-track {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 0;
+      height: 100%;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
     .hero__slide {
-      flex-shrink: 0;
-      width: calc(33.333vw - 16px);
-      height: min(875px, 80vh);
-      position: relative;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: clamp(300px, 34vw, 660px);
+      height: 100%;
       overflow: hidden;
+      border-radius: 16px;
+      backface-visibility: hidden;
+      transform-origin: center center;
+      will-change: transform, opacity;
     }
 
     .hero__slide img {
       width: 100%;
-      height: min(875px, 80vh);
+      height: 100%;
       object-fit: cover;
-      position: absolute;
-      bottom: 0;
-      left: 0;
+      pointer-events: none;
+      display: block;
     }
 
     .hero__slide-overlay {
@@ -201,7 +208,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(16, 24, 32, 0.6);
+      background: rgba(16, 24, 32, 0.5);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -222,6 +229,40 @@
       color: #fff;
       text-align: center;
       white-space: pre-line;
+    }
+
+    /* Custom cursor */
+    .hero__cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+      transform: translate(8px, 8px) scale(0.5);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hero__cursor.is-visible {
+      opacity: 1;
+      transform: translate(8px, 8px) scale(1);
+    }
+
+    .hero__cursor.is-dragging {
+      transform: translate(8px, 8px) scale(0.9);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     /* --- Fade In Animation --- */
@@ -700,7 +741,8 @@
     @media (max-width: 1024px) and (min-width: 769px) {
       .nav-btn { font-size: 13px; padding: 0 8px; }
 
-      .hero__slide { width: calc(45vw - 16px); }
+      .hero__carousel { perspective: 1400px; }
+      .hero__slide { width: clamp(280px, 40vw, 500px); }
 
       .advertising__title,
       .agency__title {
@@ -720,8 +762,6 @@
     @media (max-height: 900px) and (min-width: 769px) {
       .hero__title { padding-top: 20px; }
       .hero__visual { height: min(700px, 72vh); }
-      .hero__slide,
-      .hero__slide img { height: min(700px, 72vh); }
 
       .advertising__title { top: 10vh; }
       .advertising__subtitle { top: 24vh; }
@@ -763,8 +803,9 @@
 
       /* --- Hero --- */
       .hero__visual { height: 60vh; }
-      .hero__slide,
-      .hero__slide img { height: 60vh; width: calc(80vw - 16px); }
+      .hero__carousel { perspective: 1000px; }
+      .hero__slide { width: 70vw; border-radius: 8px; }
+      .hero__cursor { display: none; }
       .hero__title-line { font-size: 12vw; }
 
       /* --- Advertising --- */
@@ -846,49 +887,51 @@
     <!-- Main Visual Area -->
     <div class="hero__visual fade-in fade-in--delay-3">
       <!-- Curved Edges -->
-      <img class="hero__curve-top" src="https://www.figma.com/api/mcp/asset/71841429-5ee4-434e-94df-acc092ad04b3" alt="">
-      <img class="hero__curve-bottom" src="https://www.figma.com/api/mcp/asset/71841429-5ee4-434e-94df-acc092ad04b3" alt="">
+      <!-- <img class="hero__curve-top" src="https://www.figma.com/api/mcp/asset/71841429-5ee4-434e-94df-acc092ad04b3" alt="">
+      <img class="hero__curve-bottom" src="https://www.figma.com/api/mcp/asset/71841429-5ee4-434e-94df-acc092ad04b3" alt=""> -->
 
-      <!-- Carousel (duplicated for seamless loop) -->
-      <div class="hero__carousel">
-        <div class="hero__slide">
-          <img src="https://www.figma.com/api/mcp/asset/8e258b2d-5858-48ab-9860-8e2316effde6" alt="Portfolio 3">
-          <div class="hero__slide-overlay">
-            <p class="hero__slide-slogan">Beyond Digital,</br>Into the AI Era.</p>
+      <!-- 3D Cylinder Carousel -->
+      <div class="hero__carousel" id="heroCarousel">
+        <div class="hero__carousel-track" id="heroTrack">
+          <div class="hero__slide">
+            <img src="https://www.figma.com/api/mcp/asset/8e258b2d-5858-48ab-9860-8e2316effde6" alt="Portfolio 3">
+            <div class="hero__slide-overlay">
+              <p class="hero__slide-slogan">Beyond Digital,<br>Into the AI Era.</p>
+            </div>
           </div>
-        </div>
-        <div class="hero__slide">
-          <img src="https://www.figma.com/api/mcp/asset/02c903bd-ad11-47ea-a012-0c62d34a99ce" alt="Portfolio 1">
-          <div class="hero__slide-overlay">
-            <p class="hero__slide-slogan">사람과 브랜드, 생각과 기술을 잇는 새로운 가치</br>진정한 혁신, 새로운 기회</br>리노가 만듭니다.</p>
+          <div class="hero__slide">
+            <img src="https://www.figma.com/api/mcp/asset/02c903bd-ad11-47ea-a012-0c62d34a99ce" alt="Portfolio 1">
+            <div class="hero__slide-overlay">
+              <p class="hero__slide-slogan">사람과 브랜드, 생각과 기술을 잇는 새로운 가치<br>진정한 혁신, 새로운 기회<br>리노가 만듭니다.</p>
+            </div>
           </div>
-        </div>
-        <div class="hero__slide">
-          <img src="https://www.figma.com/api/mcp/asset/43cdb188-5c1f-4ec1-b657-f5dcf446f50d" alt="Portfolio 2">
-          <div class="hero__slide-overlay">
-            <p class="hero__slide-slogan">전략적인 UX, 실행되는 마케팅</br>경험을 설계하고 성과를 만듭니다.</p>
+          <div class="hero__slide">
+            <img src="https://www.figma.com/api/mcp/asset/43cdb188-5c1f-4ec1-b657-f5dcf446f50d" alt="Portfolio 2">
+            <div class="hero__slide-overlay">
+              <p class="hero__slide-slogan">전략적인 UX, 실행되는 마케팅<br>경험을 설계하고 성과를 만듭니다.</p>
+            </div>
           </div>
-        </div>
-        <!-- Duplicate -->
-        <div class="hero__slide">
-          <img src="https://www.figma.com/api/mcp/asset/8e258b2d-5858-48ab-9860-8e2316effde6" alt="Portfolio 3">
-          <div class="hero__slide-overlay">
-            <p class="hero__slide-slogan">Beyond Digital,</br>Into the AI Era.</p>
+          <div class="hero__slide">
+            <img src="https://www.figma.com/api/mcp/asset/8e258b2d-5858-48ab-9860-8e2316effde6" alt="Portfolio 4">
+            <div class="hero__slide-overlay">
+              <p class="hero__slide-slogan">Beyond Digital,<br>Into the AI Era.</p>
+            </div>
           </div>
-        </div>
-        <div class="hero__slide">
-          <img src="https://www.figma.com/api/mcp/asset/02c903bd-ad11-47ea-a012-0c62d34a99ce" alt="Portfolio 1">
-          <div class="hero__slide-overlay">
-            <p class="hero__slide-slogan">사람과 브랜드, 생각과 기술을 잇는 새로운 가치</br>진정한 혁신, 새로운 기회</br>리노가 만듭니다.</p>
+          <div class="hero__slide">
+            <img src="https://www.figma.com/api/mcp/asset/02c903bd-ad11-47ea-a012-0c62d34a99ce" alt="Portfolio 5">
+            <div class="hero__slide-overlay">
+              <p class="hero__slide-slogan">사람과 브랜드, 생각과 기술을 잇는 새로운 가치<br>진정한 혁신, 새로운 기회<br>리노가 만듭니다.</p>
+            </div>
           </div>
-        </div>
-        <div class="hero__slide">
-          <img src="https://www.figma.com/api/mcp/asset/43cdb188-5c1f-4ec1-b657-f5dcf446f50d" alt="Portfolio 2">
-          <div class="hero__slide-overlay">
-            <p class="hero__slide-slogan">전략적인 UX, 실행되는 마케팅</br>경험을 설계하고 성과를 만듭니다.</p>
+          <div class="hero__slide">
+            <img src="https://www.figma.com/api/mcp/asset/43cdb188-5c1f-4ec1-b657-f5dcf446f50d" alt="Portfolio 6">
+            <div class="hero__slide-overlay">
+              <p class="hero__slide-slogan">전략적인 UX, 실행되는 마케팅<br>경험을 설계하고 성과를 만듭니다.</p>
+            </div>
           </div>
         </div>
       </div>
+      <div class="hero__cursor" id="heroCursor">WE ARE</div>
     </div>
   </section>
   <!-- ==================== ADVERTISING ==================== -->
@@ -1210,6 +1253,133 @@
         ctx.letterSpacing = `${-fontSize2 * 0.02}px`;
         ctx.fillText('NEW OPPORTUNITY', cx, cy2);
       });
+    })();
+
+    // ===== Hero 3D Cylinder Carousel =====
+    (function () {
+      var carousel = document.getElementById('heroCarousel');
+      var track = document.getElementById('heroTrack');
+      var cursor = document.getElementById('heroCursor');
+      var slides = Array.from(track.querySelectorAll('.hero__slide'));
+      var N = slides.length;
+
+      var angle = 0;
+      var targetAngle = 0;
+      var velocity = 0;
+      var isDragging = false;
+      var startX = 0;
+      var dragStartAngle = 0;
+      var lastMoveX = 0;
+      var lastMoveTime = 0;
+      var friction = 0.95;
+      var autoSpeed = -0.15;
+      var isHovering = false;
+
+      var angleStep = 360 / N;
+
+      function getRadius() {
+        var slideW = slides[0].offsetWidth;
+        return Math.max(600, (N * (slideW + 40)) / (2 * Math.PI));
+      }
+
+      function layoutSlides() {
+        var radius = getRadius();
+
+        for (var i = 0; i < N; i++) {
+          var theta = angleStep * i + angle;
+          var rad = theta * Math.PI / 180;
+
+          var x = Math.sin(rad) * radius;
+          var z = Math.cos(rad) * radius - radius;
+
+          var depthNorm = (z + radius) / (2 * radius);
+          var opacity = 0.3 + 0.7 * depthNorm;
+          var scale = 0.65 + 0.35 * depthNorm;
+          var zIndex = Math.round(depthNorm * 100);
+
+          slides[i].style.transform =
+            'translateX(calc(' + x.toFixed(1) + 'px - 50%)) translateZ(' + z.toFixed(1) + 'px) ' +
+            'rotateY(' + (-theta).toFixed(1) + 'deg) scale(' + scale.toFixed(3) + ')';
+          slides[i].style.opacity = opacity.toFixed(3);
+          slides[i].style.zIndex = zIndex;
+          slides[i].style.filter = depthNorm < 0.5
+            ? 'brightness(' + (0.4 + depthNorm * 1.2).toFixed(2) + ')'
+            : 'brightness(1)';
+        }
+      }
+
+      layoutSlides();
+      window.addEventListener('resize', layoutSlides);
+
+      // Custom cursor
+      carousel.addEventListener('mouseenter', function () {
+        cursor.classList.add('is-visible');
+        isHovering = true;
+      });
+      carousel.addEventListener('mouseleave', function () {
+        cursor.classList.remove('is-visible');
+        cursor.classList.remove('is-dragging');
+        isHovering = false;
+      });
+      carousel.addEventListener('mousemove', function (e) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+
+      // Drag → rotate
+      carousel.addEventListener('pointerdown', function (e) {
+        isDragging = true;
+        startX = e.clientX;
+        dragStartAngle = angle;
+        lastMoveX = e.clientX;
+        lastMoveTime = Date.now();
+        velocity = 0;
+        cursor.classList.add('is-dragging');
+        carousel.setPointerCapture(e.pointerId);
+        e.preventDefault();
+      });
+
+      carousel.addEventListener('pointermove', function (e) {
+        if (!isDragging) return;
+        var now = Date.now();
+        var dt = now - lastMoveTime;
+        var dx = e.clientX - lastMoveX;
+        if (dt > 0) velocity = dx / dt * 0.8;
+        lastMoveX = e.clientX;
+        lastMoveTime = now;
+
+        var diff = e.clientX - startX;
+        targetAngle = dragStartAngle + diff * 0.2;
+      });
+
+      carousel.addEventListener('pointerup', function (e) {
+        if (!isDragging) return;
+        isDragging = false;
+        cursor.classList.remove('is-dragging');
+        velocity = Math.max(-8, Math.min(8, velocity));
+      });
+
+      // Animation loop
+      function animate() {
+        if (isDragging) {
+          angle += (targetAngle - angle) * 0.25;
+        } else {
+          if (Math.abs(velocity) > 0.01) {
+            angle += velocity;
+            velocity *= friction;
+          } else {
+            velocity = 0;
+            if (!isHovering) {
+              angle += autoSpeed;
+            }
+          }
+        }
+
+        layoutSlides();
+        requestAnimationFrame(animate);
+      }
+
+      requestAnimationFrame(animate);
     })();
 
     // ===== Nav Scroll Fix & Color Change =====
