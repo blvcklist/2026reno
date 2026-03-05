@@ -131,7 +131,7 @@
     /* --- Main Visual --- */
     .hero__visual {
       position: absolute;
-      top: 40%;
+      top: 32%;
       left: 0;
       width: 100%;
       height: min(875px, 80vh);
@@ -286,9 +286,9 @@
 
     .advertising__title {
       position: absolute;
-      top: clamp(120px, 12.5vw, 160px);
-      left: clamp(24px, 3.33vw, 64px);
-      font-size: clamp(48px, 6.25vw, 120px);
+      top: 12vh;
+      left: 64px;
+      font-size: clamp(48px, 6.25vw, 96px);
       font-weight: 700;
       line-height: 1;
       letter-spacing: -0.02em;
@@ -297,8 +297,8 @@
 
     .advertising__subtitle {
       position: absolute;
-      top: clamp(260px, 29.2vw, 480px);
-      left: clamp(24px, 3.33vw, 64px);
+      top: calc(12vh + clamp(140px, 17vw, 240px));
+      left: 64px;
       font-size: clamp(16px, 1.67vw, 32px);
       font-weight: 400;
       line-height: 1;
@@ -373,9 +373,9 @@
 
     .agency__title {
       position: absolute;
-      top: clamp(120px, 12.5vw, 160px);
-      left: clamp(24px, 3.33vw, 64px);
-      font-size: clamp(48px, 6.25vw, 120px);
+      top: 12vh;
+      left: 64px;
+      font-size: clamp(48px, 6.25vw, 96px);
       font-weight: 700;
       line-height: 1;
       letter-spacing: -0.02em;
@@ -384,8 +384,8 @@
 
     .agency__subtitle {
       position: absolute;
-      top: clamp(260px, 29.2vw, 480px);
-      left: clamp(24px, 3.33vw, 64px);
+      top: calc(12vh + clamp(140px, 17vw, 240px));
+      left: 64px;
       font-size: clamp(16px, 1.67vw, 32px);
       font-weight: 400;
       line-height: 1;
@@ -456,16 +456,16 @@
 
     .weare__heading {
       position: absolute;
-      top: clamp(120px, 14.1vw, 160px);
-      left: clamp(24px, 3.33vw, 64px);
-      right: clamp(24px, 3.33vw, 64px);
+      top: 12vh;
+      left: 64px;
+      right: 64px;
       display: flex;
       justify-content: space-between;
       align-items: baseline;
     }
 
     .weare__title {
-      font-size: clamp(48px, 8.33vw, 160px);
+      font-size: clamp(48px, 8.33vw, 96px);
       font-weight: 700;
       line-height: 1;
       letter-spacing: -0.02em;
@@ -486,8 +486,8 @@
 
     .weare__desc {
       position: absolute;
-      top: clamp(280px, 26.6vw, 400px);
-      left: clamp(24px, 3.33vw, 64px);
+      top: calc(12vh + clamp(140px, 17vw, 240px));
+      left: 64px;
       font-size: clamp(16px, 1.67vw, 32px);
       font-weight: 400;
       line-height: 1.4;
@@ -733,10 +733,22 @@
       .advertising__title,
       .agency__title {
         font-size: clamp(36px, 5.5vw, 80px);
+        left: 40px;
       }
 
-      .advertising__subtitle { top: clamp(200px, 22vw, 400px); }
-      .agency__subtitle { top: clamp(200px, 22vw, 400px); }
+      .advertising__subtitle,
+      .agency__subtitle {
+        left: 40px;
+      }
+
+      .weare__heading {
+        left: 40px;
+        right: 40px;
+      }
+
+      .weare__desc {
+        left: 40px;
+      }
 
       .weare__title,
       .weare__title-right {
@@ -748,18 +760,8 @@
     @media (max-height: 900px) and (min-width: 769px) {
       .hero__title { padding-top: 20px; }
       .hero__visual { height: min(700px, 72vh); }
-
-      .advertising__title { top: 10vh; }
-      .advertising__subtitle { top: 24vh; }
-
-      .agency__title { top: 10vh; }
-      .agency__subtitle { top: 24vh; }
       .agency__cards { bottom: 5%; }
-
-      .weare__heading { top: 10vh; }
-      .weare__desc { top: 25vh; }
-      .weare__record { top: 48%; }
-
+      .weare__record { top: 55%; }
       .footer { gap: 24px; }
     }
 
@@ -767,17 +769,8 @@
     @media (max-height: 750px) and (min-width: 769px) {
       .hero__title { padding-top: 12px; }
       .hero__title-line { font-size: 9vw; }
-
-      .advertising__title { top: 8vh; }
-      .advertising__subtitle { top: 20vh; }
-
-      .agency__title { top: 8vh; }
-      .agency__subtitle { top: 20vh; }
       .agency__cards { bottom: 3%; }
-
-      .weare__heading { top: 8vh; }
-      .weare__desc { top: 22vh; }
-      .weare__record { top: 45%; }
+      .weare__record { top: 50%; }
       .weare__record-label { font-size: clamp(12px, 1.4vw, 24px); }
     }
 
@@ -796,9 +789,13 @@
 
       /* --- Advertising --- */
       .advertising { height: 300vh; }
+      .advertising__title { left: 24px; }
+      .advertising__subtitle { left: 24px; }
       .advertising__visual { width: 90vw; margin-left: -45vw; }
 
       /* --- Agency --- */
+      .agency__title { left: 24px; }
+      .agency__subtitle { left: 24px; }
       .agency { height: auto; min-height: 100vh; }
       .agency__sticky { position: relative; }
       .agency__cards {
@@ -832,7 +829,8 @@
 
       /* --- We Are --- */
       .weare { height: auto; min-height: 100vh; padding-bottom: 60px; }
-      .weare__heading { flex-direction: column; gap: 8px; }
+      .weare__heading { left: 24px; right: 24px; flex-direction: column; gap: 8px; }
+      .weare__desc { left: 24px; }
       .weare__record {
         position: relative;
         top: auto;
@@ -1712,6 +1710,86 @@
       }, { threshold: 0.15 });
 
       reveals.forEach(el => observer.observe(el));
+    })();
+
+    // ===== Section Snap Scroll =====
+    (function () {
+      if (isMobile()) return;
+
+      var sections = Array.from(document.querySelectorAll('section, footer'));
+      var isSnapping = false;
+      var cooldown = false;
+      var COOLDOWN_MS = 1200;
+
+      // Get snap targets: top of each section
+      function getSectionTops() {
+        return sections.map(function (s) {
+          return s.getBoundingClientRect().top + window.scrollY;
+        });
+      }
+
+      // Find which section boundary we're near
+      function findCurrentIndex() {
+        var scrollY = window.scrollY;
+        var vh = window.innerHeight;
+        var tops = getSectionTops();
+
+        for (var i = tops.length - 1; i >= 0; i--) {
+          if (scrollY >= tops[i] - vh * 0.3) return i;
+        }
+        return 0;
+      }
+
+      // Is the scroll position at the boundary of a section (top or bottom)?
+      function isAtSectionBoundary(direction) {
+        var scrollY = window.scrollY;
+        var vh = window.innerHeight;
+        var idx = findCurrentIndex();
+        var section = sections[idx];
+        var top = section.getBoundingClientRect().top + window.scrollY;
+        var bottom = top + section.offsetHeight;
+        var threshold = 30;
+
+        if (direction > 0) {
+          // Scrolling down: are we near the bottom of this section?
+          return (scrollY + vh) >= bottom - threshold;
+        } else {
+          // Scrolling up: are we near the top of this section?
+          return scrollY <= top + threshold;
+        }
+      }
+
+      window.addEventListener('wheel', function (e) {
+        if (cooldown || isSnapping) return;
+
+        var direction = e.deltaY > 0 ? 1 : -1;
+
+        // Only snap when we're at a section boundary
+        if (!isAtSectionBoundary(direction)) return;
+
+        var idx = findCurrentIndex();
+        var targetIdx = idx + direction;
+        if (targetIdx < 0 || targetIdx >= sections.length) return;
+
+        e.preventDefault();
+        isSnapping = true;
+        cooldown = true;
+
+        var targetTop = getSectionTops()[targetIdx];
+
+        window.scrollTo({
+          top: targetTop,
+          behavior: 'smooth'
+        });
+
+        setTimeout(function () {
+          isSnapping = false;
+        }, 800);
+
+        setTimeout(function () {
+          cooldown = false;
+        }, COOLDOWN_MS);
+      }, { passive: false });
     })();
   </script>
 
