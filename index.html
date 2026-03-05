@@ -1785,6 +1785,19 @@
 
         var direction = e.deltaY > 0 ? 1 : -1;
 
+        // Hero section: scroll down from top → scroll to hero bottom (carousel visible)
+        var heroSection = sections[0];
+        var heroBottom = heroSection.offsetHeight - window.innerHeight;
+        if (direction > 0 && window.scrollY < 30 && heroSection.classList.contains('hero')) {
+          e.preventDefault();
+          isSnapping = true;
+          cooldown = true;
+          window.scrollTo({ top: heroBottom, behavior: 'smooth' });
+          setTimeout(function () { isSnapping = false; }, 800);
+          setTimeout(function () { cooldown = false; }, COOLDOWN_MS);
+          return;
+        }
+
         // Only snap when we're at a section boundary
         if (!isAtSectionBoundary(direction)) return;
 
