@@ -40,6 +40,7 @@
       width: 100%;
       padding-top: 40px;
       position: relative;
+      z-index: 1;
     }
 
     .hero__title-line {
@@ -130,7 +131,7 @@
     /* --- Main Visual --- */
     .hero__visual {
       position: absolute;
-      bottom: 0;
+      bottom: -10%;
       left: 0;
       width: 100%;
       height: min(875px, 80vh);
@@ -562,18 +563,18 @@
     }
 
     .footer__award-icon {
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       object-fit: contain;
     }
 
     .footer__award-icon--ict {
-      width: 41px;
-      height: 54px;
+      width: 30px;
+      height: 43px;
     }
 
     .footer__award-text {
-      font-size: 16px;
+      font-size: 12px;
       font-weight: 400;
       line-height: 1.4;
       letter-spacing: -0.32px;
@@ -627,7 +628,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      font-size: 16px;
+      font-size: 12px;
       color: #ddd;
       line-height: 1.5;
     }
@@ -659,7 +660,7 @@
     }
 
     .footer__btn-text {
-      font-size: clamp(16px, 1.25vw, 24px);
+      font-size: clamp(16px, 1.25vw, 16px);
       font-weight: 700;
       line-height: 1.4;
       color: #ddd;
