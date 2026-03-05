@@ -259,7 +259,7 @@
 
     .advertising__title {
       position: absolute;
-      top: clamp(120px, 12.5vw, 240px);
+      top: clamp(120px, 12.5vw, 160px);
       left: clamp(24px, 3.33vw, 64px);
       font-size: clamp(48px, 6.25vw, 120px);
       font-weight: 700;
@@ -270,7 +270,7 @@
 
     .advertising__subtitle {
       position: absolute;
-      top: clamp(260px, 29.2vw, 560px);
+      top: clamp(260px, 29.2vw, 480px);
       left: clamp(24px, 3.33vw, 64px);
       font-size: clamp(16px, 1.67vw, 32px);
       font-weight: 400;
@@ -346,7 +346,7 @@
 
     .agency__title {
       position: absolute;
-      top: clamp(120px, 12.5vw, 240px);
+      top: clamp(120px, 12.5vw, 160px);
       left: clamp(24px, 3.33vw, 64px);
       font-size: clamp(48px, 6.25vw, 120px);
       font-weight: 700;
@@ -357,7 +357,7 @@
 
     .agency__subtitle {
       position: absolute;
-      top: clamp(260px, 29.2vw, 560px);
+      top: clamp(260px, 29.2vw, 480px);
       left: clamp(24px, 3.33vw, 64px);
       font-size: clamp(16px, 1.67vw, 32px);
       font-weight: 400;
@@ -429,7 +429,7 @@
 
     .weare__heading {
       position: absolute;
-      top: clamp(120px, 14.1vw, 271px);
+      top: clamp(120px, 14.1vw, 160px);
       left: clamp(24px, 3.33vw, 64px);
       right: clamp(24px, 3.33vw, 64px);
       display: flex;
@@ -459,7 +459,7 @@
 
     .weare__desc {
       position: absolute;
-      top: clamp(280px, 26.6vw, 511px);
+      top: clamp(280px, 26.6vw, 400px);
       left: clamp(24px, 3.33vw, 64px);
       font-size: clamp(16px, 1.67vw, 32px);
       font-weight: 400;
@@ -679,6 +679,80 @@
       font-weight: 400;
       line-height: 1.5;
       color: #c1c1c1;
+    }
+
+    /* ==================== RESPONSIVE (Laptop ≤1440px) ==================== */
+    @media (max-width: 1440px) {
+      .advertising__visual {
+        width: min(952px, 66vw);
+        margin-left: calc(min(952px, 66vw) / -2);
+        height: min(648px, 56vh);
+      }
+    }
+
+    /* ==================== RESPONSIVE (Small Laptop ≤1280px) ==================== */
+    @media (max-width: 1280px) and (min-width: 769px) {
+      .nav { left: 24px; right: 24px; }
+      .nav-btn { font-size: clamp(13px, 1.4vw, 20px); padding: 0 10px; }
+    }
+
+    /* ==================== RESPONSIVE (Tablet ≤1024px) ==================== */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .nav-btn { font-size: 13px; padding: 0 8px; }
+
+      .hero__slide { width: calc(45vw - 16px); }
+
+      .advertising__title,
+      .agency__title {
+        font-size: clamp(36px, 5.5vw, 80px);
+      }
+
+      .advertising__subtitle { top: clamp(200px, 22vw, 400px); }
+      .agency__subtitle { top: clamp(200px, 22vw, 400px); }
+
+      .weare__title,
+      .weare__title-right {
+        font-size: clamp(36px, 7vw, 100px);
+      }
+    }
+
+    /* ==================== RESPONSIVE (Short Viewport ≤900px height) ==================== */
+    @media (max-height: 900px) and (min-width: 769px) {
+      .hero__title { padding-top: 20px; }
+      .hero__visual { height: min(700px, 72vh); }
+      .hero__slide,
+      .hero__slide img { height: min(700px, 72vh); }
+
+      .advertising__title { top: 10vh; }
+      .advertising__subtitle { top: 24vh; }
+
+      .agency__title { top: 10vh; }
+      .agency__subtitle { top: 24vh; }
+      .agency__cards { bottom: 5%; }
+
+      .weare__heading { top: 10vh; }
+      .weare__desc { top: 25vh; }
+      .weare__record { top: 48%; }
+
+      .footer { gap: 24px; }
+    }
+
+    /* ==================== RESPONSIVE (Very Short Viewport ≤750px height) ==================== */
+    @media (max-height: 750px) and (min-width: 769px) {
+      .hero__title { padding-top: 12px; }
+      .hero__title-line { font-size: 9vw; }
+
+      .advertising__title { top: 8vh; }
+      .advertising__subtitle { top: 20vh; }
+
+      .agency__title { top: 8vh; }
+      .agency__subtitle { top: 20vh; }
+      .agency__cards { bottom: 3%; }
+
+      .weare__heading { top: 8vh; }
+      .weare__desc { top: 22vh; }
+      .weare__record { top: 45%; }
+      .weare__record-label { font-size: clamp(12px, 1.4vw, 24px); }
     }
 
     /* ==================== RESPONSIVE (Mobile) ==================== */
@@ -1200,14 +1274,14 @@
         const expandT = rawProgress <= expandStart ? 0 : Math.min((rawProgress - expandStart) / (expandEnd - expandStart), 1);
         const easeE = 1 - Math.pow(1 - expandT, 3);
 
-        const startW = Math.min(952, window.innerWidth * 0.496);
+        const startW = Math.min(952, window.innerWidth * (window.innerWidth <= 1440 ? 0.66 : 0.496));
         const endW = window.innerWidth;
         const w = lerp(startW, endW, easeE);
         const radius = lerp(40, 0, easeE);
         const borderW = lerp(1, 0, easeE);
 
         const navBottom = 64 + 90;
-        const startH = Math.min(648, window.innerHeight * 0.6);
+        const startH = Math.min(648, window.innerHeight * (window.innerHeight <= 900 ? 0.5 : 0.6));
         const endH = vh - navBottom;
         const h = lerp(startH, endH, easeE);
 
