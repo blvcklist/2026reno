@@ -23,7 +23,7 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 100vh;
+      height: 140vh;
       background: #101820;
       overflow: hidden;
       display: flex;
@@ -131,25 +131,10 @@
     /* --- Main Visual --- */
     .hero__visual {
       position: absolute;
-      bottom: -10%;
+      top: 40%;
       left: 0;
       width: 100%;
       height: min(875px, 80vh);
-    }
-
-    /* Curved Edges */
-    .hero__curve-top,
-    .hero__curve-bottom {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: clamp(80px, 10.4vw, 200px);
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    .hero__curve-bottom {
-      bottom: -100px;
     }
 
     /* Carousel – 3D Cylinder */
