@@ -32,6 +32,16 @@
       gap: 10px;
     }
 
+    .hero__space {
+      position: absolute;
+      top: 30%;
+      left: 0;
+      width: 100%;
+      height: 70%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
     /* --- Title --- */
     .hero__title {
       display: flex;
@@ -878,6 +888,9 @@
     </div>
 
   
+    <!-- Space Particle Background -->
+    <canvas class="hero__space" id="spaceCanvas"></canvas>
+
     <!-- Main Visual Area -->
     <div class="hero__visual fade-in fade-in--delay-3">
       <!-- Curved Edges -->
@@ -1731,6 +1744,119 @@
       }, { threshold: 0.15 });
 
       reveals.forEach(el => observer.observe(el));
+    })();
+
+    // ===== Space Particle Background =====
+    (function () {
+      var canvas = document.getElementById('spaceCanvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var dpr = window.devicePixelRatio || 1;
+      var W, H;
+      var particles = [];
+      var PARTICLE_COUNT = 400;
+      var time = 0;
+
+      function resize() {
+        W = canvas.clientWidth;
+        H = canvas.clientHeight;
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      // Noise-like function for organic flow
+      function noise(x, y, t) {
+        return Math.sin(x * 0.8 + t) * Math.cos(y * 0.6 + t * 0.7) * 0.5
+             + Math.sin(x * 1.5 - t * 0.5) * Math.cos(y * 1.2 + t * 0.3) * 0.3
+             + Math.sin((x + y) * 0.5 + t * 0.4) * 0.2;
+      }
+
+      function initParticles() {
+        particles = [];
+        for (var i = 0; i < PARTICLE_COUNT; i++) {
+          particles.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            baseX: Math.random() * W,
+            baseY: Math.random() * H,
+            size: Math.random() * 1.5 + 0.3,
+            alpha: Math.random() * 0.6 + 0.1,
+            speed: Math.random() * 0.3 + 0.1,
+            drift: Math.random() * Math.PI * 2,
+            wanderRadius: Math.random() * 80 + 30
+          });
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        time += 0.003;
+
+        // Draw flowing particles
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+
+          // Organic flow using noise
+          var nx = noise(p.baseX * 0.005, p.baseY * 0.005, time + p.drift);
+          var ny = noise(p.baseX * 0.005 + 100, p.baseY * 0.005 + 100, time * 0.8 + p.drift);
+
+          p.x = p.baseX + nx * p.wanderRadius;
+          p.y = p.baseY + ny * p.wanderRadius;
+
+          // Slow drift of base position
+          p.baseX += Math.sin(time * 2 + p.drift) * p.speed * 0.3;
+          p.baseY += Math.cos(time * 1.5 + p.drift) * p.speed * 0.2 - p.speed * 0.05;
+
+          // Wrap around
+          if (p.baseX < -50) p.baseX = W + 50;
+          if (p.baseX > W + 50) p.baseX = -50;
+          if (p.baseY < -50) p.baseY = H + 50;
+          if (p.baseY > H + 50) p.baseY = -50;
+
+          // Pulsing alpha
+          var pulseAlpha = p.alpha * (0.6 + 0.4 * Math.sin(time * 3 + p.drift));
+
+          // Depth-based brightness: center = brighter
+          var cx = W / 2, cy = H * 0.4;
+          var dist = Math.sqrt((p.x - cx) * (p.x - cx) + (p.y - cy) * (p.y - cy));
+          var maxDist = Math.sqrt(cx * cx + cy * cy);
+          var depthFade = 1 - Math.min(dist / maxDist, 1) * 0.5;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(180, 200, 255, ' + (pulseAlpha * depthFade) + ')';
+          ctx.fill();
+        }
+
+        // Draw subtle connecting lines between nearby particles (constellation effect)
+        ctx.lineWidth = 0.3;
+        for (var i = 0; i < particles.length; i++) {
+          for (var j = i + 1; j < particles.length; j++) {
+            var dx = particles[i].x - particles[j].x;
+            var dy = particles[i].y - particles[j].y;
+            var d = dx * dx + dy * dy;
+            if (d < 3600) { // 60px radius
+              var lineAlpha = (1 - d / 3600) * 0.08;
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = 'rgba(150, 180, 255, ' + lineAlpha + ')';
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      initParticles();
+      draw();
+      window.addEventListener('resize', function () {
+        resize();
+        initParticles();
+      });
     })();
 
     // ===== Section Snap Scroll =====
