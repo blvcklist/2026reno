@@ -1046,7 +1046,10 @@ body.hero-dark .scroll-slot span {
   .adv-visual { height: 560px; }
   .adv-glass { padding: 24px; }
   .adv-visual-name { font-size: 26px; }
-  .adv-visual-category { font-size: 16px; }
+  .adv-visual-category { font-size: 14px; padding: 6px 14px; }
+  .adv-visual-info { padding: 24px; gap: 12px; }
+  .carousel-glow { width: 900px; height: 900px; }
+  .carousel-track.gathered .agency-card { margin: 0 -140px; }
   .marquee-text { font-size: 72px; }
 
   .agency-header { padding-top: 140px; margin-bottom: 70px; }
@@ -1101,10 +1104,13 @@ body.hero-dark .scroll-slot span {
   .adv-title { font-size: 40px; margin-bottom: 30px; }
   .adv-desc { font-size: 18px; }
   .adv-visual { height: 460px; }
-  .adv-glass { padding: 20px; border-radius: 24px; }
-  .adv-visual-info { padding: 20px; }
-  .adv-visual-category { font-size: 14px; }
-  .adv-visual-name { font-size: 22px; }
+  .adv-glass { padding: 16px; border-radius: 24px; }
+  .adv-visual-info { padding: 16px; gap: 10px; }
+  .adv-visual-category { font-size: 12px; padding: 5px 12px; }
+  .adv-visual-name { font-size: 20px; }
+  .adv-visual-gradient { height: 140px; }
+  .carousel-glow { width: 600px; height: 600px; }
+  .carousel-track.gathered .agency-card { margin: 0 -100px; }
   .marquee-text { font-size: 56px; }
   .adv-clients { height: 72px; }
   .adv-client { flex: 0 0 180px; height: 72px; }
@@ -1179,11 +1185,15 @@ body.hero-dark .scroll-slot span {
   .adv-title { font-size: 28px; letter-spacing: -0.6px; margin-bottom: 24px; }
   .adv-desc { font-size: 15px; }
   .adv-visual { height: 360px; }
-  .adv-glass { padding: 12px; border-radius: 20px; width: min(100%, calc(100% - 48px)); }
-  .adv-visual-info { padding: 16px; }
-  .adv-visual-category { font-size: 12px; }
-  .adv-visual-name { font-size: 18px; }
+  .adv-glass { padding: 10px; border-radius: 16px; width: min(100%, calc(100% - 48px)); }
+  .adv-visual-info { padding: 12px; gap: 8px; }
+  .adv-visual-category { font-size: 11px; padding: 4px 10px; }
+  .adv-visual-name { font-size: 16px; }
   .adv-visual-logo { width: 50%; }
+  .adv-visual-gradient { height: 100px; }
+  .adv-cube-viewport { border-width: 0.5px; }
+  .carousel-glow { width: 400px; height: 400px; }
+  .carousel-track.gathered .agency-card { margin: 0 -80px; }
   .marquee-text { font-size: 36px; }
   .adv-clients { height: auto; flex-wrap: wrap; gap: 0; padding: 0 var(--px); }
   .adv-client { flex: 0 0 50%; height: 56px; }
