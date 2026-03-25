@@ -405,9 +405,11 @@ import * as THREE from 'three';
 
     // --- 자유 이동 (부드럽게 떠다니기, 페이드인) ---
     const bounds = getDriftBounds();
-    if (elapsed > breathStart) {
-      const driftT = elapsed - breathStart;
-      const driftBlend = Math.min(1, driftT / BREATH_FADE);
+    const driftStart = ASSEMBLE_DURATION + 1;
+    const DRIFT_FADE = 2.0;
+    if (elapsed > driftStart) {
+      const driftT = elapsed - driftStart;
+      const driftBlend = Math.min(1, driftT / DRIFT_FADE);
       const driftEase = driftBlend * driftBlend * (3 - 2 * driftBlend);
       drift.x = Math.sin(driftT * driftVel.x) * Math.cos(driftT * driftVel.x * 0.7) * bounds.maxX * driftEase;
       drift.y = Math.sin(driftT * driftVel.y) * Math.cos(driftT * driftVel.y * 0.6 + 1.0) * bounds.maxY * driftEase;
