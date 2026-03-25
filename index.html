@@ -3,1955 +3,355 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RENOCOMMS - Real Evolution, New Opportunity</title>
+  <title>RENO COMMUNICATIONS</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
-  <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Pretendard', sans-serif;
-      background: #101820;
-      overflow-x: hidden;
-    }
-
-    /* ==================== HERO ==================== */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 140vh;
-      background: #101820;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .hero__space {
-      position: absolute;
-      top: 30%;
-      left: 0;
-      width: 100%;
-      height: 70%;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* --- Title --- */
-    .hero__title {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      padding-top: 40px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero__title-line {
-      font-size: 10.4vw;
-      font-weight: 700;
-      color: #ccc;
-      text-align: center;
-      line-height: 0.8;
-      letter-spacing: -0.2vw;
-      white-space: nowrap;
-      visibility: hidden;
-    }
-
-    .hero__title-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    /* --- Navigation Header --- */
-    .nav {
-      position: fixed;
-      top: 40%;
-      left: 40px;
-      right: 40px;
-      transform: translateY(-50%);
-      height: 90px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-      transition: top 0.6s ease, transform 0.6s ease;
-    }
-
-    .nav.is-scrolled {
-      top: 16px;
-      transform: translateY(0);
-    }
-
-    .nav-logo {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: clamp(140px, 11vw, 212px);
-      height: clamp(60px, 4.7vw, 90px);
-    }
-
-    .nav-logo img {
-      width: clamp(140px, 11vw, 212px);
-      height: clamp(60px, 4.7vw, 90px);
-      object-fit: contain;
-    }
-
-    .nav-btn {
-      font-size: clamp(16px, 1.67vw, 32px);
-      font-weight: 500;
-      color: #ccc;
-      padding: 0 20px;
-      line-height: 1.5;
-      cursor: pointer;
-      transition: color 0.6s ease;
-      white-space: nowrap;
-    }
-
-    .nav-btn:hover {
-      color: #fff;
-    }
-
-    .nav.is-dark .nav-btn {
-      color: #101820;
-    }
-
-    .nav.is-dark .nav-btn:hover {
-      color: #000;
-    }
-
-    .nav.is-dark .nav-logo img {
-      filter: brightness(0) saturate(100%);
-      transition: filter 0.6s ease;
-    }
-
-    .nav-logo img {
-      transition: filter 0.6s ease;
-    }
-
-    /* --- Main Visual --- */
-    .hero__visual {
-      position: absolute;
-      top: 32%;
-      left: 0;
-      width: 100%;
-      height: min(875px, 80vh);
-    }
-
-    /* Carousel – 3D Cylinder */
-    .hero__carousel {
-      position: absolute;
-      top: clamp(0px, 5.3vw, 101px);
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: min(875px, 80vh);
-      z-index: 2;
-      cursor: grab;
-      user-select: none;
-      -webkit-user-select: none;
-      perspective: 1800px;
-      overflow: hidden;
-    }
-
-    .hero__carousel:active {
-      cursor: grabbing;
-    }
-
-    .hero__carousel-track {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 0;
-      height: 100%;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-
-    .hero__slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: clamp(300px, 34vw, 660px);
-      height: 100%;
-      overflow: hidden;
-      border-radius: 16px;
-      backface-visibility: hidden;
-      transform-origin: center center;
-      will-change: transform, opacity;
-    }
-
-    .hero__slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-      display: block;
-    }
-
-    .hero__slide-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(16, 24, 32, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: 1;
-    }
-
-    .hero__slide:hover .hero__slide-overlay {
-      opacity: 1;
-    }
-
-    .hero__slide-slogan {
-      font-size: clamp(14px, 1.25vw, 24px);
-      font-weight: 300;
-      line-height: 1.6;
-      letter-spacing: -0.48px;
-      color: #fff;
-      text-align: center;
-      white-space: pre-line;
-    }
-
-    /* Custom cursor */
-    .hero__cursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      padding: 6px 12px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      pointer-events: none;
-      z-index: 10;
-      opacity: 0;
-      transform: translate(8px, 8px) scale(0.5);
-      transition: opacity 0.25s ease, transform 0.25s ease;
-      font-size: 11px;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .hero__cursor.is-visible {
-      opacity: 1;
-      transform: translate(8px, 8px) scale(1);
-    }
-
-    .hero__cursor.is-dragging {
-      transform: translate(8px, 8px) scale(0.9);
-      background: rgba(255, 255, 255, 0.25);
-    }
-
-    /* --- Fade In Animation --- */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 2s ease forwards;
-    }
-
-    .fade-in--delay-2 { animation-delay: 4s; }
-    .fade-in--delay-3 { animation-delay: 5s; }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ==================== ADVERTISING ==================== */
-    .advertising {
-      position: relative;
-      width: 100%;
-      height: 400vh;
-      background: #ccc;
-    }
-
-    .advertising__sticky {
-      position: sticky;
-      top: 0;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .advertising__title {
-      position: absolute;
-      top: 12vh;
-      left: 64px;
-      font-size: clamp(48px, 6.25vw, 96px);
-      font-weight: 700;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: #101820;
-    }
-
-    .advertising__subtitle {
-      position: absolute;
-      top: calc(12vh + clamp(140px, 17vw, 240px));
-      left: 64px;
-      font-size: clamp(16px, 1.67vw, 24px);
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: #101820;
-    }
-
-    .advertising__visual {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      margin-left: -476px;
-      width: 952px;
-      height: 648px;
-      border-radius: 40px;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(200px);
-      transform-origin: center bottom;
-    }
-
-    .advertising__visual-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .advertising__visual-slide--second {
-      z-index: 1;
-      transform: translateY(100%);
-    }
-
-    .advertising__visual-slide--second img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .advertising__visual-slide--third {
-      z-index: 2;
-      transform: translateY(100%);
-    }
-
-    .advertising__visual-slide--third img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .advertising__visual-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'Pretendard', sans-serif;
-      font-size: clamp(24px, 2.9vw, 40px);
-      font-weight: 300;
-      color: #fff;
-      white-space: nowrap;
-      opacity: 0.6;
-      letter-spacing: -1px;
-    }
-
-    /* ==================== AGENCY ==================== */
-    .agency {
-      position: relative;
-      width: 100%;
-      height: 200vh;
-      background: #fff;
-    }
-
-    .agency__sticky {
-      position: sticky;
-      top: 0;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .agency__title {
-      position: absolute;
-      top: 12vh;
-      left: 64px;
-      font-size: clamp(48px, 6.25vw, 96px);
-      font-weight: 700;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: #101820;
-    }
-
-    .agency__subtitle {
-      position: absolute;
-      top: calc(12vh + clamp(140px, 17vw, 240px));
-      left: 64px;
-      font-size: clamp(16px, 1.67vw, 24px);
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: #101820;
-    }
-
-    .agency__cards {
-      position: absolute;
-      bottom: 10%;
-      left: 50%;
-      transform: translateX(-50%) scale(0.5);
-      width: min(1400px, 90vw);
-      height: clamp(300px, 31.25vw, 600px);
-      perspective: 1800px;
-      opacity: 0;
-      transition: opacity 1s ease, transform 1s ease;
-      transition-delay: 2.5s;
-    }
-
-    .agency__cards.is-visible {
-      opacity: 1;
-      transform: translateX(-50%) scale(1);
-    }
-
-    .agency__card {
-      position: absolute;
-      top: 0;
-      width: clamp(200px, 21.875vw, 420px);
-      height: clamp(300px, 31.25vw, 600px);
-      border-radius: 16px;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), left 0.8s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.8s ease;
-    }
-
-    .agency__card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.9;
-    }
-
-    /* Scroll reveal */
-    .scroll-reveal {
-      opacity: 0;
-      transform: translateY(60px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .scroll-reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .scroll-reveal--delay-1 { transition-delay: 1.5s; }
-    .scroll-reveal--delay-2 { transition-delay: 2s; }
-    .scroll-reveal--delay-3 { transition-delay: 2.5s; }
-
-    /* ==================== WE ARE ==================== */
-    .weare {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      background: #fff;
-    }
-
-    .weare__heading {
-      position: absolute;
-      top: 12vh;
-      left: 64px;
-      right: 64px;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-
-    .weare__title {
-      font-size: clamp(48px, 8.33vw, 96px);
-      font-weight: 700;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: #101820;
-    }
-
-    .weare__title span {
-      font-weight: 300;
-    }
-
-    .weare__title-right {
-      font-size: clamp(48px, 8.33vw, 96px);
-      font-weight: 700;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: #101820;
-    }
-
-    .weare__desc {
-      position: absolute;
-      top: calc(12vh + clamp(140px, 17vw, 160px));
-      left: 64px;
-      font-size: clamp(16px, 1.67vw, 24px);
-      font-weight: 400;
-      line-height: 1.4;
-      letter-spacing: -0.64px;
-      color: #101820;
-    }
-
-    .weare__record {
-      position: absolute;
-      top: 60%;
-      left: 0;
-      width: 100%;
-      display: flex;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(60px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .weare__record.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .weare__record-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .weare__record-label {
-      font-size: clamp(16px, 1.67vw, 32px);
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: #8c9091;
-    }
-
-    .weare__record-item:nth-child(2) .weare__record-label,
-    .weare__record-item:nth-child(3) .weare__record-label {
-      font-size: clamp(14px, 1.25vw, 24px);
-      letter-spacing: -0.02em;
-    }
-
-    .weare__record-value {
-      font-size: clamp(48px, 6.25vw, 120px);
-      font-weight: 700;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: #101820;
-      display: flex;
-      justify-content: center;
-      overflow: hidden;
-      height: clamp(48px, 6.25vw, 120px);
-    }
-
-    .weare__digit {
-      display: inline-block;
-      height: clamp(48px, 6.25vw, 120px);
-      overflow: hidden;
-    }
-
-    .weare__digit-inner {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .weare__digit-inner span {
-      height: clamp(48px, 6.25vw, 120px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-
-    /* ==================== FOOTER ==================== */
-    .footer {
-      background: #222;
-      padding: clamp(40px, 3.9vw, 75px) clamp(24px, 4.17vw, 80px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 40px;
-    }
-
-    .footer__awards {
-      width: 100%;
-      display: flex;
-      gap: clamp(16px, 2.08vw, 40px);
-      align-items: center;
-    }
-
-    .footer__award {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
-
-    .footer__award-icon {
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
-    }
-
-    .footer__award-icon--ict {
-      width: 30px;
-      height: 43px;
-    }
-
-    .footer__award-text {
-      font-size: 12px;
-      font-weight: 400;
-      line-height: 1.4;
-      letter-spacing: -0.32px;
-      color: #c1c1c1;
-    }
-
-    .footer__divider {
-      width: 100%;
-      height: 1px;
-      background: #333;
-    }
-
-    .footer__info {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .footer__info-left {
-      display: flex;
-      gap: clamp(24px, 3.33vw, 64px);
-      align-items: flex-start;
-    }
-
-    .footer__logo {
-      position: relative;
-      width: 140px;
-      height: 61px;
-    }
-
-    .footer__logo-top {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 68.75%;
-      object-fit: contain;
-    }
-
-    .footer__logo-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 99.35%;
-      height: 16.46%;
-      object-fit: contain;
-    }
-
-    .footer__details {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      font-size: 12px;
-      color: #ddd;
-      line-height: 1.5;
-    }
-
-    .footer__details-row {
-      display: flex;
-      gap: 20px;
-    }
-
-    .footer__details-row strong {
-      font-weight: 700;
-    }
-
-    .footer__btn {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 13px clamp(24px, 2.08vw, 40px) 13px clamp(24px, 3.125vw, 60px);
-      border: 1px solid #ddd;
-      border-radius: 30px;
-      background: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-
-    .footer__btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .footer__btn-text {
-      font-size: clamp(16px, 1.25vw, 16px);
-      font-weight: 700;
-      line-height: 1.4;
-      color: #ddd;
-      white-space: nowrap;
-    }
-
-    .footer__btn-icon {
-      width: 24px;
-      height: 24px;
-      stroke: #ddd;
-      fill: none;
-    }
-
-    .footer__copyright {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #c1c1c1;
-    }
-
-    /* ==================== RESPONSIVE (Laptop ≤1440px) ==================== */
-    @media (max-width: 1440px) {
-      .advertising__visual {
-        width: min(952px, 66vw);
-        margin-left: calc(min(952px, 66vw) / -2);
-        height: min(648px, 56vh);
-      }
-    }
-
-    /* ==================== RESPONSIVE (Small Laptop ≤1280px) ==================== */
-    @media (max-width: 1280px) and (min-width: 769px) {
-      .nav { left: 24px; right: 24px; }
-      .nav-btn { font-size: clamp(13px, 1.4vw, 20px); padding: 0 10px; }
-    }
-
-    /* ==================== RESPONSIVE (Tablet ≤1024px) ==================== */
-    @media (max-width: 1024px) and (min-width: 769px) {
-      .nav-btn { font-size: 13px; padding: 0 8px; }
-
-      .hero__carousel { perspective: 1400px; }
-      .hero__slide { width: clamp(280px, 40vw, 500px); }
-
-      .advertising__title,
-      .agency__title {
-        font-size: clamp(36px, 5.5vw, 80px);
-        left: 40px;
-      }
-
-      .advertising__subtitle,
-      .agency__subtitle {
-        left: 40px;
-      }
-
-      .weare__heading {
-        left: 40px;
-        right: 40px;
-      }
-
-      .weare__desc {
-        left: 40px;
-      }
-
-      .weare__title,
-      .weare__title-right {
-        font-size: clamp(36px, 7vw, 100px);
-      }
-    }
-
-    /* ==================== RESPONSIVE (Short Viewport ≤900px height) ==================== */
-    @media (max-height: 900px) and (min-width: 769px) {
-      .hero__title { padding-top: 20px; }
-      .hero__visual { height: min(700px, 72vh); }
-      .agency__cards { bottom: 5%; }
-      .weare__record { top: 55%; }
-      .footer { gap: 24px; }
-    }
-
-    /* ==================== RESPONSIVE (Very Short Viewport ≤750px height) ==================== */
-    @media (max-height: 750px) and (min-width: 769px) {
-      .hero__title { padding-top: 12px; }
-      .hero__title-line { font-size: 9vw; }
-      .agency__cards { bottom: 3%; }
-      .weare__record { top: 50%; }
-      .weare__record-label { font-size: clamp(12px, 1.4vw, 24px); }
-    }
-
-    /* ==================== RESPONSIVE (Mobile) ==================== */
-    @media (max-width: 768px) {
-      /* --- Nav --- */
-      .nav-btn { display: none; }
-      .nav { left: 16px; right: 16px; }
-
-      /* --- Hero --- */
-      .hero__visual { height: 60vh; }
-      .hero__carousel { perspective: 1000px; }
-      .hero__slide { width: 70vw; border-radius: 8px; }
-      .hero__cursor { display: none; }
-      .hero__title-line { font-size: 12vw; }
-
-      /* --- Advertising --- */
-      .advertising { height: 300vh; }
-      .advertising__title { left: 24px; }
-      .advertising__subtitle { left: 24px; }
-      .advertising__visual { width: 90vw; margin-left: -45vw; }
-
-      /* --- Agency --- */
-      .agency__title { left: 24px; }
-      .agency__subtitle { left: 24px; }
-      .agency { height: auto; min-height: 100vh; }
-      .agency__sticky { position: relative; }
-      .agency__cards {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        transform: none;
-        width: 100%;
-        height: auto;
-        perspective: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        padding: 340px 24px 60px;
-        opacity: 1;
-        transition: none;
-      }
-      .agency__cards.is-visible { transform: none; }
-      .agency__card {
-        position: relative !important;
-        width: 100% !important;
-        max-width: 400px;
-        height: auto !important;
-        aspect-ratio: 4/5;
-        transform: none !important;
-        left: auto !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
-      }
-      .agency__card img { height: auto; }
-
-      /* --- We Are --- */
-      .weare { height: auto; min-height: 100vh; padding-bottom: 60px; }
-      .weare__heading { left: 24px; right: 24px; flex-direction: column; gap: 8px; }
-      .weare__desc { left: 24px; }
-      .weare__record {
-        position: relative;
-        top: auto;
-        margin-top: 420px;
-        flex-direction: column;
-        gap: 40px;
-      }
-
-      /* --- Footer --- */
-      .footer__awards { flex-direction: column; gap: 20px; }
-      .footer__info { flex-direction: column; gap: 32px; }
-      .footer__info-left { flex-direction: column; gap: 24px; }
-      .footer__details-row { flex-direction: column; gap: 4px; }
-      .footer__btn { align-self: stretch; justify-content: center; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/" } }
+  </script>
 </head>
 <body>
 
-  <!-- Navigation -->
-    <nav class="nav fade-in fade-in--delay-2">
-      <div class="nav-btn">ADVERTISING BUSINESS DIV.</div>
-      <div class="nav-logo">
-        <img src="https://www.figma.com/api/mcp/asset/65954d34-c75b-4e2e-84fc-33be2517953f" alt="RENO COMMS">
-      </div>
-      <div class="nav-btn">AGENCY BUSINESS DIV.</div>
-    </nav>
-
-  <section class="hero">
-    <!-- Title -->
-    <div class="hero__title">
-      <div class="hero__title-line" id="titleLine1">REAL EVOLUTION</div>
-      <div class="hero__title-line" id="titleLine2">NEW OPPORTUNITY</div>
-      <canvas class="hero__title-canvas" id="particleCanvas"></canvas>
-    </div>
-
-  
-    <!-- Space Particle Background -->
-    <canvas class="hero__space" id="spaceCanvas"></canvas>
-
-    <!-- Main Visual Area -->
-    <div class="hero__visual fade-in fade-in--delay-3">
-      <!-- Curved Edges -->
-      <!-- <img class="hero__curve-top" src="https://www.figma.com/api/mcp/asset/71841429-5ee4-434e-94df-acc092ad04b3" alt="">
-      <img class="hero__curve-bottom" src="https://www.figma.com/api/mcp/asset/71841429-5ee4-434e-94df-acc092ad04b3" alt=""> -->
-
-      <!-- 3D Cylinder Carousel -->
-      <div class="hero__carousel" id="heroCarousel">
-        <div class="hero__carousel-track" id="heroTrack">
-          <div class="hero__slide">
-            <img src="https://www.figma.com/api/mcp/asset/8e258b2d-5858-48ab-9860-8e2316effde6" alt="Portfolio 3">
-            <div class="hero__slide-overlay">
-              <p class="hero__slide-slogan">Beyond Digital,<br>Into the AI Era.</p>
-            </div>
-          </div>
-          <div class="hero__slide">
-            <img src="https://www.figma.com/api/mcp/asset/02c903bd-ad11-47ea-a012-0c62d34a99ce" alt="Portfolio 1">
-            <div class="hero__slide-overlay">
-              <p class="hero__slide-slogan">사람과 브랜드, 생각과 기술을 잇는 새로운 가치<br>진정한 혁신, 새로운 기회<br>리노가 만듭니다.</p>
-            </div>
-          </div>
-          <div class="hero__slide">
-            <img src="https://www.figma.com/api/mcp/asset/43cdb188-5c1f-4ec1-b657-f5dcf446f50d" alt="Portfolio 2">
-            <div class="hero__slide-overlay">
-              <p class="hero__slide-slogan">전략적인 UX, 실행되는 마케팅<br>경험을 설계하고 성과를 만듭니다.</p>
-            </div>
-          </div>
-          <div class="hero__slide">
-            <img src="https://www.figma.com/api/mcp/asset/8e258b2d-5858-48ab-9860-8e2316effde6" alt="Portfolio 4">
-            <div class="hero__slide-overlay">
-              <p class="hero__slide-slogan">Beyond Digital,<br>Into the AI Era.</p>
-            </div>
-          </div>
-          <div class="hero__slide">
-            <img src="https://www.figma.com/api/mcp/asset/02c903bd-ad11-47ea-a012-0c62d34a99ce" alt="Portfolio 5">
-            <div class="hero__slide-overlay">
-              <p class="hero__slide-slogan">사람과 브랜드, 생각과 기술을 잇는 새로운 가치<br>진정한 혁신, 새로운 기회<br>리노가 만듭니다.</p>
-            </div>
-          </div>
-          <div class="hero__slide">
-            <img src="https://www.figma.com/api/mcp/asset/43cdb188-5c1f-4ec1-b657-f5dcf446f50d" alt="Portfolio 6">
-            <div class="hero__slide-overlay">
-              <p class="hero__slide-slogan">전략적인 UX, 실행되는 마케팅<br>경험을 설계하고 성과를 만듭니다.</p>
-            </div>
-          </div>
+  <!-- GNB -->
+  <nav class="gnb">
+    <div class="gnb-inner">
+      <a href="#" class="gnb-logo">
+        <div class="gnb-ci">
+          <img src="images/reno-ci.svg" alt="RENO" class="gnb-ci-img">
         </div>
-      </div>
-      <div class="hero__cursor" id="heroCursor">WE ARE</div>
-    </div>
-  </section>
-  <!-- ==================== ADVERTISING ==================== -->
-  <section class="advertising" data-theme="light">
-    <div class="advertising__sticky">
-      <h2 class="advertising__title scroll-reveal scroll-reveal--delay-1">
-        <p>ADVERTISING</p>
-        <p>BUSINESS DIV.</p>
-      </h2>
-      <p class="advertising__subtitle scroll-reveal scroll-reveal--delay-2">기획안을 넘어, 대담함으로 커뮤니케이션</p>
-
-      <div class="advertising__visual">
-        <img class="advertising__visual-slide" src="assets/lotte-cinema-composite.jpg" alt="LOTTE Cinema Screen">
-        <span class="advertising__visual-text">LOTTE Cinema screen</span>
-        <div class="advertising__visual-slide advertising__visual-slide--second">
-          <img src="assets/golfzon.jpg" alt="GOLFZON">
-          <span class="advertising__visual-text">GOLFZON</span>
-        </div>
-        <div class="advertising__visual-slide advertising__visual-slide--third">
-          <img src="assets/korea.jpg" alt="Korean Air AD">
-          <span class="advertising__visual-text">Korean Air AD</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== AGENCY ==================== -->
-  <section class="agency" data-theme="light">
-    <div class="agency__sticky">
-      <h2 class="agency__title scroll-reveal scroll-reveal--delay-1">
-        <p>AGENCY</p>
-        <p>BUSINESS DIV.</p>
-      </h2>
-      <p class="agency__subtitle scroll-reveal scroll-reveal--delay-2">AI 생태계의 내일을 설계합니다</p>
-
-      <div class="agency__cards">
-        <div class="agency__card">
-          <img src="https://www.figma.com/api/mcp/asset/a3ec0f26-3573-434a-86da-b1555818cf0c" alt="TV CHOSUN">
-        </div>
-        <div class="agency__card">
-          <img src="https://www.figma.com/api/mcp/asset/6a5f9b9c-fe83-41e4-8184-27a6fba40466" alt="Character App">
-        </div>
-        <div class="agency__card">
-          <img src="https://www.figma.com/api/mcp/asset/0897d507-e59b-4f5d-8ef6-a388e32d50bb" alt="Daegu App">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== WE ARE ==================== -->
-  <section class="weare" data-theme="light">
-    <div class="weare__heading scroll-reveal scroll-reveal--delay-1">
-      <h2 class="weare__title">WE <span>ARE</span></h2>
-      <p class="weare__title-right">RENO</p>
-    </div>
-    <p class="weare__desc scroll-reveal scroll-reveal--delay-2">리노는 2004부터 22년 동안 웹의 기준을 만들어 오고 있습니다.<br>매년 눈부신 성과를 이루며 성장하고 혁신합니다.</p>
-    <div class="weare__record">
-      <div class="weare__record-item">
-        <p class="weare__record-label">since</p>
-        <p class="weare__record-value" data-value="2004"></p>
-      </div>
-      <div class="weare__record-item">
-        <p class="weare__record-label">years</p>
-        <p class="weare__record-value" data-value="22"></p>
-      </div>
-      <div class="weare__record-item">
-        <p class="weare__record-label">sales</p>
-        <p class="weare__record-value" data-value="17B"></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="footer">
-    <div class="footer__awards">
-      <div class="footer__award">
-        <img class="footer__award-icon" src="https://www.figma.com/api/mcp/asset/736dc420-dd6d-462b-b325-720518ad1518" alt="WEB AWARD">
-        <p class="footer__award-text">WEB AWARD<br>KOREA 2025 Gold 부문</p>
-      </div>
-      <div class="footer__award">
-        <img class="footer__award-icon" src="https://www.figma.com/api/mcp/asset/736dc420-dd6d-462b-b325-720518ad1518" alt="WEB AWARD">
-        <p class="footer__award-text">WEB AWARD<br>KOREA 2025 Silver 부문</p>
-      </div>
-      <div class="footer__award">
-        <img class="footer__award-icon footer__award-icon--ict" src="https://www.figma.com/api/mcp/asset/27a36537-37c4-4ff3-9c2a-3ae575df3e17" alt="ICT AWARD">
-        <p class="footer__award-text">ICT AWARD<br>KOREA 2025 GOLD PRIZE</p>
-      </div>
-    </div>
-
-    <div class="footer__divider"></div>
-
-    <div class="footer__info">
-      <div class="footer__info-left">
-        <div class="footer__logo">
-          <img class="footer__logo-top" src="https://www.figma.com/api/mcp/asset/cc0392fe-f760-4d9b-b40b-61c85a2c5cdd" alt="RENO">
-          <img class="footer__logo-bottom" src="https://www.figma.com/api/mcp/asset/ef21c2d7-52fc-4a40-97f7-85cb40d9e9c5" alt="COMMUNICATIONS">
-        </div>
-        <div class="footer__details">
-          <div class="footer__details-row">
-            <span>서울특별시 송파구 동남로 155 리노컴즈빌딩</span>
-            <span>www.renocomms.com</span>
-            <span><strong>대표번호</strong> 02-3445-1750</span>
-          </div>
-          <div class="footer__details-row">
-            <span><strong>대표이사</strong> 김덕구</span>
-            <span><strong>사업자등록번호</strong> 220-86-92530</span>
-          </div>
-        </div>
-      </div>
-      <a class="footer__btn" href="#">
-        <span class="footer__btn-text">회사소개서</span>
-        <svg class="footer__btn-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 5v14M5 12l7 7 7-7"/>
-        </svg>
       </a>
+      <div class="gnb-btns">
+        <a href="#advertising" class="gnb-link">ADVERTISING BUSINESS DIV.</a>
+        <a href="#agency" class="gnb-link">AGENCY BUSINESS DIV.</a>
+        <a href="#about" class="gnb-link">ABOUT RENO</a>
+        <a href="#contact" class="gnb-link">CONTACT US</a>
+        <a href="#" class="gnb-download">
+          <span>회사소개서</span>
+          <span class="gnb-download-icon">
+            <img src="images/ic-download.svg" alt="" class="gnb-download-ic">
+          </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-slides">
+      <div class="hero-slide active" data-slide="0" data-dark="true">
+        <canvas id="cubeCanvas"></canvas>
+        <div class="hero-text">
+          <p class="hero-subtitle">사람과 브랜드, 생각과 기술을 잇는 새로운 가치</p>
+          <h1 class="hero-title">
+            <span class="line"><strong>R</strong>EAL <strong>E</strong>VOLUTION,</span>
+            <span class="line"><strong>N</strong>EW <strong>O</strong>PPORTUNITY</span>
+          </h1>
+          <div class="hero-desc">
+            <p>진정한 혁신, 새로운 기회</p>
+            <p class="semi">리노가 만듭니다.</p>
+          </div>
+        </div>
+      </div>
+      <!--
+      <div class="hero-slide" data-slide="1" data-dark="true">
+        <canvas id="bulbCanvas"></canvas>
+        <div class="hero-text">
+          <h1 class="hero-title">
+            <span class="line">전략적인 <strong>UX,</strong></span>
+            <span class="line">실행되는 <strong>마케팅</strong></span>
+          </h1>
+          <div class="hero-desc">
+            <p>경험을 설계하고 성과를 만듭니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-slide" data-slide="2" data-dark="true">
+        <canvas id="particleCanvas"></canvas>
+        <div class="hero-text">
+          <h1 class="hero-title">
+            <span class="line">BEYOND <strong>DIGITAL</strong></span>
+            <span class="line">INTO THE <strong>AI ERA.</strong></span>
+          </h1>
+        </div>
+      </div>
+      -->
+    </div>
+    <div class="hero-indicator">
+      <div class="hero-indicator-select glass-shine">
+        <div class="indicator-item active" data-index="0">
+          <span class="indicator-num">01</span>
+          <div class="indicator-gauge">
+            <div class="indicator-gauge-base"></div>
+            <div class="indicator-gauge-progress"></div>
+          </div>
+        </div>
+        <!--
+        <div class="indicator-item" data-index="1">
+          <span class="indicator-num">02</span>
+          <div class="indicator-gauge">
+            <div class="indicator-gauge-base"></div>
+            <div class="indicator-gauge-progress"></div>
+          </div>
+        </div>
+        <div class="indicator-item" data-index="2">
+          <span class="indicator-num">03</span>
+          <div class="indicator-gauge">
+            <div class="indicator-gauge-base"></div>
+            <div class="indicator-gauge-progress"></div>
+          </div>
+        </div>
+        -->
+      </div>
+      <button class="indicator-pause glass-shine" aria-label="일시정지">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <rect x="13.5" y="6" width="3" height="12" fill="#101820"/>
+          <rect x="7.5" y="6" width="3" height="12" fill="#101820"/>
+        </svg>
+      </button>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-slot">
+        <span>SCROLL</span>
+        <span>SCROLL</span>
+        <span>SCROLL</span>
+        <span>SCROLL</span>
+        <span>SCROLL</span>
+        <span>SCROLL</span>
+        <span>SCROLL</span>
+        <span>SCROLL</span>
+        <span>SCROLL</span>
+        <span>SCROLL</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advertising -->
+  <section class="advertising" id="advertising">
+    <div class="adv-top">
+      <div class="adv-text">
+        <h2 class="adv-title"><strong>ADVERTISING</strong> BUSINESS DIV.</h2>
+        <p class="adv-desc">기획안을 넘어, <strong>대담함으로 커뮤니케이션</strong></p>
+      </div>
     </div>
 
-    <div class="footer__divider"></div>
+    <div class="adv-visual">
+      <!-- Marquee behind the card -->
+      <div class="adv-marquee">
+        <div class="adv-marquee-row">
+          <div class="adv-marquee-track marquee-left">
+            <span class="marquee-text dark">ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class="marquee-text dark">ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </div>
+        </div>
+        <div class="adv-marquee-row">
+          <div class="adv-marquee-track marquee-right">
+            <span class="marquee-text light">ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class="marquee-text light">ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </div>
+        </div>
+      </div>
 
-    <p class="footer__copyright">Copyright ⓒ RENOCOMMS. All Rights Reserved.</p>
+      <!-- Glass + Visual -->
+      <div class="adv-glass glass-shine">
+       <div class="adv-cube-viewport">
+        <div class="adv-cube" id="advCube">
+        <div class="adv-slide" data-slide="0">
+          <img src="images/adv-visual-lotte.jpg" alt="롯데시네마" class="adv-visual-img">
+          <img src="images/adv-visual-logo.svg" alt="" class="adv-visual-logo">
+        </div>
+        <div class="adv-slide" data-slide="1">
+          <img src="images/adv-visual-kakao.jpg" alt="대한항공" class="adv-visual-img">
+        </div>
+        <div class="adv-slide" data-slide="2">
+          <img src="images/adv-visual-golfzon.png" alt="골프존" class="adv-visual-img">
+        </div>
+        <div class="adv-slide" data-slide="3">
+          <img src="images/adv-visual-koreanair.png" alt="카카오모빌리티" class="adv-visual-img">
+        </div>
+        </div>
+        <div class="adv-visual-gradient"></div>
+        <div class="adv-visual-info" id="advVisualInfo">
+          <p class="adv-visual-category">스크린 광고</p>
+          <p class="adv-visual-name">LOTTE Cinema</p>
+        </div>
+       </div>
+      </div>
+    </div>
+
+    <div class="adv-clients">
+      <button class="adv-client active" data-index="0">
+        <img src="images/logo-lotte.svg" alt="LOTTE CINEMA">
+      </button>
+      <button class="adv-client" data-index="1">
+        <img src="images/logo-koreanair.svg" alt="KOREAN AIR">
+      </button>
+      <button class="adv-client" data-index="2">
+        <img src="images/logo-golfzon.svg" alt="GOLFZON">
+      </button>
+      <button class="adv-client" data-index="3">
+        <img src="images/logo-kakao1.svg" alt="kakao" class="kakao-part1">
+        <img src="images/logo-kakao2.svg" alt="mobility" class="kakao-part2">
+      </button>
+    </div>
+  </section>
+
+  <!-- Agency -->
+  <section class="agency" id="agency">
+    <div class="agency-bg-logo">
+      <img src="images/agency-bg-1.svg" alt="">
+      <img src="images/agency-bg-2.svg" alt="">
+      <img src="images/agency-bg-3.svg" alt="">
+    </div>
+
+    <div class="agency-header">
+      <div class="agency-text">
+        <h2 class="agency-title"><strong>AGENCY</strong> BUSINESS DIV.</h2>
+        <p class="agency-desc">AI 생태계의 <strong>내일을 설계합니다.</strong></p>
+      </div>
+    </div>
+
+    <div class="carousel-glow" id="carouselGlow"></div>
+    <div class="agency-carousel-area">
+      <button class="carousel-arrow arrow-left glass-shine" aria-label="이전">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M18 12H6" stroke="#101820" stroke-width="1.8"/>
+          <path d="M11 7L6 12L11 17" stroke="#101820" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="agencyTrack">
+          <div class="agency-card" data-glow="#6BC5C0" style="background:#6BC5C0"></div>
+          <div class="agency-card" data-glow="#7B9FE8" style="background:#7B9FE8"></div>
+          <div class="agency-card" data-glow="#E88A7B" style="background:#E88A7B"></div>
+          <div class="agency-card" data-glow="#C49BE8" style="background:#C49BE8"></div>
+          <div class="agency-card" data-glow="#E8C77B" style="background:#E8C77B"></div>
+        </div>
+      </div>
+      <button class="carousel-arrow arrow-right glass-shine" aria-label="다음">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M6 12H18" stroke="#101820" stroke-width="1.8"/>
+          <path d="M13 7L18 12L13 17" stroke="#101820" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="carousel-dots"></div>
+
+    <div class="skills-marquee">
+      <div class="skills-row">
+        <div class="skills-track skills-left">
+          <span class="skill-tag">WEB</span><span class="skill-tag">APP</span><span class="skill-tag">Design System</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Product Build</span><span class="skill-tag">AI</span><span class="skill-tag">CREATIVITY</span><span class="skill-tag">EXECUTION</span><span class="skill-tag">SYNERGY</span><span class="skill-tag">CORE</span><span class="skill-tag">FRAMEWORK</span><span class="skill-tag">INTUITIVE</span><span class="skill-tag">BRIDGE</span><span class="skill-tag">EXPERTISE</span>
+          <span class="skill-tag">WEB</span><span class="skill-tag">APP</span><span class="skill-tag">Design System</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Product Build</span><span class="skill-tag">AI</span><span class="skill-tag">CREATIVITY</span><span class="skill-tag">EXECUTION</span><span class="skill-tag">SYNERGY</span><span class="skill-tag">CORE</span><span class="skill-tag">FRAMEWORK</span><span class="skill-tag">INTUITIVE</span><span class="skill-tag">BRIDGE</span><span class="skill-tag">EXPERTISE</span>
+        </div>
+      </div>
+      <div class="skills-row">
+        <div class="skills-track skills-right">
+          <span class="skill-tag">FRAMEWORK</span><span class="skill-tag">INTUITIVE</span><span class="skill-tag">BRIDGE</span><span class="skill-tag">EXPERTISE</span><span class="skill-tag">WEB</span><span class="skill-tag">APP</span><span class="skill-tag">Design System</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Product Build</span><span class="skill-tag">AI</span><span class="skill-tag">CREATIVITY</span><span class="skill-tag">EXECUTION</span><span class="skill-tag">SYNERGY</span><span class="skill-tag">CORE</span>
+          <span class="skill-tag">FRAMEWORK</span><span class="skill-tag">INTUITIVE</span><span class="skill-tag">BRIDGE</span><span class="skill-tag">EXPERTISE</span><span class="skill-tag">WEB</span><span class="skill-tag">APP</span><span class="skill-tag">Design System</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Product Build</span><span class="skill-tag">AI</span><span class="skill-tag">CREATIVITY</span><span class="skill-tag">EXECUTION</span><span class="skill-tag">SYNERGY</span><span class="skill-tag">CORE</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- We Are -->
+  <section class="weare" id="about" data-gnb-dark="true">
+    <div class="weare-inner">
+      <div class="weare-left">
+        <h2 class="weare-title">
+          <span class="line"><strong>WE</strong> ARE</span>
+          <span class="line"><strong>RENO</strong></span>
+        </h2>
+        <div class="weare-desc">
+          <p>리노는 2004부터 22년 동안 웹의 기준을 만들어 오고 있습니다.</p>
+          <p>매년 눈부신 성과를 이루며 성장하고 혁신합니다.</p>
+        </div>
+        <a href="#" class="weare-more">
+          More
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path d="M16 12l8 8-8 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="weare-right">
+        <div class="record">
+          <span class="record-label">Since</span>
+          <span class="record-value">2004</span>
+        </div>
+        <div class="record-divider"></div>
+        <div class="record">
+          <span class="record-label">Years</span>
+          <span class="record-value">22<small>년</small></span>
+        </div>
+        <div class="record-divider"></div>
+        <div class="record">
+          <div class="record-label-wrap">
+            <span class="record-label">Sales</span>
+            <span class="record-label-sub">25년 기준</span>
+          </div>
+          <span class="record-value">170<small>억</small></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact" data-gnb-dark="true">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-left">
+          <div class="footer-awards">
+            <div class="award">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4l3.09 6.26L26 11.27l-5 4.87 1.18 6.88L16 19.77l-6.18 3.25L11 16.14l-5-4.87 6.91-1.01L16 4z" stroke="#CCC" stroke-width="1.2" stroke-linejoin="round"/></svg>
+              <div class="award-info">
+                <p class="award-t">AND AWARD 2025 Gold 부문</p>
+                <p class="award-d">B world 홈페이지 리뉴얼 및 메뉴개선</p>
+              </div>
+            </div>
+            <div class="award">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4l3.09 6.26L26 11.27l-5 4.87 1.18 6.88L16 19.77l-6.18 3.25L11 16.14l-5-4.87 6.91-1.01L16 4z" stroke="#CCC" stroke-width="1.2" stroke-linejoin="round"/></svg>
+              <div class="award-info">
+                <p class="award-t">AND AWARD 2025 Gold 부문</p>
+                <p class="award-d">B world 홈페이지 리뉴얼 및 메뉴개선</p>
+              </div>
+            </div>
+            <div class="award">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4l3.09 6.26L26 11.27l-5 4.87 1.18 6.88L16 19.77l-6.18 3.25L11 16.14l-5-4.87 6.91-1.01L16 4z" stroke="#CCC" stroke-width="1.2" stroke-linejoin="round"/></svg>
+              <div class="award-info">
+                <p class="award-t">AND AWARD 2025 Gold 부문</p>
+                <p class="award-d">B world 홈페이지 리뉴얼 및 메뉴개선</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-info">
+            <div class="footer-row">
+              <span>서울특별시 송파구 동남로 155 리노컴즈빌딩</span>
+              <span>www.renocomms.com</span>
+              <span><strong>대표번호</strong>&nbsp;&nbsp;02-3445-1750</span>
+            </div>
+            <div class="footer-row">
+              <span><strong>대표이사</strong> 김덕구</span>
+              <span><strong>사업자등록번호</strong> 220-86-92530</span>
+            </div>
+          </div>
+        </div>
+        <div class="footer-right-logo">
+          <img src="images/footer-reno.svg" alt="RENO">
+          <img src="images/footer-communications.svg" alt="COMMUNICATIONS">
+        </div>
+      </div>
+      <div class="footer-line"></div>
+      <p class="footer-copy">Copyright ⓒ RENOCOMMS. All Rights Reserved.</p>
+    </div>
   </footer>
 
-  <script>
-    function isMobile() { return window.innerWidth <= 768; }
-
-    (function () {
-      const canvas = document.getElementById('particleCanvas');
-      const ctx = canvas.getContext('2d');
-      const titleContainer = document.querySelector('.hero__title');
-      const line1 = document.getElementById('titleLine1');
-      const line2 = document.getElementById('titleLine2');
-
-      let particles = [];
-      let animationStarted = false;
-      const PARTICLE_SIZE = 2;
-      const DENSITY = 3;
-
-      function resize() {
-        const rect = titleContainer.getBoundingClientRect();
-        canvas.width = rect.width;
-        canvas.height = rect.height;
-      }
-
-      function getTextPixels(text, fontSize, centerX, centerY) {
-        const offscreen = document.createElement('canvas');
-        offscreen.width = canvas.width;
-        offscreen.height = canvas.height;
-        const offCtx = offscreen.getContext('2d');
-
-        offCtx.fillStyle = '#cccccc';
-        offCtx.font = `700 ${fontSize}px Pretendard, sans-serif`;
-        offCtx.textAlign = 'center';
-        offCtx.textBaseline = 'middle';
-        offCtx.letterSpacing = `${-fontSize * 0.02}px`;
-        offCtx.fillText(text, centerX, centerY);
-
-        const imageData = offCtx.getImageData(0, 0, offscreen.width, offscreen.height);
-        const pixels = [];
-
-        for (let y = 0; y < offscreen.height; y += DENSITY) {
-          for (let x = 0; x < offscreen.width; x += DENSITY) {
-            const i = (y * offscreen.width + x) * 4;
-            if (imageData.data[i + 3] > 128) {
-              pixels.push({ x, y });
-            }
-          }
-        }
-        return pixels;
-      }
-
-      function createParticles() {
-        particles = [];
-        resize();
-
-        const style1 = window.getComputedStyle(line1);
-        const style2 = window.getComputedStyle(line2);
-        const fontSize1 = parseFloat(style1.fontSize);
-        const fontSize2 = parseFloat(style2.fontSize);
-
-        const rect1 = line1.getBoundingClientRect();
-        const rect2 = line2.getBoundingClientRect();
-        const containerRect = titleContainer.getBoundingClientRect();
-
-        const cy1 = rect1.top - containerRect.top + rect1.height / 2;
-        const cy2 = rect2.top - containerRect.top + rect2.height / 2;
-        const cx = canvas.width / 2;
-
-        const pixels1 = getTextPixels('REAL EVOLUTION', fontSize1, cx, cy1);
-        const pixels2 = getTextPixels('NEW OPPORTUNITY', fontSize2, cx, cy2);
-
-        pixels1.forEach(p => {
-          particles.push({
-            targetX: p.x,
-            targetY: p.y,
-            x: -Math.random() * canvas.width,
-            y: p.y + (Math.random() - 0.5) * 200,
-            size: PARTICLE_SIZE + Math.random() * 1,
-            delay: 0.5 + Math.random() * 0.8,
-            alpha: 0,
-          });
-        });
-
-        pixels2.forEach(p => {
-          particles.push({
-            targetX: p.x,
-            targetY: p.y,
-            x: canvas.width + Math.random() * canvas.width,
-            y: p.y + (Math.random() - 0.5) * 200,
-            size: PARTICLE_SIZE + Math.random() * 1,
-            delay: 1.0 + Math.random() * 0.8,
-            alpha: 0,
-          });
-        });
-      }
-
-      function animate() {
-        if (!animationStarted) return;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        const now = (performance.now() / 1000);
-        let allDone = true;
-
-        for (const p of particles) {
-          const elapsed = now - p.startTime;
-          if (elapsed < p.delay) {
-            allDone = false;
-            continue;
-          }
-
-          const duration = 2.5;
-          const t = Math.min((elapsed - p.delay) / duration, 1);
-          const ease = 1 - Math.pow(1 - t, 3);
-
-          p.x = p.originX + (p.targetX - p.originX) * ease;
-          p.y = p.originY + (p.targetY - p.originY) * ease;
-          p.alpha = ease;
-
-          ctx.globalAlpha = p.alpha;
-          ctx.fillStyle = '#cccccc';
-          ctx.fillRect(p.x, p.y, p.size, p.size);
-
-          if (t < 1) allDone = false;
-        }
-
-        if (allDone) {
-          ctx.globalAlpha = 1;
-          const style1 = window.getComputedStyle(line1);
-          const style2 = window.getComputedStyle(line2);
-          const fontSize1 = parseFloat(style1.fontSize);
-          const fontSize2 = parseFloat(style2.fontSize);
-          const rect1 = line1.getBoundingClientRect();
-          const rect2 = line2.getBoundingClientRect();
-          const containerRect = titleContainer.getBoundingClientRect();
-          const cy1 = rect1.top - containerRect.top + rect1.height / 2;
-          const cy2 = rect2.top - containerRect.top + rect2.height / 2;
-          const cx = canvas.width / 2;
-
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = '#cccccc';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-
-          ctx.font = `700 ${fontSize1}px Pretendard, sans-serif`;
-          ctx.letterSpacing = `${-fontSize1 * 0.02}px`;
-          ctx.fillText('REAL EVOLUTION', cx, cy1);
-
-          ctx.font = `700 ${fontSize2}px Pretendard, sans-serif`;
-          ctx.letterSpacing = `${-fontSize2 * 0.02}px`;
-          ctx.fillText('NEW OPPORTUNITY', cx, cy2);
-          return;
-        }
-
-        requestAnimationFrame(animate);
-      }
-
-      function start() {
-        createParticles();
-        const startTime = performance.now() / 1000;
-        particles.forEach(p => {
-          p.startTime = startTime;
-          p.originX = p.x;
-          p.originY = p.y;
-        });
-        animationStarted = true;
-        requestAnimationFrame(animate);
-      }
-
-      window.addEventListener('load', () => {
-        setTimeout(start, 300);
-      });
-
-      window.addEventListener('resize', () => {
-        createParticles();
-        const startTime = performance.now() / 1000 - 10;
-        particles.forEach(p => {
-          p.startTime = startTime;
-          p.originX = p.targetX;
-          p.originY = p.targetY;
-          p.x = p.targetX;
-          p.y = p.targetY;
-          p.alpha = 1;
-        });
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const style1 = window.getComputedStyle(line1);
-        const style2 = window.getComputedStyle(line2);
-        const fontSize1 = parseFloat(style1.fontSize);
-        const fontSize2 = parseFloat(style2.fontSize);
-        const rect1 = line1.getBoundingClientRect();
-        const rect2 = line2.getBoundingClientRect();
-        const containerRect = titleContainer.getBoundingClientRect();
-        const cy1 = rect1.top - containerRect.top + rect1.height / 2;
-        const cy2 = rect2.top - containerRect.top + rect2.height / 2;
-        const cx = canvas.width / 2;
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = '#cccccc';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.font = `700 ${fontSize1}px Pretendard, sans-serif`;
-        ctx.letterSpacing = `${-fontSize1 * 0.02}px`;
-        ctx.fillText('REAL EVOLUTION', cx, cy1);
-        ctx.font = `700 ${fontSize2}px Pretendard, sans-serif`;
-        ctx.letterSpacing = `${-fontSize2 * 0.02}px`;
-        ctx.fillText('NEW OPPORTUNITY', cx, cy2);
-      });
-    })();
-
-    // ===== Hero 3D Cylinder Carousel =====
-    (function () {
-      var carousel = document.getElementById('heroCarousel');
-      var track = document.getElementById('heroTrack');
-      var cursor = document.getElementById('heroCursor');
-      var slides = Array.from(track.querySelectorAll('.hero__slide'));
-      var N = slides.length;
-
-      var angle = 0;
-      var targetAngle = 0;
-      var velocity = 0;
-      var isDragging = false;
-      var startX = 0;
-      var dragStartAngle = 0;
-      var lastMoveX = 0;
-      var lastMoveTime = 0;
-      var friction = 0.95;
-      var autoSpeed = -0.15;
-      var isHovering = false;
-
-      var angleStep = 360 / N;
-
-      function getRadius() {
-        var slideW = slides[0].offsetWidth;
-        return Math.max(600, (N * (slideW + 40)) / (2 * Math.PI));
-      }
-
-      function layoutSlides() {
-        var radius = getRadius();
-
-        for (var i = 0; i < N; i++) {
-          var theta = angleStep * i + angle;
-          var rad = theta * Math.PI / 180;
-
-          var x = Math.sin(rad) * radius;
-          var z = Math.cos(rad) * radius - radius;
-
-          var depthNorm = (z + radius) / (2 * radius);
-          var opacity = 0.3 + 0.7 * depthNorm;
-          var scale = 0.65 + 0.35 * depthNorm;
-          var zIndex = Math.round(depthNorm * 100);
-
-          slides[i].style.transform =
-            'translateX(calc(' + x.toFixed(1) + 'px - 50%)) translateZ(' + z.toFixed(1) + 'px) ' +
-            'rotateY(' + (-theta).toFixed(1) + 'deg) scale(' + scale.toFixed(3) + ')';
-          slides[i].style.opacity = opacity.toFixed(3);
-          slides[i].style.zIndex = zIndex;
-          slides[i].style.filter = depthNorm < 0.5
-            ? 'brightness(' + (0.6 + depthNorm * 0.8).toFixed(2) + ')'
-            : 'brightness(1)';
-        }
-      }
-
-      layoutSlides();
-      window.addEventListener('resize', layoutSlides);
-
-      // Custom cursor
-      carousel.addEventListener('mouseenter', function () {
-        cursor.classList.add('is-visible');
-        isHovering = true;
-      });
-      carousel.addEventListener('mouseleave', function () {
-        cursor.classList.remove('is-visible');
-        cursor.classList.remove('is-dragging');
-        isHovering = false;
-      });
-      carousel.addEventListener('mousemove', function (e) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-      });
-
-      // Drag → rotate
-      carousel.addEventListener('pointerdown', function (e) {
-        isDragging = true;
-        startX = e.clientX;
-        dragStartAngle = angle;
-        lastMoveX = e.clientX;
-        lastMoveTime = Date.now();
-        velocity = 0;
-        cursor.classList.add('is-dragging');
-        carousel.setPointerCapture(e.pointerId);
-        e.preventDefault();
-      });
-
-      carousel.addEventListener('pointermove', function (e) {
-        if (!isDragging) return;
-        var now = Date.now();
-        var dt = now - lastMoveTime;
-        var dx = e.clientX - lastMoveX;
-        if (dt > 0) velocity = dx / dt * 0.8;
-        lastMoveX = e.clientX;
-        lastMoveTime = now;
-
-        var diff = e.clientX - startX;
-        targetAngle = dragStartAngle + diff * 0.2;
-      });
-
-      carousel.addEventListener('pointerup', function (e) {
-        if (!isDragging) return;
-        isDragging = false;
-        cursor.classList.remove('is-dragging');
-        velocity = Math.max(-8, Math.min(8, velocity));
-      });
-
-      // Animation loop
-      function animate() {
-        if (isDragging) {
-          angle += (targetAngle - angle) * 0.25;
-        } else {
-          if (Math.abs(velocity) > 0.01) {
-            angle += velocity;
-            velocity *= friction;
-          } else {
-            velocity = 0;
-            if (!isHovering) {
-              angle += autoSpeed;
-            }
-          }
-        }
-
-        layoutSlides();
-        requestAnimationFrame(animate);
-      }
-
-      requestAnimationFrame(animate);
-    })();
-
-    // ===== Nav Scroll Fix & Color Change =====
-    (function () {
-      const nav = document.querySelector('.nav');
-      const lightSections = document.querySelectorAll('[data-theme="light"]');
-
-      function updateNav() {
-        if (window.scrollY > 100) {
-          nav.classList.add('is-scrolled');
-        } else {
-          nav.classList.remove('is-scrolled');
-        }
-
-        const navRect = nav.getBoundingClientRect();
-        const navCenter = navRect.top + navRect.height / 2;
-        let onLight = false;
-
-        lightSections.forEach(section => {
-          const rect = section.getBoundingClientRect();
-          if (navCenter >= rect.top && navCenter <= rect.bottom) {
-            onLight = true;
-          }
-        });
-
-        if (onLight) {
-          nav.classList.add('is-dark');
-        } else {
-          nav.classList.remove('is-dark');
-        }
-      }
-
-      window.addEventListener('scroll', updateNav);
-      window.addEventListener('resize', updateNav);
-    })();
-
-    // ===== Advertising Visual Scroll Animation =====
-    (function () {
-      const visual = document.querySelector('.advertising__visual');
-      const visualText = document.querySelector('.advertising__visual-text');
-      const section = document.querySelector('.advertising');
-
-      function lerp(a, b, t) { return a + (b - a) * t; }
-
-      function update() {
-        const rect = section.getBoundingClientRect();
-        const vh = window.innerHeight;
-        const scrolled = -rect.top;
-        const totalScroll = section.offsetHeight - vh;
-
-        const rawProgress = Math.max(0, Math.min(scrolled / totalScroll, 1));
-
-        // Phase 1: fade in & rise
-        const fadeEnd = 0.35;
-        const fadeT = Math.min(rawProgress / fadeEnd, 1);
-        const easeF = 1 - Math.pow(1 - fadeT, 3);
-        const opacity = easeF;
-        const translateY = lerp(200, 0, easeF);
-
-        // Phase 2 (0.2~0.5): expand width
-        const expandStart = 0.2, expandEnd = 0.5;
-        const expandT = rawProgress <= expandStart ? 0 : Math.min((rawProgress - expandStart) / (expandEnd - expandStart), 1);
-        const easeE = 1 - Math.pow(1 - expandT, 3);
-
-        const startW = Math.min(952, window.innerWidth * (window.innerWidth <= 1440 ? 0.66 : 0.496));
-        const endW = window.innerWidth;
-        const w = lerp(startW, endW, easeE);
-        const radius = lerp(40, 0, easeE);
-        const borderW = lerp(1, 0, easeE);
-
-        const navBottom = 64 + 90;
-        const startH = Math.min(648, window.innerHeight * (window.innerHeight <= 900 ? 0.5 : 0.6));
-        const endH = vh - navBottom;
-        const h = lerp(startH, endH, easeE);
-
-        // First image text: fade in & rise during expand phase
-        const textStart = 0.3, textEnd = 0.5;
-        const textT = rawProgress <= textStart ? 0 : Math.min((rawProgress - textStart) / (textEnd - textStart), 1);
-        const easeT = 1 - Math.pow(1 - textT, 3);
-        const textOpacity = easeT;
-        const textY = lerp(40, 0, easeT);
-        const textScale = lerp(0.6, 1, easeT);
-
-        visual.style.opacity = opacity;
-        visual.style.transform = `translateY(${translateY}px)`;
-        visual.style.width = w + 'px';
-        visual.style.height = h + 'px';
-        visual.style.marginLeft = (-w / 2) + 'px';
-        visual.style.borderRadius = radius + 'px';
-        visual.style.borderWidth = borderW + 'px';
-
-        visualText.style.opacity = textOpacity;
-        visualText.style.transform = `translate(-50%, calc(-50% + ${textY}px)) scale(${textScale})`;
-      }
-
-      window.addEventListener('scroll', update);
-      window.addEventListener('resize', update);
-    })();
-
-    // ===== Advertising Visual Carousel (scroll-driven, vertical) =====
-    (function () {
-      const secondSlide = document.querySelector('.advertising__visual-slide--second');
-      const thirdSlide = document.querySelector('.advertising__visual-slide--third');
-      const section = document.querySelector('.advertising');
-
-      function update() {
-        const rect = section.getBoundingClientRect();
-        const vh = window.innerHeight;
-        const scrolled = -rect.top;
-        const totalScroll = section.offsetHeight - vh;
-        const progress = Math.max(0, Math.min(scrolled / totalScroll, 1));
-
-        // Second slide: 0.4 ~ 0.6
-        const s2Start = 0.4, s2End = 0.6;
-        const s2T = progress <= s2Start ? 0 : Math.min((progress - s2Start) / (s2End - s2Start), 1);
-        const ease2 = 1 - Math.pow(1 - s2T, 3);
-        secondSlide.style.transform = `translateY(${(1 - ease2) * 100}%)`;
-
-        // Third slide: 0.65 ~ 0.85
-        const s3Start = 0.65, s3End = 0.85;
-        const s3T = progress <= s3Start ? 0 : Math.min((progress - s3Start) / (s3End - s3Start), 1);
-        const ease3 = 1 - Math.pow(1 - s3T, 3);
-        thirdSlide.style.transform = `translateY(${(1 - ease3) * 100}%)`;
-      }
-
-      window.addEventListener('scroll', update);
-      window.addEventListener('resize', update);
-    })();
-
-    // ===== Agency Cards Spread Animation =====
-    (function () {
-      const cards = document.querySelectorAll('.agency__card');
-      const cardsContainer = document.querySelector('.agency__cards');
-      const section = document.querySelector('.agency');
-
-      function getCardLayout() {
-        var cw = Math.min(1400, window.innerWidth * 0.9);
-        var cardW = Math.min(420, window.innerWidth * 0.21875);
-        var g = Math.min(320, cw * 0.2286);
-        var sx = (cw - cardW) / 2;
-        var bx = (cw - (cardW + g * 2)) / 2;
-        return { gap: g, startX: sx, baseX: bx, targets: [bx, bx + g, bx + g * 2] };
-      }
-      var layout = getCardLayout();
-      window.addEventListener('resize', function() { layout = getCardLayout(); if (!isMobile()) applyState(); });
-      const endRotateY = -25;
-      var spread = false;
-
-      // 초기 위치: 중앙에 모아두기
-      if (!isMobile()) {
-        cards.forEach((card, i) => {
-          card.style.left = layout.startX + 'px';
-          card.style.zIndex = cards.length - i;
-          card.style.opacity = 1;
-          card.style.transform = 'rotateY(0deg) scale(1) translateY(0px)';
-        });
-      }
-
-      // 자동 페이드인
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            cardsContainer.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-      observer.observe(section);
-
-      function applyState() {
-        if (isMobile()) return;
-        cards.forEach((card, i) => {
-          var hoverY = (spread && card.classList.contains('is-hovered')) ? -200 : 0;
-          if (spread) {
-            var cos = Math.cos(Math.abs(endRotateY) * Math.PI / 180);
-            var scale = 1 / cos;
-            card.style.left = layout.targets[i] + 'px';
-            card.style.transform = 'rotateY(' + endRotateY + 'deg) scale(' + scale + ') translateY(' + hoverY + 'px)';
-            card.style.boxShadow = '0 40px 60px rgba(0, 0, 0, 0.2)';
-            card.style.transitionDelay = (i * 0.1) + 's';
-          } else {
-            card.style.left = layout.startX + 'px';
-            card.style.transform = 'rotateY(0deg) scale(1) translateY(0px)';
-            card.style.boxShadow = '0 10px 15px rgba(0, 0, 0, 0.05)';
-            card.style.transitionDelay = ((cards.length - 1 - i) * 0.1) + 's';
-          }
-        });
-
-        if (spread) {
-          cardsContainer.classList.add('is-spread');
-        } else {
-          cardsContainer.classList.remove('is-spread');
-        }
-      }
-
-      // Hover
-      cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          card.classList.add('is-hovered');
-          if (spread) applyState();
-        });
-        card.addEventListener('mouseleave', () => {
-          card.classList.remove('is-hovered');
-          if (spread) applyState();
-        });
-      });
-
-      // wheel 이벤트로 토글
-      section.addEventListener('wheel', function (e) {
-        if (isMobile()) return;
-        if (!cardsContainer.classList.contains('is-visible')) return;
-        if (e.deltaY > 0 && !spread) {
-          spread = true;
-          applyState();
-        } else if (e.deltaY < 0 && spread) {
-          spread = false;
-          applyState();
-        }
-      });
-    })();
-
-    // ===== We Are Record Slot Animation =====
-    (function () {
-      var record = document.querySelector('.weare__record');
-      var values = document.querySelectorAll('.weare__record-value');
-      var animated = false;
-      var H = Math.max(48, Math.min(120, window.innerWidth * 0.0625));
-      var CYCLES = 3;
-      var digitAnims = [];
-
-      values.forEach(function (el) {
-        var val = el.dataset.value;
-
-        val.split('').forEach(function (char, i) {
-          var isLetter = isNaN(parseInt(char));
-          var wrapper = document.createElement('div');
-          wrapper.className = 'weare__digit';
-
-          var inner = document.createElement('div');
-          inner.className = 'weare__digit-inner';
-
-          var isLetter = isNaN(parseInt(char));
-          // 0~9 반복 x CYCLES
-          for (var c = 0; c < CYCLES; c++) {
-            for (var n = 0; n <= 9; n++) {
-              var s = document.createElement('span');
-              s.textContent = n;
-              inner.appendChild(s);
-            }
-          }
-          if (isLetter) {
-            // 마지막 0~9 한 번 더 + 최종 문자
-            for (var n = 0; n <= 9; n++) {
-              var s = document.createElement('span');
-              s.textContent = n;
-              inner.appendChild(s);
-            }
-            var s = document.createElement('span');
-            s.textContent = char;
-            inner.appendChild(s);
-            var totalSpans = CYCLES * 10 + 10 + 1;
-          } else {
-            var digit = parseInt(char);
-            for (var n = 0; n <= digit; n++) {
-              var s = document.createElement('span');
-              s.textContent = n;
-              inner.appendChild(s);
-            }
-            var totalSpans = CYCLES * 10 + digit + 1;
-          }
-
-          var targetY = (totalSpans - 1) * H;
-
-          digitAnims.push({
-            el: inner,
-            targetY: targetY,
-            delay: i * 200,
-            duration: 1800 + i * 400
-          });
-
-          wrapper.appendChild(inner);
-          el.appendChild(wrapper);
-        });
-      });
-
-      function easeOutExpo(t) {
-        return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
-      }
-
-      function startSlot() {
-        var startTime = null;
-
-        function step(timestamp) {
-          if (!startTime) startTime = timestamp;
-          var allDone = true;
-
-          digitAnims.forEach(function (anim) {
-            var elapsed = timestamp - startTime - anim.delay;
-            if (elapsed < 0) {
-              anim.el.style.transform = 'translateY(0)';
-              allDone = false;
-              return;
-            }
-            var t = Math.min(elapsed / anim.duration, 1);
-            var eased = easeOutExpo(t);
-            var y = eased * anim.targetY;
-            anim.el.style.transform = 'translateY(' + (-y) + 'px)';
-            if (t < 1) allDone = false;
-          });
-
-          if (!allDone) {
-            requestAnimationFrame(step);
-          }
-        }
-
-        requestAnimationFrame(step);
-      }
-
-      // weare 섹션 진입 감지 → heading/desc 페이드인 후 record 페이드인 → 슬롯 시작
-      var weareSection = document.querySelector('.weare');
-      var triggered = false;
-
-      var sectionObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting && !triggered) {
-            triggered = true;
-            sectionObserver.unobserve(weareSection);
-            // heading: 1.5s delay + 0.8s transition = 2.3s
-            // desc: 2s delay + 0.8s transition = 2.8s
-            // record: desc 완료 후 페이드인
-            setTimeout(function () {
-              record.classList.add('is-visible');
-              // record 페이드인(0.8s) 완료 후 슬롯 시작
-              setTimeout(startSlot, 800);
-            }, 2800);
-          }
-        });
-      }, { threshold: 0.15 });
-      sectionObserver.observe(weareSection);
-    })();
-
-    // ===== Scroll Reveal =====
-    (function () {
-      const reveals = document.querySelectorAll('.scroll-reveal');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
-        });
-      }, { threshold: 0.15 });
-
-      reveals.forEach(el => observer.observe(el));
-    })();
-
-    // ===== Space Particle Background =====
-    (function () {
-      var canvas = document.getElementById('spaceCanvas');
-      if (!canvas) return;
-      var ctx = canvas.getContext('2d');
-      var dpr = window.devicePixelRatio || 1;
-      var W, H;
-      var particles = [];
-      var PARTICLE_COUNT = 400;
-      var time = 0;
-
-      function resize() {
-        W = canvas.clientWidth;
-        H = canvas.clientHeight;
-        canvas.width = W * dpr;
-        canvas.height = H * dpr;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-
-      // Noise-like function for organic flow
-      function noise(x, y, t) {
-        return Math.sin(x * 0.8 + t) * Math.cos(y * 0.6 + t * 0.7) * 0.5
-             + Math.sin(x * 1.5 - t * 0.5) * Math.cos(y * 1.2 + t * 0.3) * 0.3
-             + Math.sin((x + y) * 0.5 + t * 0.4) * 0.2;
-      }
-
-      function initParticles() {
-        particles = [];
-        for (var i = 0; i < PARTICLE_COUNT; i++) {
-          particles.push({
-            x: Math.random() * W,
-            y: Math.random() * H,
-            baseX: Math.random() * W,
-            baseY: Math.random() * H,
-            size: Math.random() * 1.5 + 0.3,
-            alpha: Math.random() * 0.6 + 0.1,
-            speed: Math.random() * 0.3 + 0.1,
-            drift: Math.random() * Math.PI * 2,
-            wanderRadius: Math.random() * 80 + 30
-          });
-        }
-      }
-
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-        time += 0.003;
-
-        // Draw flowing particles
-        for (var i = 0; i < particles.length; i++) {
-          var p = particles[i];
-
-          // Organic flow using noise
-          var nx = noise(p.baseX * 0.005, p.baseY * 0.005, time + p.drift);
-          var ny = noise(p.baseX * 0.005 + 100, p.baseY * 0.005 + 100, time * 0.8 + p.drift);
-
-          p.x = p.baseX + nx * p.wanderRadius;
-          p.y = p.baseY + ny * p.wanderRadius;
-
-          // Slow drift of base position
-          p.baseX += Math.sin(time * 2 + p.drift) * p.speed * 0.3;
-          p.baseY += Math.cos(time * 1.5 + p.drift) * p.speed * 0.2 - p.speed * 0.05;
-
-          // Wrap around
-          if (p.baseX < -50) p.baseX = W + 50;
-          if (p.baseX > W + 50) p.baseX = -50;
-          if (p.baseY < -50) p.baseY = H + 50;
-          if (p.baseY > H + 50) p.baseY = -50;
-
-          // Pulsing alpha
-          var pulseAlpha = p.alpha * (0.6 + 0.4 * Math.sin(time * 3 + p.drift));
-
-          // Depth-based brightness: center = brighter
-          var cx = W / 2, cy = H * 0.4;
-          var dist = Math.sqrt((p.x - cx) * (p.x - cx) + (p.y - cy) * (p.y - cy));
-          var maxDist = Math.sqrt(cx * cx + cy * cy);
-          var depthFade = 1 - Math.min(dist / maxDist, 1) * 0.5;
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(180, 200, 255, ' + (pulseAlpha * depthFade) + ')';
-          ctx.fill();
-        }
-
-        // Draw subtle connecting lines between nearby particles (constellation effect)
-        ctx.lineWidth = 0.3;
-        for (var i = 0; i < particles.length; i++) {
-          for (var j = i + 1; j < particles.length; j++) {
-            var dx = particles[i].x - particles[j].x;
-            var dy = particles[i].y - particles[j].y;
-            var d = dx * dx + dy * dy;
-            if (d < 3600) { // 60px radius
-              var lineAlpha = (1 - d / 3600) * 0.08;
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.strokeStyle = 'rgba(150, 180, 255, ' + lineAlpha + ')';
-              ctx.stroke();
-            }
-          }
-        }
-
-        requestAnimationFrame(draw);
-      }
-
-      resize();
-      initParticles();
-      draw();
-      window.addEventListener('resize', function () {
-        resize();
-        initParticles();
-      });
-    })();
-
-    // ===== Section Snap Scroll =====
-    (function () {
-      if (isMobile()) return;
-
-      var sections = Array.from(document.querySelectorAll('section, footer'));
-      var isSnapping = false;
-      var cooldown = false;
-      var COOLDOWN_MS = 1200;
-
-      // Get snap targets: top of each section
-      function getSectionTops() {
-        return sections.map(function (s) {
-          return s.getBoundingClientRect().top + window.scrollY;
-        });
-      }
-
-      // Find which section boundary we're near
-      function findCurrentIndex() {
-        var scrollY = window.scrollY;
-        var vh = window.innerHeight;
-        var tops = getSectionTops();
-
-        for (var i = tops.length - 1; i >= 0; i--) {
-          if (scrollY >= tops[i] - vh * 0.3) return i;
-        }
-        return 0;
-      }
-
-      // Is the scroll position at the boundary of a section (top or bottom)?
-      function isAtSectionBoundary(direction) {
-        var scrollY = window.scrollY;
-        var vh = window.innerHeight;
-        var idx = findCurrentIndex();
-        var section = sections[idx];
-        var top = section.getBoundingClientRect().top + window.scrollY;
-        var bottom = top + section.offsetHeight;
-        var threshold = 30;
-
-        if (direction > 0) {
-          // Scrolling down: are we near the bottom of this section?
-          return (scrollY + vh) >= bottom - threshold;
-        } else {
-          // Scrolling up: are we near the top of this section?
-          return scrollY <= top + threshold;
-        }
-      }
-
-      window.addEventListener('wheel', function (e) {
-        if (cooldown || isSnapping) return;
-
-        var direction = e.deltaY > 0 ? 1 : -1;
-
-        // Hero section: scroll down from top → scroll to hero bottom (carousel visible)
-        var heroSection = sections[0];
-        var heroBottom = heroSection.offsetHeight - window.innerHeight;
-        if (direction > 0 && window.scrollY < 30 && heroSection.classList.contains('hero')) {
-          e.preventDefault();
-          isSnapping = true;
-          cooldown = true;
-          window.scrollTo({ top: heroBottom, behavior: 'smooth' });
-          setTimeout(function () { isSnapping = false; }, 800);
-          setTimeout(function () { cooldown = false; }, COOLDOWN_MS);
-          return;
-        }
-
-        // Only snap when we're at a section boundary
-        if (!isAtSectionBoundary(direction)) return;
-
-        var idx = findCurrentIndex();
-        var targetIdx = idx + direction;
-        if (targetIdx < 0 || targetIdx >= sections.length) return;
-
-        e.preventDefault();
-        isSnapping = true;
-        cooldown = true;
-
-        var targetTop = getSectionTops()[targetIdx];
-
-        window.scrollTo({
-          top: targetTop,
-          behavior: 'smooth'
-        });
-
-        setTimeout(function () {
-          isSnapping = false;
-        }, 800);
-
-        setTimeout(function () {
-          cooldown = false;
-        }, COOLDOWN_MS);
-      }, { passive: false });
-    })();
-  </script>
-
+  <script src="hero-slider.js"></script>
+  <script src="bulb-particles.js"></script>
+  <script src="cursor-particles.js"></script>
+  <script src="hero-intro.js"></script>
+  <script src="particles.js"></script>
+  <script src="carousel.js"></script>
+  <script src="script.js"></script>
+  <script type="module" src="cube.js"></script>
 </body>
 </html>
