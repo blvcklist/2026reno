@@ -376,10 +376,7 @@ import * as THREE from 'three';
     if (startTime < 0) startTime = time;
     const elapsed = (time - startTime) * 0.001;
 
-    // --- Assembly phase + breathing ---
-    const BREATH_FADE = 2.0; // breathing 페이드인 시간(초)
-    const breathStart = ASSEMBLE_DURATION + 1;
-
+    // --- Assembly phase ---
     cubes.forEach(({ mesh, target, start, startRot, delay }, idx) => {
       const cubeTime = Math.max(0, elapsed - delay);
       const progress = Math.min(1, cubeTime / ASSEMBLE_DURATION);
@@ -390,18 +387,11 @@ import * as THREE from 'three';
       let py = start.y + (target.y - start.y) * ease;
       let pz = start.z + (target.z - start.z) * ease;
 
-      // 조립 완료 후 breathing (균일한 팽창/수축으로 형태 유지)
-      if (elapsed > breathStart) {
-        const breathT = elapsed - breathStart;
-        const breathBlend = Math.min(1, breathT / BREATH_FADE);
-        const breathEase = breathBlend * breathBlend * (3 - 2 * breathBlend);
-
-        // 모든 큐브가 동일한 비율로 중심에서 팽창/수축
-        const breathScale = 1.0 + Math.sin(breathT * 0.5) * 0.06 * breathEase;
-
-        px = target.x * breathScale;
-        py = target.y * breathScale;
-        pz = target.z * breathScale;
+      // 조립 완료 후 target 위치 유지
+      if (progress >= 1) {
+        px = target.x;
+        py = target.y;
+        pz = target.z;
       }
 
       mesh.position.x = px;
