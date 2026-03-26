@@ -1,7 +1,6 @@
 // ===== Hero Intro Sequence =====
-// Phase 1: hero-text가 화면 중앙에서 타이핑 등장
-// Phase 2: 타이핑 완료 → hero-text가 왼쪽으로 슬라이드
-// Phase 3: 큐브 조립 시작 + indicator/scroll 페이드인
+// Phase 1: hero-text가 원래 자리에서 타이핑 등장
+// Phase 2: 타이핑 완료 → 큐브 조립 시작 + indicator/scroll 페이드인
 document.addEventListener('DOMContentLoaded', function () {
   var hero = document.querySelector('.hero');
   var firstSlide = document.querySelector('.hero-slide[data-slide="0"]');
@@ -11,14 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
   var subtitle = firstSlide.querySelector('.hero-subtitle');
   var titleLines = firstSlide.querySelectorAll('.hero-title .line');
   var descPs = firstSlide.querySelectorAll('.hero-desc p');
-  var indicator = document.querySelector('.hero-indicator');
-  var heroScroll = document.querySelector('.hero-scroll');
 
   if (!heroText || !subtitle) return;
 
-  // --- Phase 1 준비: 인트로 상태 설정 ---
+  // --- Phase 1 준비: 큐브/인디케이터/스크롤 숨김 ---
   hero.classList.add('intro-phase');
-  heroText.classList.add('intro-center');
 
   // 타이핑할 요소들을 순서대로 수집
   var typingTargets = [];
@@ -81,26 +77,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function onTypingComplete() {
-    // --- Phase 2: 텍스트 왼쪽으로 슬라이드 ---
+    // 타이핑 완료 후 큐브/인디케이터/스크롤 페이드인
     setTimeout(function () {
-      // intro-center 제거 → 기본 위치(좌측)로 돌아감
-      // intro-slide 추가 → transition 적용
-      heroText.classList.remove('intro-center');
-      heroText.classList.add('intro-slide');
-
-      // --- Phase 3: 큐브/인디케이터/스크롤 페이드인 ---
-      setTimeout(function () {
-        // intro-phase 제거 → 큐브 캔버스, 인디케이터, 스크롤 표시
-        hero.classList.remove('intro-phase');
-
-        // 큐브 조립 시작 신호
-        window.cubeAssemblyReady = true;
-
-        // 슬라이드 transition 완료 후 클래스 정리
-        setTimeout(function () {
-          heroText.classList.remove('intro-slide');
-        }, 1800);
-      }, 400);
+      hero.classList.remove('intro-phase');
+      window.cubeAssemblyReady = true;
     }, 600);
   }
 

@@ -1,5 +1,4 @@
-// ===== Hero Slider + Indicator =====
-// 독립 실행 — 다른 JS에 의존하지 않음
+// ===== Hero Slider + Indicator + Typing =====
 document.addEventListener('DOMContentLoaded', function () {
   var slides = document.querySelectorAll('.hero-slide');
   var items = document.querySelectorAll('.indicator-item');
@@ -11,9 +10,112 @@ document.addEventListener('DOMContentLoaded', function () {
   var total = slides.length;
   var DURATION = 20000;
   var paused = false;
+  var isTyping = false;
 
-  function activate() {
-    // 슬라이드 전환
+  // --- 타이핑 유틸 ---
+  function typeHTML(el, html, speed, callback) {
+    var result = '';
+    var i = 0;
+    var len = html.length;
+    el.classList.add('hero-typing-cursor');
+
+    function step() {
+      if (i >= len) {
+        el.innerHTML = html;
+        el.classList.remove('hero-typing-cursor');
+        if (callback) callback();
+        return;
+      }
+      if (html[i] === '<') {
+        var closeIdx = html.indexOf('>', i);
+        if (closeIdx !== -1) {
+          result += html.substring(i, closeIdx + 1);
+          i = closeIdx + 1;
+        }
+      } else {
+        result += html[i];
+        i++;
+      }
+      el.innerHTML = result;
+      setTimeout(step, speed);
+    }
+    step();
+  }
+
+  // 슬라이드의 텍스트 요소 수집
+  function getTypingTargets(slide) {
+    var targets = [];
+    var subtitle = slide.querySelector('.hero-subtitle');
+    var titleLines = slide.querySelectorAll('.hero-title .line');
+    var descPs = slide.querySelectorAll('.hero-desc p');
+
+    if (subtitle) targets.push({ el: subtitle, html: subtitle.getAttribute('data-html') || subtitle.innerHTML, speed: 40 });
+    for (var i = 0; i < titleLines.length; i++) {
+      targets.push({ el: titleLines[i], html: titleLines[i].getAttribute('data-html') || titleLines[i].innerHTML, speed: 30 });
+    }
+    for (var j = 0; j < descPs.length; j++) {
+      targets.push({ el: descPs[j], html: descPs[j].getAttribute('data-html') || descPs[j].innerHTML, speed: 40 });
+    }
+    return targets;
+  }
+
+  // 원본 HTML 저장 (최초 1회)
+  for (var s = 0; s < slides.length; s++) {
+    var els = slides[s].querySelectorAll('.hero-subtitle, .hero-title .line, .hero-desc p');
+    for (var e = 0; e < els.length; e++) {
+      els[e].setAttribute('data-html', els[e].innerHTML);
+    }
+  }
+
+  // 텍스트 비우기
+  function clearSlideText(slide) {
+    var els = slide.querySelectorAll('.hero-subtitle, .hero-title .line, .hero-desc p');
+    for (var i = 0; i < els.length; i++) {
+      els[i].textContent = '';
+      els[i].classList.remove('hero-typing-cursor');
+    }
+  }
+
+  // 순차 타이핑
+  function typeSlide(slide, callback) {
+    var targets = getTypingTargets(slide);
+    clearSlideText(slide);
+    isTyping = true;
+
+    function run(index) {
+      if (index >= targets.length) {
+        isTyping = false;
+        if (callback) callback();
+        return;
+      }
+      var t = targets[index];
+      var delay = index === 0 ? 300 : 150;
+      setTimeout(function () {
+        typeHTML(t.el, t.html, t.speed, function () {
+          run(index + 1);
+        });
+      }, delay);
+    }
+    run(0);
+  }
+
+  // 이전 슬라이드 텍스트 페이드아웃
+  function fadeOutSlideText(slide, callback) {
+    var textEl = slide.querySelector('.hero-text');
+    if (textEl) {
+      textEl.style.transition = 'opacity 0.5s ease';
+      textEl.style.opacity = '0';
+      setTimeout(function () {
+        textEl.style.transition = '';
+        textEl.style.opacity = '';
+        if (callback) callback();
+      }, 500);
+    } else {
+      if (callback) callback();
+    }
+  }
+
+  function activate(withTyping) {
     var isDark = false;
     for (var i = 0; i < total; i++) {
       if (i === idx) {
@@ -24,14 +126,12 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // 어두운 슬라이드일 때 body에 클래스 토글
     if (isDark) {
       document.body.classList.add('hero-dark');
     } else {
       document.body.classList.remove('hero-dark');
     }
 
-    // GNB 다크 모드 연동 이벤트
     window.dispatchEvent(new Event('heroSlideChange'));
 
     // 인디케이터 게이지
@@ -46,19 +146,43 @@ document.addEventListener('DOMContentLoaded', function () {
         prog.style.animation = 'none';
         void prog.offsetHeight;
         if (j === idx) {
-          prog.style.animation = 'gauge ' + DURATION + 'ms linear forwards';
-          prog.style.width = '';
+          // 타이핑 중에는 게이지 시작을 지연
+          if (withTyping) {
+            prog.style.width = '0';
+          } else {
+            prog.style.animation = 'gauge ' + DURATION + 'ms linear forwards';
+            prog.style.width = '';
+          }
         } else {
           prog.style.animation = 'none';
           prog.style.width = '0';
         }
       }
     }
+
+    // 타이핑 효과
+    if (withTyping) {
+      typeSlide(slides[idx], function () {
+        // 타이핑 완료 후 게이지 시작
+        var prog = items[idx].querySelector('.indicator-gauge-progress');
+        if (prog) {
+          prog.style.animation = 'gauge ' + DURATION + 'ms linear forwards';
+          prog.style.width = '';
+        }
+      });
+    }
   }
 
   function goTo(index) {
+    if (isTyping) return;
+    var prevIdx = idx;
     idx = ((index % total) + total) % total;
-    activate();
+    if (prevIdx === idx) return;
+
+    // 이전 슬라이드 텍스트 페이드아웃 → 새 슬라이드 활성화 + 타이핑
+    fadeOutSlideText(slides[prevIdx], function () {
+      activate(true);
+    });
   }
 
   // 게이지 완료 → 다음 슬라이드
@@ -73,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })(items[k]);
   }
 
-  // 인디케이터 클릭 → 해당 슬라이드
+  // 인디케이터 클릭
   for (var m = 0; m < items.length; m++) {
     (function (index) {
       items[index].style.cursor = 'pointer';
@@ -100,6 +224,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 초기 실행
-  activate();
+  // 초기 실행 (타이핑 없이 — hero-intro.js가 첫 슬라이드 타이핑 담당)
+  activate(false);
 });
