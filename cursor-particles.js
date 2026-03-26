@@ -26,6 +26,11 @@ document.addEventListener('DOMContentLoaded', function () {
       cxSmooth.y += (cx.y - cxSmooth.y) * 0.15;
       cursorEl.style.left = cxSmooth.x + 'px';
       cursorEl.style.top = cxSmooth.y + 'px';
+
+      // 배경 밝기에 따라 dark/light 전환
+      var isDark = document.body.classList.contains('hero-dark');
+      cursorEl.classList.toggle('dark', isDark);
+
       requestAnimationFrame(moveCursor);
     })();
   }

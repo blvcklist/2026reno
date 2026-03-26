@@ -190,17 +190,7 @@ strong { font-weight: 700; }
 .hero-cursor {
   position: fixed;
   top: 0; left: 0;
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  background: rgba(204, 31, 38, 0.45);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 20px rgba(204, 31, 38, 0.3), inset 0 0 12px rgba(255, 255, 255, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 80px; height: 78px;
   pointer-events: none;
   z-index: 9999;
   opacity: 0;
@@ -211,15 +201,50 @@ strong { font-weight: 700; }
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
-.hero-cursor span {
-  display: block;
+.hero-cursor-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  transition: opacity 0.4s ease;
+}
+/* 밝은 배경: 빨간색 표시, 흰색 숨김 */
+.hero-cursor-red { opacity: 1; }
+.hero-cursor-white { opacity: 0; }
+/* 어두운 배경: 흰색 표시, 빨간색 숨김 */
+.hero-cursor.dark .hero-cursor-red { opacity: 0; }
+.hero-cursor.dark .hero-cursor-white { opacity: 1; }
+/* 글래스 블러 레이어 (말풍선 형태로 클리핑) */
+.hero-cursor::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  clip-path: path('M40.0025 0C62.0837 0.000607014 80 17.4704 80 39C80 60.5296 62.0837 77.9994 40.0025 78C17.9209 78 0 60.53 0 39C0 17.47 17.9209 0 40.0025 0ZM40.0025 14.427C26.0911 14.427 14.7986 25.4669 14.7986 39C14.7986 43.1516 15.8691 47.088 17.7614 50.5324L11.5457 64.0961L25.3312 58.9316C29.4636 61.8228 34.5452 63.5426 40.0025 63.5426V63.573C53.9135 63.5724 65.2065 52.5635 65.2065 39C65.2065 25.4365 53.9135 14.4276 40.0025 14.427Z');
+}
+.hero-cursor-text {
+  position: absolute;
+  top: 50%; left: calc(50% + 0.5px);
+  transform: translate(-50%, -55%);
+  text-align: center;
   font-family: 'Pretendard', sans-serif;
   font-weight: 600;
-  font-size: 16px;
-  line-height: 1.1;
+  font-size: 20px;
+  line-height: 0.64;
   letter-spacing: -0.4px;
+  color: #CC1F26;
+  transition: color 0.4s ease;
+}
+.hero-cursor.dark .hero-cursor-text {
   color: #fff;
-  text-align: center;
+}
+.hero-cursor-text span {
+  display: block;
+  margin-bottom: 4px;
+}
+.hero-cursor-text span:last-child {
+  margin-bottom: 0;
 }
 .hero { cursor: none; }
 
