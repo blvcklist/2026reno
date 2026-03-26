@@ -194,7 +194,9 @@ strong { font-weight: 700; }
   width: min(100%, var(--cw));
   height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 3;
+  opacity: 0;
+  mix-blend-mode: screen;
 }
 
 #bulbCanvas {
@@ -285,9 +287,10 @@ strong { font-weight: 700; }
   transition: none !important;
 }
 
-/* Phase 2: 컨테이너 이동 */
+/* Phase 2: X축 이동 + 정렬 전환 */
 .hero-slide.active .hero-text.intro-slide {
   text-align: left !important;
+  transform: translateX(0) !important;
   transition: left 1.6s cubic-bezier(0.16, 1, 0.3, 1),
               transform 1.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
