@@ -1039,8 +1039,8 @@ body.hero-dark .scroll-slot span {
 .skills-track { display: flex; gap: 6px; white-space: nowrap; width: max-content; }
 .skills-left { animation: sLeft 40s linear infinite; }
 .skills-right { animation: sRight 40s linear infinite; }
-@keyframes sLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@keyframes sRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@keyframes sLeft { from { transform: translateX(0); } to { transform: translateX(-33.333%); } }
+@keyframes sRight { from { transform: translateX(-33.333%); } to { transform: translateX(0); } }
 
 .skill-tag {
   display: inline-flex; align-items: center; justify-content: center;
