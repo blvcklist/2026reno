@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var leftBtn = document.querySelector('.arrow-left');
   var rightBtn = document.querySelector('.arrow-right');
   var viewport = document.querySelector('.carousel-viewport');
-  var area = document.querySelector('.agency-carousel-area');
+  var area = document.querySelector('.agency-visual-layer');
 
   var total = originalCards.length;
   var CLONES = total; // 앞뒤로 전체 세트를 복제
@@ -203,7 +203,8 @@ document.addEventListener('DOMContentLoaded', function () {
         track.classList.remove('gathered');
         // 펼쳐진 후 자동재생 시작
         setTimeout(function () {
-          startAuto();
+          // 자동재생은 dot progress animationend로 트리거됨
+          updateCards();
         }, 1400);
       }
     });

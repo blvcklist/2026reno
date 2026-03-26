@@ -140,8 +140,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
   // --- 1. Staggered Reveal (시차 fade-up) ---
   const staggerGroups = [
-    { parent: '.adv-text', children: '.adv-title, .adv-desc', baseDelay: 0 },
-    { parent: '.agency-text', children: '.agency-title, .agency-desc', baseDelay: 0 },
     { parent: '.weare-left', children: '.weare-title, .weare-desc, .weare-more', baseDelay: 0 },
     { parent: '.weare-right', children: '.record, .record-divider', baseDelay: 0 },
   ];
@@ -156,24 +154,85 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     });
   });
 
+  // --- Adv 시퀀스 (텍스트 fade-in → 2s hold → fade-out → visual fade-in) ---
+  (function () {
+    const advertising = document.querySelector('.advertising');
+    if (!advertising) return;
+
+    const introLayer = advertising.querySelector('.adv-intro-layer');
+    const visualLayer = advertising.querySelector('.adv-visual-layer');
+    const title = advertising.querySelector('.adv-title');
+    const desc = advertising.querySelector('.adv-desc');
+    if (!introLayer || !visualLayer || !title || !desc) return;
+
+    const items = [title, desc];
+    let played = false;
+
+    const advObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !played) {
+          played = true;
+
+          // 1초 대기 후 순차 fade-in
+          items.forEach((el, i) => {
+            setTimeout(() => el.classList.add('anim-in'), 1000 + i * 300);
+          });
+
+          // 마지막 요소 등장 완료 + 2초 유지 → fade-out text → fade-in visual
+          const fadeOutDelay = 1000 + (items.length - 1) * 300 + 1400 + 1000;
+          setTimeout(() => {
+            introLayer.classList.add('minimized');
+            visualLayer.classList.add('active');
+          }, fadeOutDelay);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    advObserver.observe(advertising);
+  })();
+
+  // --- Agency 시퀀스 (텍스트 fade-in → 2s hold → slide out → visual slide in) ---
+  (function () {
+    const agencySection = document.querySelector('.agency');
+    if (!agencySection) return;
+
+    const introLayer = agencySection.querySelector('.agency-intro-layer');
+    const visualLayer = agencySection.querySelector('.agency-visual-layer');
+    const title = agencySection.querySelector('.agency-title');
+    const desc = agencySection.querySelector('.agency-desc');
+    if (!introLayer || !visualLayer || !title || !desc) return;
+
+    const items = [title, desc];
+    let played = false;
+
+    const agcObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !played) {
+          played = true;
+
+          items.forEach((el, i) => {
+            setTimeout(() => el.classList.add('anim-in'), 1000 + i * 300);
+          });
+
+          const fadeOutDelay = 1000 + (items.length - 1) * 300 + 1400 + 1000;
+          setTimeout(() => {
+            introLayer.classList.add('minimized');
+            visualLayer.classList.add('active');
+            // 비주얼 레이어 transition 중/후 캐러셀 위치 재계산
+            setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
+            setTimeout(() => window.dispatchEvent(new Event('resize')), 1850);
+          }, fadeOutDelay);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    agcObserver.observe(agencySection);
+  })();
+
   // 개별 reveal 요소
-  document.querySelectorAll('.hero-indicator, .skills-marquee, .carousel-dots')
+  document.querySelectorAll('.hero-indicator, .carousel-dots')
     .forEach(el => el.classList.add('reveal-scale'));
 
-  // adv-visual, adv-clients 순차 페이드인
-  const advGlass = document.querySelector('.adv-glass');
-  if (advGlass) { advGlass.classList.add('reveal'); advGlass.style.transitionDelay = '0.9s'; }
-  const advClients = document.querySelector('.adv-clients');
-  if (advClients) { advClients.classList.add('reveal'); advClients.style.transitionDelay = '1.4s'; }
-
-  // adv-marquee rows: 첫번째 오른쪽에서, 두번째 왼쪽에서
-  const marqueeRows = document.querySelectorAll('.adv-marquee-row');
-  if (marqueeRows.length >= 2) {
-    marqueeRows[0].classList.add('reveal-from-right');
-    marqueeRows[0].style.transitionDelay = '1.9s';
-    marqueeRows[1].classList.add('reveal-from-left');
-    marqueeRows[1].style.transitionDelay = '2.2s';
-  }
 
   // --- 2. Intersection Observer (reveal 트리거) ---
   const revealObserver = new IntersectionObserver(entries => {
@@ -189,7 +248,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
   // --- 3. Parallax (스크롤 기반 이동) ---
   const parallaxEls = [
-    { el: document.querySelector('.adv-glass'), speed: 0.08 },
     { el: document.querySelector('.agency-bg-logo'), speed: 0.12 },
     { el: document.querySelector('.hero-text'), speed: 0.05 },
   ].filter(p => p.el);
@@ -265,32 +323,81 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 })();
 
-// ===== Hero ↔ Next Section Scroll Snap =====
+// ===== Full-page Section Scroll Snap =====
 (function () {
-  const hero = document.querySelector('.hero');
-  const nextSection = document.querySelector('.hero + section');
-  if (!hero || !nextSection) return;
+  var sections = Array.prototype.slice.call(
+    document.querySelectorAll('.hero, .advertising, .agency, .weare, .footer')
+  );
+  if (!sections.length) return;
 
-  let scrolling = false;
-  const heroH = function () { return hero.offsetHeight; };
+  var scrolling = false;
+  var cooldown = 1000;
+
+  // 각 섹션의 scrollTop 위치를 계산 (hero는 0)
+  function getSectionTops() {
+    var tops = [];
+    for (var i = 0; i < sections.length; i++) {
+      if (i === 0) {
+        tops.push(0); // hero는 sticky이므로 0
+      } else {
+        tops.push(sections[i].offsetTop);
+      }
+    }
+    return tops;
+  }
+
+  function getCurrentIndex() {
+    var scrollY = window.scrollY;
+    var tops = getSectionTops();
+    var current = 0;
+
+    for (var i = tops.length - 1; i >= 0; i--) {
+      if (scrollY >= tops[i] - window.innerHeight * 0.3) {
+        current = i;
+        break;
+      }
+    }
+    return current;
+  }
+
+  function scrollToSection(index) {
+    if (index < 0 || index >= sections.length) return;
+    scrolling = true;
+
+    var tops = getSectionTops();
+    window.scrollTo({ top: tops[index], behavior: 'smooth' });
+
+    setTimeout(function () { scrolling = false; }, cooldown);
+  }
 
   window.addEventListener('wheel', function (e) {
     if (scrolling) return;
+    e.preventDefault();
 
-    // Hero에서 아래로 → 다음 섹션
-    if (window.scrollY < heroH() * 0.5 && e.deltaY > 0) {
-      scrolling = true;
-      nextSection.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(function () { scrolling = false; }, 1000);
-      return;
+    var current = getCurrentIndex();
+    if (e.deltaY > 0) {
+      scrollToSection(current + 1);
+    } else if (e.deltaY < 0) {
+      scrollToSection(current - 1);
     }
+  }, { passive: false });
 
-    // Advertising 상단 근처에서 위로 → Hero로
-    if (e.deltaY < 0 && window.scrollY > 0 && window.scrollY < heroH() * 1.5) {
-      scrolling = true;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setTimeout(function () { scrolling = false; }, 1000);
-      return;
-    }
+  // 모바일 터치 스와이프
+  var touchStartY = 0;
+  window.addEventListener('touchstart', function (e) {
+    touchStartY = e.touches[0].clientY;
   }, { passive: true });
+
+  window.addEventListener('touchend', function (e) {
+    if (scrolling) return;
+    var diff = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(diff) < 50) return;
+
+    var current = getCurrentIndex();
+    if (diff > 0) {
+      scrollToSection(current + 1);
+    } else {
+      scrollToSection(current - 1);
+    }
+  });
 })();

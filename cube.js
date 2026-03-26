@@ -360,9 +360,9 @@ import * as THREE from 'three';
   function getDriftBounds() {
     const z = getCameraZ();
     const fovRad = (35 / 2) * Math.PI / 180;
-    const halfH = Math.tan(fovRad) * z * 0.45;
+    const halfH = Math.tan(fovRad) * z * 0.8;
     const aspect = window.innerWidth / window.innerHeight;
-    const halfW = halfH * aspect * 0.45;
+    const halfW = halfH * aspect * 0.8;
     return { maxX: halfW, maxY: halfH };
   }
 
@@ -373,7 +373,14 @@ import * as THREE from 'three';
   function animate(time) {
     requestAnimationFrame(animate);
 
-    if (startTime < 0) startTime = time;
+    // cubeAssemblyReady 신호를 받을 때까지 대기
+    if (startTime < 0) {
+      if (!window.cubeAssemblyReady) {
+        renderer.render(scene, camera);
+        return;
+      }
+      startTime = time;
+    }
     const elapsed = (time - startTime) * 0.001;
 
     // --- Assembly phase ---

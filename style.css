@@ -43,7 +43,9 @@
   --white: var(--reno-white);
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -57,6 +59,7 @@ img { display: block; max-width: 100%; }
 a { text-decoration: none; color: inherit; }
 button { border: none; background: none; cursor: pointer; }
 strong { font-weight: 700; }
+
 
 /* 공통 유리 질감 */
 .glass-shine {
@@ -186,8 +189,9 @@ strong { font-weight: 700; }
 #cubeCanvas {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, var(--cw));
   height: 100%;
   pointer-events: none;
   z-index: 1;
@@ -215,7 +219,7 @@ strong { font-weight: 700; }
 /* 텍스트 그룹: 컨테이너 내 좌측 배치 */
 .hero-text {
   position: absolute;
-  left: calc(50% - var(--cw) / 2 + var(--px));
+  left: calc(50% - var(--cw) / 2);
   top: 33%;
   z-index: 2;
   display: flex;
@@ -257,6 +261,47 @@ strong { font-weight: 700; }
 }
 .hero-slide.active #cubeCanvas {
   opacity: 1;
+}
+
+/* === Hero Intro Sequence === */
+/* Phase 1: 텍스트 화면 중앙, 큐브/인디케이터/스크롤 숨김 */
+.hero.intro-phase .hero-slide.active #cubeCanvas {
+  opacity: 0 !important;
+}
+.hero.intro-phase .hero-indicator {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+.hero.intro-phase .hero-scroll {
+  opacity: 0 !important;
+}
+
+/* 텍스트 중앙 배치 (Y축 최종 위치 유지, X축만 중앙) */
+.hero-slide.active .hero-text.intro-center {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  text-align: center !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+/* Phase 2: 컨테이너 이동 */
+.hero-slide.active .hero-text.intro-slide {
+  text-align: left !important;
+  transition: left 1.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+
+/* 큐브/인디케이터/스크롤 페이드인 */
+#cubeCanvas {
+  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-indicator {
+  transition: opacity 1s ease;
+}
+.hero-scroll {
+  transition: opacity 1s ease;
 }
 
 /* 어두운 슬라이드: 배경 + 흰색 텍스트 + GNB/인디케이터 반전 */
@@ -379,7 +424,7 @@ body.hero-dark .indicator-pause svg polygon {
 /* 인디케이터: 컨테이너 내 좌하단 */
 .hero-indicator {
   position: absolute;
-  left: calc(50% - var(--cw) / 2 + var(--px));
+  left: calc(50% - var(--cw) / 2);
   bottom: 40px;
   z-index: 2;
   display: flex;
@@ -460,26 +505,51 @@ body.hero-dark .scroll-slot span {
   100% { transform: translateY(-50%); }
 }
 
-/* ===== ADVERTISING (전체폭) ===== */
+/* ===== ADVERTISING ===== */
 .advertising {
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 700px;
   background: var(--reno-white);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
-.adv-top {
+/* 공통 레이어 (같은 공간에 겹침) */
+.adv-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+/* Layer 1: Title */
+.adv-intro-layer {
+  display: flex;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.adv-intro-inner {
   max-width: var(--cw);
   width: 100%;
+  margin: 0 auto;
   padding: 0;
-  margin: 0 auto 60px;
-  text-align: left;
+  padding-top: 43vh;
+  transition: padding-top 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Layer 2: Visual (아래에서 올라옴) */
+.adv-visual-layer {
+  display: flex;
+  flex-direction: column;
+  z-index: 3;
+  padding-top: 120px;
+  transform: translateY(100%);
+  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.adv-visual-layer.active {
+  transform: translateY(0);
 }
 
 .adv-text {
@@ -488,25 +558,66 @@ body.hero-dark .scroll-slot span {
 }
 
 .adv-title {
-  font-size: 60px; font-weight: 400; line-height: 1;
-  letter-spacing: -1.2px; margin-bottom: 40px;
+  font: var(--h2);
+  letter-spacing: -1.2px;
+  margin-bottom: 40px;
+  font-weight: 400;
 }
 .adv-title strong { font-weight: 700; }
 
 .adv-desc {
-  font-size: 24px; font-weight: 400; line-height: 1.4; letter-spacing: -0.48px;
+  font: var(--d8);
+  letter-spacing: -0.48px;
 }
 .adv-desc strong { font-weight: 600; }
 
-/* 비주얼 영역: 글래스 카드 + 마키 */
-.adv-visual {
+/* Adv-intro 텍스트 시퀀스: fade-in up */
+.adv-intro-layer .adv-title,
+.adv-intro-layer .adv-desc {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.adv-intro-layer .adv-title.anim-in,
+.adv-intro-layer .adv-desc.anim-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Minimized: 타이틀 우측 상단 축소 */
+.adv-intro-layer.minimized {
+  z-index: 4;
+  pointer-events: none;
+}
+.adv-intro-layer.minimized .adv-intro-inner {
+  padding-top: 120px;
+  transition: padding-top 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.adv-intro-layer.minimized .adv-title {
+  font-size: 24px;
+  letter-spacing: 0;
+  margin-bottom: 0;
+  opacity: 0.5;
+  transition: font-size 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+              letter-spacing 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+              margin-bottom 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.adv-intro-layer.minimized .adv-desc {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+.adv-screen-area {
   position: relative;
-  width: 100%;
-  height: 660px;
-  margin-bottom: 60px;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 /* 마키: 전체폭, glass 뒤 중앙 */
@@ -525,7 +636,7 @@ body.hero-dark .scroll-slot span {
 /* Glass 프레임 */
 .adv-glass {
   position: relative;
-  width: min(900px, 62.5%);
+  width: min(900px, calc(100% - 160px));
   aspect-ratio: 1200 / 718;
   border-radius: 30px;
   background: rgba(255,255,255,0.1);
@@ -533,16 +644,7 @@ body.hero-dark .scroll-slot span {
   -webkit-backdrop-filter: blur(8px) saturate(24%);
   box-shadow: 8px 8px 24px rgba(0,0,0,0.08);
   z-index: 2;
-  padding: 16px;
-  overflow: hidden;
-}
-
-/* Visual 영역 (흰색 보더 + 이미지) */
-.adv-visual-area {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border: 1px solid white;
+  padding: 30px;
   overflow: hidden;
 }
 
@@ -627,17 +729,22 @@ body.hero-dark .scroll-slot span {
 }
 
 .adv-visual-name {
-  font-size: 32px; font-weight: 600; line-height: 1.4;
+  font-size: 24px; font-weight: 600; line-height: 1.4;
 }
 
-/* 클라이언트 네비게이션 */
+/* 클라이언트 로고 바 (하단 고정) */
 .adv-clients {
+  flex-shrink: 0;
+  width: 100%;
+  padding: 0 var(--px);
+}
+.adv-clients-inner {
   display: flex; align-items: center; justify-content: space-between;
-  max-width: var(--cw); width: 100%;
-  padding: 0 var(--px); height: 100px;
+  max-width: var(--cw); width: 100%; margin: 0 auto;
+  height: 75px;
 }
 .adv-client {
-  flex: 0 0 240px; height: 100px;
+  flex: 0 0 240px; height: 75px;
   display: flex; align-items: center; justify-content: center; gap: 4px;
   background: none; border: none; cursor: pointer;
   opacity: 0.4; transition: opacity 0.3s;
@@ -648,29 +755,36 @@ body.hero-dark .scroll-slot span {
 .kakao-part1 { max-height: 24px; }
 .kakao-part2 { max-height: 32px; }
 
-/* ===== AGENCY (전체폭) ===== */
+/* ===== AGENCY ===== */
 .agency {
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 700px;
   background: var(--reno-white);
   overflow: hidden;
 }
 
-.agency-bg-logo {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 950px; height: 860px; opacity: 0.03;
-  pointer-events: none;
+.agency-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
 }
-.agency-bg-logo img { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); }
 
-.agency-header {
-  position: relative; z-index: 1;
+.agency-intro-layer {
+  display: flex;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.agency-intro-inner {
   max-width: var(--cw);
-  margin: 0 auto 90px;
-  padding: 180px 0 0;
-  text-align: left;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  padding-top: 43vh;
+  transition: padding-top 1.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .agency-text {
@@ -679,21 +793,88 @@ body.hero-dark .scroll-slot span {
 }
 
 .agency-title {
-  font-size: 60px; font-weight: 400; line-height: 1;
-  letter-spacing: -1.2px; margin-bottom: 40px;
+  font: var(--h2);
+  letter-spacing: -1.2px;
+  margin-bottom: 40px;
+  font-weight: 400;
 }
 .agency-title strong { font-weight: 700; }
 
 .agency-desc {
-  font-size: 24px; font-weight: 400; line-height: 1.4; letter-spacing: -0.48px;
+  font: var(--d8);
+  letter-spacing: -0.48px;
 }
 .agency-desc strong { font-weight: 600; }
+
+/* Agency-intro 텍스트 시퀀스: fade-in up */
+.agency-intro-layer .agency-title,
+.agency-intro-layer .agency-desc {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.agency-intro-layer .agency-title.anim-in,
+.agency-intro-layer .agency-desc.anim-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Minimized: 타이틀 우측 상단 축소 */
+.agency-intro-layer.minimized {
+  z-index: 4;
+  pointer-events: none;
+}
+.agency-intro-layer.minimized .agency-intro-inner {
+  padding-top: 120px;
+  transition: padding-top 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.agency-intro-layer.minimized .agency-title {
+  font-size: 24px;
+  letter-spacing: 0;
+  margin-bottom: 0;
+  opacity: 0.5;
+  transition: font-size 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+              letter-spacing 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+              margin-bottom 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.agency-intro-layer.minimized .agency-desc {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+/* Agency Visual Layer */
+.agency-visual-layer {
+  z-index: 3;
+  background: var(--reno-white);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.agency-visual-layer.active {
+  transform: translateY(0);
+}
+
+.agency-bg-logo {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 480px; height: 480px; opacity: 0.03;
+  pointer-events: none;
+}
+.agency-bg-logo img { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); }
 
 /* 캐러셀 */
 .agency-carousel-area {
   position: relative; z-index: 1;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
+  width: 100%;
 }
 
 .carousel-glow {
@@ -846,11 +1027,16 @@ body.hero-dark .scroll-slot span {
   border-radius: 999px;
 }
 
-/* 스킬 마키: 전체폭 */
-.skills-marquee { overflow: hidden; padding: 60px 0; }
-.skills-row { overflow: hidden; margin-bottom: 20px; }
+/* 스킬 마키: 전체폭, 하단 고정 */
+.skills-marquee {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  overflow: hidden;
+  padding: 24px 0;
+}
+.skills-row { overflow: hidden; margin-bottom: 8px; }
 .skills-row:last-child { margin-bottom: 0; }
-.skills-track { display: flex; gap: 20px; white-space: nowrap; width: max-content; }
+.skills-track { display: flex; gap: 6px; white-space: nowrap; width: max-content; }
 .skills-left { animation: sLeft 40s linear infinite; }
 .skills-right { animation: sRight 40s linear infinite; }
 @keyframes sLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -858,8 +1044,8 @@ body.hero-dark .scroll-slot span {
 
 .skill-tag {
   display: inline-flex; align-items: center; justify-content: center;
-  padding: 12px 20px; border: 1px solid var(--reno-black); border-radius: 28px;
-  font-size: 30px; font-weight: 700; line-height: 1.4; white-space: nowrap; flex-shrink: 0;
+  padding: 12px 18px; border: 1px solid var(--reno-black); border-radius: 18px;
+  font-size: 15px; font-weight: 400; line-height: 1.4; white-space: nowrap; flex-shrink: 0;
 }
 
 /* ===== WE ARE (전체폭 다크 배경) ===== */
@@ -1023,6 +1209,7 @@ body.hero-dark .scroll-slot span {
 @media (max-width: 1440px) {
   :root { --px: 80px; }
 
+  /* GNB */
   .gnb { height: 72px; }
   .gnb-inner { padding: 8px 20px; }
   .gnb-link { font-size: 14px; padding: 0 14px; }
@@ -1032,33 +1219,34 @@ body.hero-dark .scroll-slot span {
   .gnb-ci { width: 52px; height: 52px; }
   .gnb-ci-img { width: 34px; height: 34px; }
 
-  .hero { height: 100vh; min-height: 600px; }
+  /* Hero */
   .hero-subtitle { font-size: 20px; }
   .hero-title { font-size: 52px; }
   .hero-desc { font-size: 20px; }
-  .hero-reno-logo { width: 200px; }
-  .reno-logo-main { width: 200px; }
-  .reno-logo-sub { width: 198px; }
 
-  .adv-top { padding-top: 140px; padding-left: 0; padding-right: 0; }
+  /* Advertising */
   .adv-title { font-size: 52px; }
   .adv-desc { font-size: 20px; }
-  .adv-visual { height: 560px; }
-  .adv-glass { padding: 24px; }
-  .adv-visual-name { font-size: 26px; }
+  .adv-glass { padding: 20px; }
+  .adv-visual-name { font-size: 22px; }
   .adv-visual-category { font-size: 14px; padding: 6px 14px; }
   .adv-visual-info { padding: 24px; gap: 12px; }
+  .adv-visual-layer { padding-top: 100px; }
+  .marquee-text { font-size: 72px; }
   .carousel-glow { width: 900px; height: 900px; }
   .carousel-track.gathered .agency-card { margin: 0 -140px; }
-  .marquee-text { font-size: 72px; }
+  .adv-intro-layer.minimized .adv-title { font-size: 20px; }
+  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 96px; }
 
-  .agency-header { padding-top: 140px; margin-bottom: 70px; }
+  /* Agency */
   .agency-title { font-size: 52px; margin-bottom: 32px; }
   .agency-desc { font-size: 20px; }
-  .agency-card { width: 340px; height: 510px; }
-  .skill-tag { font-size: 24px; padding: 10px 18px; }
+  .agency-card { width: 360px; height: 540px; }
+  .agency-intro-layer.minimized .agency-title { font-size: 20px; }
+  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 96px; }
+  .skill-tag { font-size: 14px; padding: 10px 16px; }
 
-  .weare { min-height: 100vh; }
+  /* We Are */
   .weare-inner { gap: 80px; }
   .weare-title { font-size: 52px; }
   .weare-desc { font-size: 16px; margin-bottom: 70px; }
@@ -1073,7 +1261,7 @@ body.hero-dark .scroll-slot span {
 @media (max-width: 1024px) {
   :root { --px: 40px; }
 
-  /* GNB: 링크 숨김, 다운로드만 표시 */
+  /* GNB: 링크 숨김 */
   .gnb { height: 60px; }
   .gnb-inner { padding: 6px 16px; }
   .gnb-link { display: none; }
@@ -1084,15 +1272,10 @@ body.hero-dark .scroll-slot span {
   .gnb-download-icon { width: 28px; height: 28px; padding: 4px; }
 
   /* Hero */
-  .hero { height: 100vh; min-height: 500px; }
-  .hero-bg { width: 50%; top: 15%; height: 60%; }
   .hero-text { left: var(--px); top: 30%; }
   .hero-subtitle { font-size: 16px; margin-bottom: 18px; }
   .hero-title { font-size: 40px; margin-bottom: 30px; }
   .hero-desc { font-size: 16px; }
-  .hero-reno-logo { width: 160px; right: var(--px); bottom: 30px; }
-  .reno-logo-main { width: 160px; margin-bottom: 10px; }
-  .reno-logo-sub { width: 158px; }
   .hero-indicator { left: var(--px); bottom: 30px; }
   .hero-indicator-select { gap: 18px; padding: 12px 20px; }
   .indicator-gauge { width: 60px; }
@@ -1100,37 +1283,38 @@ body.hero-dark .scroll-slot span {
   .hero-scroll { bottom: 20px; }
 
   /* Advertising */
-  .adv-top { padding: 100px 0 0; margin-bottom: 40px; }
   .adv-title { font-size: 40px; margin-bottom: 30px; }
   .adv-desc { font-size: 18px; }
-  .adv-visual { height: 460px; }
-  .adv-glass { padding: 16px; border-radius: 24px; }
+  .adv-visual-layer { padding-top: 80px; }
+  .adv-glass { padding: 12px; border-radius: 24px; }
   .adv-visual-info { padding: 16px; gap: 10px; }
   .adv-visual-category { font-size: 12px; padding: 5px 12px; }
-  .adv-visual-name { font-size: 20px; }
+  .adv-visual-name { font-size: 18px; }
   .adv-visual-gradient { height: 140px; }
+  .adv-intro-layer.minimized .adv-title { font-size: 16px; }
+  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 76px; }
+  .marquee-text { font-size: 56px; }
   .carousel-glow { width: 600px; height: 600px; }
   .carousel-track.gathered .agency-card { margin: 0 -100px; }
-  .marquee-text { font-size: 56px; }
-  .adv-clients { height: 72px; }
-  .adv-client { flex: 0 0 180px; height: 72px; }
+  .adv-clients-inner { height: 60px; }
+  .adv-client { flex: 0 0 160px; height: 60px; }
   .adv-client img { max-height: 18px; }
 
   /* Agency */
-  .agency-header { padding-top: 100px; margin-bottom: 60px; }
   .agency-title { font-size: 40px; margin-bottom: 30px; }
   .agency-desc { font-size: 18px; }
+  .agency-intro-layer.minimized .agency-title { font-size: 16px; }
+  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 76px; }
   .agency-card { width: 280px; height: 420px; }
-  .card-phone { border-radius: 18px; border-width: 2px; }
   .carousel-arrow { width: 48px; height: 48px; }
   .carousel-arrow svg { width: 20px; height: 20px; }
   .arrow-left { left: 8px; }
   .arrow-right { right: 8px; }
-  .skill-tag { font-size: 20px; padding: 8px 16px; border-radius: 24px; }
-  .skills-marquee { padding: 40px 0; }
+  .skill-tag { font-size: 13px; padding: 8px 14px; border-radius: 16px; }
+  .skills-marquee { padding: 20px 0; }
+  .skills-row { margin-bottom: 6px; }
 
   /* We Are */
-  .weare { min-height: 100vh; }
   .weare-inner { flex-direction: column; padding: 80px var(--px); gap: 60px; }
   .weare-left { padding-top: 0; }
   .weare-title { font-size: 44px; }
@@ -1164,15 +1348,10 @@ body.hero-dark .scroll-slot span {
 
   /* Hero */
   .hero { height: 100svh; min-height: 560px; }
-  .hero-bg { width: 80%; top: 8%; height: 45%; right: -10%; }
-  .hero-crystal { object-position: center; }
   .hero-text { left: var(--px); top: auto; bottom: 160px; }
   .hero-subtitle { font-size: 14px; margin-bottom: 14px; }
-  .hero-title { font-size: 32px; letter-spacing: -0.8px; margin-bottom: 24px; }
+  .hero-title { font-size: 28px; letter-spacing: -0.8px; margin-bottom: 24px; }
   .hero-desc { font-size: 14px; }
-  .hero-reno-logo { width: 120px; right: var(--px); bottom: 24px; }
-  .reno-logo-main { width: 120px; margin-bottom: 8px; }
-  .reno-logo-sub { width: 118px; }
   .hero-indicator { left: var(--px); bottom: 24px; gap: 8px; }
   .hero-indicator-select { gap: 14px; padding: 10px 16px; }
   .indicator-num { font-size: 12px; }
@@ -1181,57 +1360,59 @@ body.hero-dark .scroll-slot span {
   .hero-scroll { display: none; }
 
   /* Advertising */
-  .adv-top { padding: 80px 0 0; margin-bottom: 32px; }
-  .adv-title { font-size: 28px; letter-spacing: -0.6px; margin-bottom: 24px; }
+  .adv-intro-inner { padding-top: 38vh; }
+  .adv-title { font-size: 28px; letter-spacing: -0.6px; margin-bottom: 20px; }
   .adv-desc { font-size: 15px; }
-  .adv-visual { height: 360px; }
-  .adv-glass { padding: 10px; border-radius: 16px; width: min(100%, calc(100% - 48px)); }
+  .adv-visual-layer { padding-top: 64px; }
+  .adv-glass { padding: 8px; border-radius: 16px; }
   .adv-visual-info { padding: 12px; gap: 8px; }
   .adv-visual-category { font-size: 11px; padding: 4px 10px; }
-  .adv-visual-name { font-size: 16px; }
-  .adv-visual-logo { width: 50%; }
+  .adv-visual-name { font-size: 14px; }
   .adv-visual-gradient { height: 100px; }
   .adv-cube-viewport { border-width: 0.5px; }
+  .adv-intro-layer.minimized .adv-title { font-size: 14px; }
+  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 60px; }
+  .marquee-text { font-size: 32px; }
   .carousel-glow { width: 400px; height: 400px; }
   .carousel-track.gathered .agency-card { margin: 0 -80px; }
-  .marquee-text { font-size: 36px; }
-  .adv-clients { height: auto; flex-wrap: wrap; gap: 0; padding: 0 var(--px); }
-  .adv-client { flex: 0 0 50%; height: 56px; }
+  .adv-clients-inner { height: auto; flex-wrap: wrap; }
+  .adv-client { flex: 0 0 50%; height: 48px; }
   .adv-client img { max-height: 16px; }
   .kakao-part1 { max-height: 14px; }
   .kakao-part2 { max-height: 20px; }
 
   /* Agency */
-  .agency-header { padding-top: 80px; margin-bottom: 40px; }
-  .agency-title { font-size: 28px; letter-spacing: -0.6px; margin-bottom: 24px; }
+  .agency-intro-inner { padding-top: 38vh; }
+  .agency-title { font-size: 28px; letter-spacing: -0.6px; margin-bottom: 20px; }
   .agency-desc { font-size: 15px; }
-  .carousel-viewport { width: 90vw; }
-  .agency-card { width: 240px; height: 360px; border-radius: 0; }
-  .card-phone { border-radius: 16px; border-width: 2px; }
+  .agency-intro-layer.minimized .agency-title { font-size: 14px; }
+  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 60px; }
+  .agency-card { width: 220px; height: 330px; }
   .carousel-arrow { width: 40px; height: 40px; }
   .carousel-arrow svg { width: 18px; height: 18px; }
   .arrow-left { left: 4px; }
   .arrow-right { right: 4px; }
-  .carousel-dots { gap: 6px; margin-top: 20px; padding: 12px 20px; }
+  .carousel-dots { gap: 6px; margin-top: 20px; padding: 12px 16px; }
   .dot { width: 6px; height: 6px; }
   .dot.active { width: 24px; }
-  .skill-tag { font-size: 16px; padding: 8px 14px; border-radius: 20px; }
-  .skills-marquee { padding: 32px 0; }
-  .skills-row { margin-bottom: 12px; }
-  .skills-track { gap: 12px; }
+  .skill-tag { font-size: 12px; padding: 8px 12px; border-radius: 14px; }
+  .skills-marquee { padding: 16px 0; }
+  .skills-row { margin-bottom: 5px; }
+  .skills-track { gap: 4px; }
 
   /* We Are */
-  .weare-inner { padding: 60px var(--px); gap: 40px; }
+  .weare-inner { flex-direction: column; padding: 60px var(--px); gap: 40px; }
+  .weare-left { padding-top: 0; }
   .weare-title { font-size: 36px; margin-bottom: 20px; }
   .weare-desc { font-size: 14px; margin-bottom: 32px; }
   .weare-more { font-size: 16px; gap: 12px; }
   .weare-more svg { width: 24px; height: 24px; }
+  .weare-right { width: 100%; gap: 20px; }
   .record-label { font-size: 16px; width: 140px; }
   .record-label-wrap { width: 140px; }
   .record-label-sub { font-size: 12px; }
   .record-value { font-size: 36px; }
   .record-value small { font-size: 16px; }
-  .weare-right { gap: 20px; }
 
   /* Footer */
   .footer { padding: 40px 0; }

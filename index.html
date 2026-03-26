@@ -128,127 +128,139 @@
 
   <!-- Advertising -->
   <section class="advertising" id="advertising">
-    <div class="adv-top">
-      <div class="adv-text">
-        <h2 class="adv-title"><strong>ADVERTISING</strong> BUSINESS DIV.</h2>
-        <p class="adv-desc">기획안을 넘어, <strong>대담함으로 커뮤니케이션</strong></p>
+    <!-- Layer 1: Title (fade-in → hold → fade-out) -->
+    <div class="adv-layer adv-intro-layer">
+      <div class="adv-intro-inner">
+        <div class="adv-text">
+          <h2 class="adv-title"><strong>ADVERTISING</strong> BUSINESS DIV.</h2>
+          <p class="adv-desc">기획안을 넘어, <strong>대담함으로 커뮤니케이션</strong></p>
+        </div>
       </div>
     </div>
 
-    <div class="adv-visual">
-      <!-- Marquee behind the card -->
-      <div class="adv-marquee">
-        <div class="adv-marquee-row">
-          <div class="adv-marquee-track marquee-left">
-            <span class="marquee-text dark">ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <span class="marquee-text dark">ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <!-- Layer 2: Visual (fade-in after title fades out) -->
+    <div class="adv-layer adv-visual-layer">
+      <div class="adv-screen-area">
+        <div class="adv-marquee">
+          <div class="adv-marquee-row">
+            <div class="adv-marquee-track marquee-left">
+              <span class="marquee-text dark">ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <span class="marquee-text dark">ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </div>
+          </div>
+          <div class="adv-marquee-row">
+            <div class="adv-marquee-track marquee-right">
+              <span class="marquee-text light">ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <span class="marquee-text light">ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </div>
           </div>
         </div>
-        <div class="adv-marquee-row">
-          <div class="adv-marquee-track marquee-right">
-            <span class="marquee-text light">ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <span class="marquee-text light">ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;ADVERTISING BUSINESS DIV.&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+        <div class="adv-glass glass-shine">
+          <div class="adv-cube-viewport">
+            <div class="adv-cube" id="advCube">
+              <div class="adv-slide" data-slide="0">
+                <img src="images/adv-visual-lotte.jpg" alt="롯데시네마" class="adv-visual-img">
+                <img src="images/adv-visual-logo.svg" alt="" class="adv-visual-logo">
+              </div>
+              <div class="adv-slide" data-slide="1">
+                <img src="images/adv-visual-kakao.jpg" alt="대한항공" class="adv-visual-img">
+              </div>
+              <div class="adv-slide" data-slide="2">
+                <img src="images/adv-visual-golfzon.png" alt="골프존" class="adv-visual-img">
+              </div>
+              <div class="adv-slide" data-slide="3">
+                <img src="images/adv-visual-koreanair.png" alt="카카오모빌리티" class="adv-visual-img">
+              </div>
+            </div>
+            <div class="adv-visual-gradient"></div>
+            <div class="adv-visual-info" id="advVisualInfo">
+              <p class="adv-visual-category">스크린 광고</p>
+              <p class="adv-visual-name">LOTTE Cinema</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Glass + Visual -->
-      <div class="adv-glass glass-shine">
-       <div class="adv-cube-viewport">
-        <div class="adv-cube" id="advCube">
-        <div class="adv-slide" data-slide="0">
-          <img src="images/adv-visual-lotte.jpg" alt="롯데시네마" class="adv-visual-img">
-          <img src="images/adv-visual-logo.svg" alt="" class="adv-visual-logo">
+      <div class="adv-clients">
+        <div class="adv-clients-inner">
+          <button class="adv-client active" data-index="0">
+            <img src="images/logo-lotte.svg" alt="LOTTE CINEMA">
+          </button>
+          <button class="adv-client" data-index="1">
+            <img src="images/logo-koreanair.svg" alt="KOREAN AIR">
+          </button>
+          <button class="adv-client" data-index="2">
+            <img src="images/logo-golfzon.svg" alt="GOLFZON">
+          </button>
+          <button class="adv-client" data-index="3">
+            <img src="images/logo-kakao1.svg" alt="kakao" class="kakao-part1">
+            <img src="images/logo-kakao2.svg" alt="mobility" class="kakao-part2">
+          </button>
         </div>
-        <div class="adv-slide" data-slide="1">
-          <img src="images/adv-visual-kakao.jpg" alt="대한항공" class="adv-visual-img">
-        </div>
-        <div class="adv-slide" data-slide="2">
-          <img src="images/adv-visual-golfzon.png" alt="골프존" class="adv-visual-img">
-        </div>
-        <div class="adv-slide" data-slide="3">
-          <img src="images/adv-visual-koreanair.png" alt="카카오모빌리티" class="adv-visual-img">
-        </div>
-        </div>
-        <div class="adv-visual-gradient"></div>
-        <div class="adv-visual-info" id="advVisualInfo">
-          <p class="adv-visual-category">스크린 광고</p>
-          <p class="adv-visual-name">LOTTE Cinema</p>
-        </div>
-       </div>
       </div>
-    </div>
-
-    <div class="adv-clients">
-      <button class="adv-client active" data-index="0">
-        <img src="images/logo-lotte.svg" alt="LOTTE CINEMA">
-      </button>
-      <button class="adv-client" data-index="1">
-        <img src="images/logo-koreanair.svg" alt="KOREAN AIR">
-      </button>
-      <button class="adv-client" data-index="2">
-        <img src="images/logo-golfzon.svg" alt="GOLFZON">
-      </button>
-      <button class="adv-client" data-index="3">
-        <img src="images/logo-kakao1.svg" alt="kakao" class="kakao-part1">
-        <img src="images/logo-kakao2.svg" alt="mobility" class="kakao-part2">
-      </button>
     </div>
   </section>
 
   <!-- Agency -->
   <section class="agency" id="agency">
-    <div class="agency-bg-logo">
-      <img src="images/agency-bg-1.svg" alt="">
-      <img src="images/agency-bg-2.svg" alt="">
-      <img src="images/agency-bg-3.svg" alt="">
-    </div>
-
-    <div class="agency-header">
-      <div class="agency-text">
-        <h2 class="agency-title"><strong>AGENCY</strong> BUSINESS DIV.</h2>
-        <p class="agency-desc">AI 생태계의 <strong>내일을 설계합니다.</strong></p>
-      </div>
-    </div>
-
-    <div class="carousel-glow" id="carouselGlow"></div>
-    <div class="agency-carousel-area">
-      <button class="carousel-arrow arrow-left glass-shine" aria-label="이전">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M18 12H6" stroke="#101820" stroke-width="1.8"/>
-          <path d="M11 7L6 12L11 17" stroke="#101820" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <div class="carousel-viewport">
-        <div class="carousel-track" id="agencyTrack">
-          <div class="agency-card" data-glow="#6BC5C0" style="background:#6BC5C0"></div>
-          <div class="agency-card" data-glow="#7B9FE8" style="background:#7B9FE8"></div>
-          <div class="agency-card" data-glow="#E88A7B" style="background:#E88A7B"></div>
-          <div class="agency-card" data-glow="#C49BE8" style="background:#C49BE8"></div>
-          <div class="agency-card" data-glow="#E8C77B" style="background:#E8C77B"></div>
+    <!-- Layer 1: Title (fade-in → hold → slide out) -->
+    <div class="agency-layer agency-intro-layer">
+      <div class="agency-intro-inner">
+        <div class="agency-text">
+          <h2 class="agency-title"><strong>AGENCY</strong> BUSINESS DIV.</h2>
+          <p class="agency-desc">AI 생태계의 <strong>내일을 설계합니다.</strong></p>
         </div>
       </div>
-      <button class="carousel-arrow arrow-right glass-shine" aria-label="다음">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M6 12H18" stroke="#101820" stroke-width="1.8"/>
-          <path d="M13 7L18 12L13 17" stroke="#101820" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
     </div>
 
-    <div class="carousel-dots"></div>
-
-    <div class="skills-marquee">
-      <div class="skills-row">
-        <div class="skills-track skills-left">
-          <span class="skill-tag">WEB</span><span class="skill-tag">APP</span><span class="skill-tag">Design System</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Product Build</span><span class="skill-tag">AI</span><span class="skill-tag">CREATIVITY</span><span class="skill-tag">EXECUTION</span><span class="skill-tag">SYNERGY</span><span class="skill-tag">CORE</span><span class="skill-tag">FRAMEWORK</span><span class="skill-tag">INTUITIVE</span><span class="skill-tag">BRIDGE</span><span class="skill-tag">EXPERTISE</span>
-          <span class="skill-tag">WEB</span><span class="skill-tag">APP</span><span class="skill-tag">Design System</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Product Build</span><span class="skill-tag">AI</span><span class="skill-tag">CREATIVITY</span><span class="skill-tag">EXECUTION</span><span class="skill-tag">SYNERGY</span><span class="skill-tag">CORE</span><span class="skill-tag">FRAMEWORK</span><span class="skill-tag">INTUITIVE</span><span class="skill-tag">BRIDGE</span><span class="skill-tag">EXPERTISE</span>
-        </div>
+    <!-- Layer 2: Visual (slide up after title) -->
+    <div class="agency-layer agency-visual-layer">
+      <div class="agency-bg-logo">
+        <img src="images/agency-bg-1.svg" alt="">
+        <img src="images/agency-bg-2.svg" alt="">
+        <img src="images/agency-bg-3.svg" alt="">
       </div>
-      <div class="skills-row">
-        <div class="skills-track skills-right">
-          <span class="skill-tag">FRAMEWORK</span><span class="skill-tag">INTUITIVE</span><span class="skill-tag">BRIDGE</span><span class="skill-tag">EXPERTISE</span><span class="skill-tag">WEB</span><span class="skill-tag">APP</span><span class="skill-tag">Design System</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Product Build</span><span class="skill-tag">AI</span><span class="skill-tag">CREATIVITY</span><span class="skill-tag">EXECUTION</span><span class="skill-tag">SYNERGY</span><span class="skill-tag">CORE</span>
-          <span class="skill-tag">FRAMEWORK</span><span class="skill-tag">INTUITIVE</span><span class="skill-tag">BRIDGE</span><span class="skill-tag">EXPERTISE</span><span class="skill-tag">WEB</span><span class="skill-tag">APP</span><span class="skill-tag">Design System</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Product Build</span><span class="skill-tag">AI</span><span class="skill-tag">CREATIVITY</span><span class="skill-tag">EXECUTION</span><span class="skill-tag">SYNERGY</span><span class="skill-tag">CORE</span>
+
+      <div class="carousel-glow" id="carouselGlow"></div>
+      <div class="agency-carousel-area">
+        <button class="carousel-arrow arrow-left glass-shine" aria-label="이전">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M18 12H6" stroke="#101820" stroke-width="1.8"/>
+            <path d="M11 7L6 12L11 17" stroke="#101820" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="agencyTrack">
+            <div class="agency-card" data-glow="#6BC5C0" style="background:#6BC5C0"></div>
+            <div class="agency-card" data-glow="#7B9FE8" style="background:#7B9FE8"></div>
+            <div class="agency-card" data-glow="#E88A7B" style="background:#E88A7B"></div>
+            <div class="agency-card" data-glow="#C49BE8" style="background:#C49BE8"></div>
+            <div class="agency-card" data-glow="#E8C77B" style="background:#E8C77B"></div>
+          </div>
+        </div>
+        <button class="carousel-arrow arrow-right glass-shine" aria-label="다음">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 12H18" stroke="#101820" stroke-width="1.8"/>
+            <path d="M13 7L18 12L13 17" stroke="#101820" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="carousel-dots"></div>
+
+      <div class="skills-marquee">
+        <div class="skills-row">
+          <div class="skills-track skills-left">
+            <span class="skill-tag">WEB</span><span class="skill-tag">APP</span><span class="skill-tag">Design System</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Product Build</span><span class="skill-tag">AI</span><span class="skill-tag">CREATIVITY</span><span class="skill-tag">EXECUTION</span><span class="skill-tag">SYNERGY</span><span class="skill-tag">CORE</span><span class="skill-tag">FRAMEWORK</span><span class="skill-tag">INTUITIVE</span><span class="skill-tag">BRIDGE</span><span class="skill-tag">EXPERTISE</span>
+            <span class="skill-tag">WEB</span><span class="skill-tag">APP</span><span class="skill-tag">Design System</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Product Build</span><span class="skill-tag">AI</span><span class="skill-tag">CREATIVITY</span><span class="skill-tag">EXECUTION</span><span class="skill-tag">SYNERGY</span><span class="skill-tag">CORE</span><span class="skill-tag">FRAMEWORK</span><span class="skill-tag">INTUITIVE</span><span class="skill-tag">BRIDGE</span><span class="skill-tag">EXPERTISE</span>
+          </div>
+        </div>
+        <div class="skills-row">
+          <div class="skills-track skills-right">
+            <span class="skill-tag">FRAMEWORK</span><span class="skill-tag">INTUITIVE</span><span class="skill-tag">BRIDGE</span><span class="skill-tag">EXPERTISE</span><span class="skill-tag">WEB</span><span class="skill-tag">APP</span><span class="skill-tag">Design System</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Product Build</span><span class="skill-tag">AI</span><span class="skill-tag">CREATIVITY</span><span class="skill-tag">EXECUTION</span><span class="skill-tag">SYNERGY</span><span class="skill-tag">CORE</span>
+            <span class="skill-tag">FRAMEWORK</span><span class="skill-tag">INTUITIVE</span><span class="skill-tag">BRIDGE</span><span class="skill-tag">EXPERTISE</span><span class="skill-tag">WEB</span><span class="skill-tag">APP</span><span class="skill-tag">Design System</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Product Build</span><span class="skill-tag">AI</span><span class="skill-tag">CREATIVITY</span><span class="skill-tag">EXECUTION</span><span class="skill-tag">SYNERGY</span><span class="skill-tag">CORE</span>
+          </div>
         </div>
       </div>
     </div>
