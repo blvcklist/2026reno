@@ -77,13 +77,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function onTypingComplete() {
-    // 타이핑 완료 후 큐브/인디케이터/스크롤 페이드인
-    setTimeout(function () {
-      hero.classList.remove('intro-phase');
-      window.cubeAssemblyReady = true;
-    }, 600);
+    // 타이핑 완료 후 인디케이터/스크롤 페이드인
   }
 
-  // 타이핑 시작
+  // 타이핑 시작과 동시에 큐브 조립 시작 (캔버스 페이드인)
+  hero.classList.remove('intro-phase');
   runSequence(0);
 });

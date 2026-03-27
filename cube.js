@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
 (function () {
   const canvas = document.getElementById('cubeCanvas');
@@ -10,9 +11,12 @@ import * as THREE from 'three';
     antialias: true,
     alpha: true,
   });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  renderer.setPixelRatio(window.devicePixelRatio);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 3.2;
+  renderer.toneMappingExposure = 2.4;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  Object.defineProperty(renderer, 'transmissionResolutionScale', { value: 1.0 });
 
   // --- Scene & Camera ---
   const scene = new THREE.Scene();
@@ -111,50 +115,33 @@ import * as THREE from 'three';
 
   // --- Glass Material ---
   const glassMaterial = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color(0.97, 0.98, 1.0),
-    metalness: 0.08,
+    color: new THREE.Color(0.85, 0.88, 0.94),
+    metalness: 0.03,
     roughness: 0.0,
-    transmission: 0.95,
-    thickness: 0.2,
-    ior: 2.4,
-    envMapIntensity: 14.0,
+    transmission: 0.85,
+    thickness: 0.4,
+    ior: 2.0,
+    envMapIntensity: 6.0,
     clearcoat: 1.0,
     clearcoatRoughness: 0.0,
     reflectivity: 1.0,
-    specularIntensity: 10.0,
+    specularIntensity: 4.0,
     specularColor: 0xffffff,
-    sheen: 0.5,
+    sheen: 0.2,
     sheenRoughness: 0.02,
-    sheenColor: 0x99bbff,
+    sheenColor: 0x7788bb,
     transparent: true,
-    opacity: 0.15,
-    side: THREE.FrontSide,
-    attenuationColor: new THREE.Color(0.85, 0.92, 1.0),
-    attenuationDistance: 2.0,
-    dispersion: 1.0,
-    iridescence: 0.9,
-    iridescenceIOR: 2.2,
-    iridescenceThicknessRange: [60, 800],
-    emissive: new THREE.Color(0x112244),
-    emissiveIntensity: 0.2,
-  });
-
-  // --- Edge Material (크롬) ---
-  const edgeMaterial = new THREE.MeshPhysicalMaterial({
-    color: 0xffffff,
-    metalness: 1.0,
-    roughness: 0.0,
-    envMapIntensity: 10.0,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.0,
-    reflectivity: 1.0,
-    specularIntensity: 3.0,
-    specularColor: 0xffffff,
-    emissive: 0x88aadd,
-    emissiveIntensity: 1.2,
-    sheen: 0.5,
-    sheenRoughness: 0.0,
-    sheenColor: 0xaaccff,
+    opacity: 0.5,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+    attenuationColor: new THREE.Color(0.55, 0.65, 0.8),
+    attenuationDistance: 1.5,
+    dispersion: 1.5,
+    iridescence: 0.7,
+    iridescenceIOR: 2.0,
+    iridescenceThicknessRange: [100, 600],
+    emissive: new THREE.Color(0x0a1830),
+    emissiveIntensity: 0.15,
   });
 
   // --- Cube data (26개: 3x3x3 - center) ---
@@ -200,48 +187,12 @@ import * as THREE from 'three';
   const COUNT = cubeData.length; // 26
 
   // --- InstancedMesh: Glass bodies (1 draw call) ---
-  const boxGeo = new THREE.BoxGeometry(unitSize, unitSize, unitSize);
+  const boxGeo = new RoundedBoxGeometry(unitSize, unitSize, unitSize, 6, unitSize * 0.12);
   const glassInstanced = new THREE.InstancedMesh(boxGeo, glassMaterial, COUNT);
   glassInstanced.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
 
-  // --- InstancedMesh: Edges (12 edges per cube = 312, 1 draw call) ---
-  const edgeR = unitSize * 0.008;
-  const edgeHalf = unitSize / 2;
-  const cylGeo = new THREE.CylinderGeometry(edgeR, edgeR, unitSize, 6);
-  const EDGES_PER_CUBE = 12;
-  const edgeInstanced = new THREE.InstancedMesh(cylGeo, edgeMaterial, COUNT * EDGES_PER_CUBE);
-  edgeInstanced.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-
-  // 큐브 로컬 좌표에서의 엣지 위치/회전
-  const edgeLocalDefs = [
-    { p: [0, -edgeHalf, -edgeHalf], r: new THREE.Euler(0, 0, Math.PI / 2) },
-    { p: [0, -edgeHalf, edgeHalf], r: new THREE.Euler(0, 0, Math.PI / 2) },
-    { p: [-edgeHalf, -edgeHalf, 0], r: new THREE.Euler(Math.PI / 2, 0, 0) },
-    { p: [edgeHalf, -edgeHalf, 0], r: new THREE.Euler(Math.PI / 2, 0, 0) },
-    { p: [0, edgeHalf, -edgeHalf], r: new THREE.Euler(0, 0, Math.PI / 2) },
-    { p: [0, edgeHalf, edgeHalf], r: new THREE.Euler(0, 0, Math.PI / 2) },
-    { p: [-edgeHalf, edgeHalf, 0], r: new THREE.Euler(Math.PI / 2, 0, 0) },
-    { p: [edgeHalf, edgeHalf, 0], r: new THREE.Euler(Math.PI / 2, 0, 0) },
-    { p: [-edgeHalf, 0, -edgeHalf], r: new THREE.Euler(0, 0, 0) },
-    { p: [edgeHalf, 0, -edgeHalf], r: new THREE.Euler(0, 0, 0) },
-    { p: [-edgeHalf, 0, edgeHalf], r: new THREE.Euler(0, 0, 0) },
-    { p: [edgeHalf, 0, edgeHalf], r: new THREE.Euler(0, 0, 0) },
-  ];
-
-  // 엣지 로컬 Matrix 사전 계산
-  const edgeLocalMatrices = edgeLocalDefs.map(({ p, r }) => {
-    const m = new THREE.Matrix4();
-    m.compose(
-      new THREE.Vector3(p[0], p[1], p[2]),
-      new THREE.Quaternion().setFromEuler(r),
-      new THREE.Vector3(1, 1, 1)
-    );
-    return m;
-  });
-
   const cubeGroup = new THREE.Group();
   cubeGroup.add(glassInstanced);
-  cubeGroup.add(edgeInstanced);
   scene.add(cubeGroup);
 
   cubeGroup.rotation.x = Math.PI / 5;
@@ -250,7 +201,7 @@ import * as THREE from 'three';
   // --- Lights ---
   scene.add(new THREE.AmbientLight(0xc8deff, 0.15));
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 6.0);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
   keyLight.position.set(5, 8, 6);
   scene.add(keyLight);
 
@@ -258,19 +209,19 @@ import * as THREE from 'three';
   fillLight.position.set(-6, -2, 4);
   scene.add(fillLight);
 
-  const rimLight = new THREE.DirectionalLight(0xfff0e0, 4.0);
+  const rimLight = new THREE.DirectionalLight(0xfff0e0, 0.8);
   rimLight.position.set(0, 3, -8);
   scene.add(rimLight);
 
-  const p1 = new THREE.PointLight(0xff6688, 6, 30);
+  const p1 = new THREE.PointLight(0xff4466, 4, 25);
   p1.position.set(4, 2, 5);
   scene.add(p1);
 
-  const p2 = new THREE.PointLight(0x6688ff, 6, 30);
+  const p2 = new THREE.PointLight(0x4488ff, 4, 25);
   p2.position.set(-4, -2, 5);
   scene.add(p2);
 
-  const spotLight = new THREE.SpotLight(0xffffff, 12, 35, Math.PI / 6, 0.4, 1);
+  const spotLight = new THREE.SpotLight(0xffffff, 4, 35, Math.PI / 6, 0.5, 1);
   spotLight.position.set(5, 5, 8);
   scene.add(spotLight);
   scene.add(spotLight.target);
@@ -330,17 +281,12 @@ import * as THREE from 'three';
   const tmpQuat = new THREE.Quaternion();
   const tmpScale = new THREE.Vector3(1, 1, 1);
   const tmpMatrix = new THREE.Matrix4();
-  const tmpEdgeMatrix = new THREE.Matrix4();
   const tmpEuler = new THREE.Euler();
 
   function animate(time) {
     requestAnimationFrame(animate);
 
     if (startTime < 0) {
-      if (!window.cubeAssemblyReady) {
-        renderer.render(scene, camera);
-        return;
-      }
       startTime = time;
     }
     const elapsed = (time - startTime) * 0.001;
@@ -374,15 +320,8 @@ import * as THREE from 'three';
       // Glass body matrix
       tmpMatrix.compose(tmpPos, tmpQuat, tmpScale);
       glassInstanced.setMatrixAt(i, tmpMatrix);
-
-      // Edge matrices (큐브 matrix × 각 엣지 로컬 matrix)
-      for (let e = 0; e < EDGES_PER_CUBE; e++) {
-        tmpEdgeMatrix.multiplyMatrices(tmpMatrix, edgeLocalMatrices[e]);
-        edgeInstanced.setMatrixAt(i * EDGES_PER_CUBE + e, tmpEdgeMatrix);
-      }
     }
     glassInstanced.instanceMatrix.needsUpdate = true;
-    edgeInstanced.instanceMatrix.needsUpdate = true;
 
     // --- 자유 이동 ---
     const bounds = getDriftBounds();
