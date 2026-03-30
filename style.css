@@ -720,11 +720,11 @@ body.hero-dark .scroll-slot span {
 .adv-clients {
   flex-shrink: 0;
   width: 100%;
-  padding: 0 120px;
+  padding: 0 var(--px);
 }
 .adv-clients-inner {
   display: flex; align-items: center; justify-content: space-between;
-  width: 100%;
+  max-width: 1440px; width: 100%; margin: 0 auto;
   height: 100px;
 }
 .adv-client {
@@ -1333,7 +1333,6 @@ body.hero-dark .scroll-slot span {
   .marquee-text { font-size: 56px; }
   .carousel-glow { width: 600px; height: 600px; }
   .carousel-track.gathered .agency-card { margin: 0 -100px; }
-  .adv-clients { padding: 0 60px; }
   .adv-clients-inner { height: 72px; }
   .adv-client { flex: 0 0 220px; height: 72px; }
 
@@ -1417,7 +1416,6 @@ body.hero-dark .scroll-slot span {
   .marquee-text { font-size: 32px; }
   .carousel-glow { width: 400px; height: 400px; }
   .carousel-track.gathered .agency-card { margin: 0 -80px; }
-  .adv-clients { padding: 0 24px; }
   .adv-clients-inner { height: auto; flex-wrap: wrap; }
   .adv-client { flex: 0 0 50%; height: 56px; }
 
