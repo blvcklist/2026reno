@@ -186,68 +186,6 @@ strong { font-weight: 700; }
   z-index: 0;
 }
 
-/* Hero 커스텀 커서 */
-.hero-cursor {
-  position: fixed;
-  top: 0; left: 0;
-  width: 80px; height: 78px;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.6);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.hero-cursor.visible {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-.hero-cursor-bg {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  transition: opacity 0.4s ease;
-}
-/* 밝은 배경: 빨간색 표시, 흰색 숨김 */
-.hero-cursor-red { opacity: 1; }
-.hero-cursor-white { opacity: 0; }
-/* 어두운 배경: 흰색 표시, 빨간색 숨김 */
-.hero-cursor.dark .hero-cursor-red { opacity: 0; }
-.hero-cursor.dark .hero-cursor-white { opacity: 1; }
-/* 글래스 블러 레이어 (말풍선 형태로 클리핑) */
-.hero-cursor::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  backdrop-filter: blur(12px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
-  clip-path: path('M40.0025 0C62.0837 0.000607014 80 17.4704 80 39C80 60.5296 62.0837 77.9994 40.0025 78C17.9209 78 0 60.53 0 39C0 17.47 17.9209 0 40.0025 0ZM40.0025 14.427C26.0911 14.427 14.7986 25.4669 14.7986 39C14.7986 43.1516 15.8691 47.088 17.7614 50.5324L11.5457 64.0961L25.3312 58.9316C29.4636 61.8228 34.5452 63.5426 40.0025 63.5426V63.573C53.9135 63.5724 65.2065 52.5635 65.2065 39C65.2065 25.4365 53.9135 14.4276 40.0025 14.427Z');
-}
-.hero-cursor-text {
-  position: absolute;
-  top: 50%; left: calc(50% + 0.5px);
-  transform: translate(-50%, -55%);
-  text-align: center;
-  font-family: 'Pretendard', sans-serif;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 0.64;
-  letter-spacing: -0.4px;
-  color: #CC1F26;
-  transition: color 0.4s ease;
-}
-.hero-cursor.dark .hero-cursor-text {
-  color: #fff;
-}
-.hero-cursor-text span {
-  display: block;
-  margin-bottom: 4px;
-}
-.hero-cursor-text span:last-child {
-  margin-bottom: 0;
-}
-.hero { cursor: none; }
-
 #cubeCanvas {
   position: absolute;
   top: 0;
@@ -412,28 +350,16 @@ body.hero-dark .indicator-pause svg polygon {
   fill: #fff;
 }
 
-/* 커서 파티클 캔버스 */
-.cursor-particles-canvas {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 3;
-}
 
-/* 히어로 타이핑 효과 */
-.hero-subtitle,
-.hero-title .line,
-.hero-desc p {
-  overflow: hidden;
+/* 히어로 순차 페이드인 */
+.hero-fadein-item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.hero-typing-cursor::after {
-  content: '|';
-  animation: blink 0.6s step-end infinite;
-  font-weight: 300;
-}
-@keyframes blink {
-  50% { opacity: 0; }
+.hero-fadein-item.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 
@@ -460,6 +386,22 @@ body.hero-dark .indicator-pause svg polygon {
   line-height: 1.4;
 }
 .hero-desc .semi { font-weight: 600; }
+
+.hero-about-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 160px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--reno-black);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+.hero-about-btn:hover { opacity: 0.6; }
+.hero-about-btn svg { width: 40px; height: 40px; }
+body.hero-dark .hero-about-btn { color: #fff; }
 
 /* RENO 로고: 컨테이너 내 우하단 */
 .hero-reno-logo {
@@ -1318,6 +1260,8 @@ body.hero-dark .scroll-slot span {
   .hero-subtitle { font-size: 20px; }
   .hero-title { font-size: 52px; }
   .hero-desc { font-size: 20px; }
+  .hero-about-btn { font-size: 24px; gap: 16px; margin-top: 60px; }
+  .hero-about-btn svg { width: 32px; height: 32px; }
 
   /* Advertising */
   .adv-title { font-size: 52px; }
@@ -1374,6 +1318,8 @@ body.hero-dark .scroll-slot span {
   .hero-subtitle { font-size: 16px; margin-bottom: 18px; }
   .hero-title { font-size: 40px; margin-bottom: 30px; }
   .hero-desc { font-size: 16px; }
+  .hero-about-btn { font-size: 20px; gap: 12px; margin-top: 40px; }
+  .hero-about-btn svg { width: 28px; height: 28px; }
   .hero-indicator { left: var(--px); bottom: 30px; }
   .hero-indicator-select { gap: 18px; padding: 12px 20px; }
   .indicator-gauge { width: 60px; }
@@ -1453,6 +1399,8 @@ body.hero-dark .scroll-slot span {
   .hero-subtitle { font-size: 14px; margin-bottom: 14px; }
   .hero-title { font-size: 28px; letter-spacing: -0.8px; margin-bottom: 24px; }
   .hero-desc { font-size: 14px; }
+  .hero-about-btn { font-size: 16px; gap: 10px; margin-top: 32px; }
+  .hero-about-btn svg { width: 24px; height: 24px; }
   .hero-indicator { left: var(--px); bottom: 24px; gap: 8px; }
   .hero-indicator-select { gap: 14px; padding: 10px 16px; }
   .indicator-num { font-size: 12px; }
