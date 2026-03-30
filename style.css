@@ -1059,9 +1059,8 @@ body.hero-dark .scroll-slot span {
 /* 스킬 마키: 전체폭, 하단 고정 */
 .skills-marquee {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 64px; left: 0; right: 0;
   overflow: hidden;
-  padding: 24px 0;
 }
 .skills-row { overflow: hidden; margin-bottom: 8px; }
 .skills-row:last-child { margin-bottom: 0; }
@@ -1350,8 +1349,7 @@ body.hero-dark .scroll-slot span {
   .arrow-left { left: 8px; }
   .arrow-right { right: 8px; }
   .skill-tag { font-size: 13px; padding: 8px 14px; border-radius: 16px; }
-  .skills-marquee { padding: 20px 0; }
-  .skills-row { margin-bottom: 6px; }
+  .skills-marquee { bottom: 48px; }
 
   /* We Are */
   .weare-inner { flex-direction: column; padding: 80px var(--px); gap: 60px; }
@@ -1439,8 +1437,7 @@ body.hero-dark .scroll-slot span {
   .dot { width: 6px; height: 6px; }
   .dot.active { width: 24px; }
   .skill-tag { font-size: 12px; padding: 8px 12px; border-radius: 14px; }
-  .skills-marquee { padding: 16px 0; }
-  .skills-row { margin-bottom: 5px; }
+  .skills-marquee { bottom: 32px; }
   .skills-track { gap: 4px; }
 
   /* We Are */

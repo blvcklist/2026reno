@@ -328,66 +328,40 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 })();
 
-// ===== Full-page Section Scroll Snap =====
+// ===== Hero → Adv Scroll Snap =====
 (function () {
-  var sections = Array.prototype.slice.call(
-    document.querySelectorAll('.hero, .advertising, .agency, .weare, .footer')
-  );
-  if (!sections.length) return;
+  var hero = document.querySelector('.hero');
+  var adv = document.querySelector('.advertising');
+  if (!hero || !adv) return;
 
   var scrolling = false;
-  var cooldown = 1000;
+  var cooldown = 1200;
 
-  // 각 섹션의 scrollTop 위치를 계산 (hero는 0)
-  function getSectionTops() {
-    var tops = [];
-    for (var i = 0; i < sections.length; i++) {
-      if (i === 0) {
-        tops.push(0); // hero는 sticky이므로 0
-      } else {
-        tops.push(sections[i].offsetTop);
-      }
-    }
-    return tops;
+  function isInHero() {
+    return window.scrollY < adv.offsetTop - window.innerHeight * 0.5;
   }
 
-  function getCurrentIndex() {
-    var scrollY = window.scrollY;
-    var tops = getSectionTops();
-    var current = 0;
-
-    for (var i = tops.length - 1; i >= 0; i--) {
-      if (scrollY >= tops[i] - window.innerHeight * 0.3) {
-        current = i;
-        break;
-      }
-    }
-    return current;
-  }
-
-  function scrollToSection(index) {
-    if (index < 0 || index >= sections.length) return;
-    scrolling = true;
-
-    var tops = getSectionTops();
-    window.scrollTo({ top: tops[index], behavior: 'smooth' });
-
-    setTimeout(function () { scrolling = false; }, cooldown);
+  function isInAdv() {
+    var advTop = adv.offsetTop;
+    return window.scrollY >= advTop - window.innerHeight * 0.5 && window.scrollY < advTop + window.innerHeight * 0.3;
   }
 
   window.addEventListener('wheel', function (e) {
     if (scrolling) return;
-    e.preventDefault();
 
-    var current = getCurrentIndex();
-    if (e.deltaY > 0) {
-      scrollToSection(current + 1);
-    } else if (e.deltaY < 0) {
-      scrollToSection(current - 1);
+    if (isInHero() && e.deltaY > 0) {
+      e.preventDefault();
+      scrolling = true;
+      window.scrollTo({ top: adv.offsetTop, behavior: 'smooth' });
+      setTimeout(function () { scrolling = false; }, cooldown);
+    } else if (isInAdv() && e.deltaY < 0) {
+      e.preventDefault();
+      scrolling = true;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(function () { scrolling = false; }, cooldown);
     }
   }, { passive: false });
 
-  // 모바일 터치 스와이프
   var touchStartY = 0;
   window.addEventListener('touchstart', function (e) {
     touchStartY = e.touches[0].clientY;
@@ -398,11 +372,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     var diff = touchStartY - e.changedTouches[0].clientY;
     if (Math.abs(diff) < 50) return;
 
-    var current = getCurrentIndex();
-    if (diff > 0) {
-      scrollToSection(current + 1);
-    } else {
-      scrollToSection(current - 1);
+    if (isInHero() && diff > 0) {
+      scrolling = true;
+      window.scrollTo({ top: adv.offsetTop, behavior: 'smooth' });
+      setTimeout(function () { scrolling = false; }, cooldown);
+    } else if (isInAdv() && diff < 0) {
+      scrolling = true;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(function () { scrolling = false; }, cooldown);
     }
   });
 })();
