@@ -415,7 +415,6 @@ body.hero-dark .hero-about-btn { color: #fff; }
 .reno-logo-sub { width: 238px; }
 
 /* 인디케이터: 컨테이너 내 좌하단 */
-/* 인디케이터: 컨테이너 내 좌하단 */
 .hero-indicator {
   position: absolute;
   left: calc(50% - var(--cw) / 2);
@@ -437,6 +436,7 @@ body.hero-dark .hero-about-btn { color: #fff; }
   -webkit-backdrop-filter: blur(24px);
   border-right: 1px solid rgba(0,0,0,0.04);
   border-bottom: 1px solid rgba(0,0,0,0.04);
+  height: 56px;
 }
 
 .indicator-item { display: flex; align-items: center; gap: 8px; }
