@@ -47,57 +47,64 @@
     document.body.classList.toggle('gnb-dark', isDark);
   }
 
+  var heroScroll = document.querySelector('.hero-scroll');
+
   window.addEventListener('scroll', () => {
     gnb.classList.toggle('sticky', window.scrollY > 80);
     checkDark();
+    if (heroScroll) {
+      heroScroll.style.opacity = window.scrollY > 10 ? '0' : '';
+    }
   });
 
   window.addEventListener('heroSlideChange', checkDark);
   checkDark();
 })();
 
-// ===== Adv Client Navigation + Cube Slide =====
+// ===== Adv Client Navigation + Slot Slide =====
 (function () {
-  const clients = document.querySelectorAll('.adv-client');
-  const cube = document.getElementById('advCube');
+  var clients = document.querySelectorAll('.adv-client');
+  var cube = document.getElementById('advCube');
   if (!clients.length || !cube) return;
 
-  var total = 4;
+  var slides = cube.querySelectorAll('.adv-slide');
+  var total = slides.length;
   var current = 0;
-  var rotation = 0; // 누적 회전 각도
   var autoTimer = null;
+  var switching = false;
 
-  var slideData = [
-    { category: '스크린 광고', name: 'LOTTE Cinema' },
-    { category: '항공 광고', name: 'KOREAN AIR' },
-    { category: '스포츠 광고', name: 'GOLFZON' },
-    { category: '모빌리티 광고', name: 'kakaomobility' },
-  ];
-
-  var infoEl = document.getElementById('advVisualInfo');
-  var categoryEl = infoEl ? infoEl.querySelector('.adv-visual-category') : null;
-  var nameEl = infoEl ? infoEl.querySelector('.adv-visual-name') : null;
-
-  function setCubeSize() {
-    var viewport = cube.parentElement;
-    var h = viewport.clientHeight;
-    cube.style.setProperty('--cube-z', (h / 2) + 'px');
-  }
+  // 첫 슬라이드 즉시 표시 후, 모든 슬라이드에 transition 활성화
+  setTimeout(function () {
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].classList.add('ready');
+    }
+  }, 100);
 
   function goToSlide(idx) {
-    // 현재→목표까지 최단 정방향(위로) 회전량 계산
-    var diff = ((idx - current) % total + total) % total;
-    if (diff === 0 && idx !== current) diff = total;
-    rotation += diff * 90;
-    current = idx;
+    if (switching || idx === current) return;
+    switching = true;
 
-    cube.style.transform = 'rotateX(' + rotation + 'deg)';
+    var prev = slides[current];
+    var next = slides[idx];
+
+    // 새 슬라이드: 아래 위치로 즉시 이동
+    next.classList.remove('out', 'ready');
+    void next.offsetHeight;
+    next.classList.add('ready');
+
+    // 이전 슬라이드: 위로 밀려남 + 새 슬라이드: 올라옴
+    prev.classList.remove('active');
+    prev.classList.add('out');
+    next.classList.add('active');
+
+    current = idx;
     clients.forEach(function (c) { c.classList.remove('active'); });
     if (clients[idx]) clients[idx].classList.add('active');
-    if (categoryEl && nameEl && slideData[idx]) {
-      categoryEl.textContent = slideData[idx].category;
-      nameEl.textContent = slideData[idx].name;
-    }
+
+    setTimeout(function () {
+      prev.classList.remove('out');
+      switching = false;
+    }, 750);
   }
 
   function startAuto() {
@@ -119,8 +126,6 @@
     });
   });
 
-  setCubeSize();
-  window.addEventListener('resize', setCubeSize);
   startAuto();
 })();
 

@@ -470,6 +470,7 @@ body.hero-dark .hero-about-btn { color: #fff; }
   width: 57px;
   height: 56px;
   overflow: hidden;
+  transition: opacity 0.3s ease;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
 }
@@ -630,34 +631,31 @@ body.hero-dark .scroll-slot span {
 /* Glass 프레임 */
 .adv-glass {
   position: relative;
-  width: min(900px, calc(100% - 160px));
-  aspect-ratio: 1200 / 718;
-  border-radius: 30px;
+  width: min(1200px, calc(100% - 160px));
+  border-radius: 40px;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(8px) saturate(24%);
   -webkit-backdrop-filter: blur(8px) saturate(24%);
   box-shadow: 8px 8px 24px rgba(0,0,0,0.08);
   z-index: 2;
-  padding: 30px;
+  padding: 39px 40px;
   overflow: hidden;
 }
 
-/* 큐브 뷰포트 (glass padding 안쪽, perspective 제공) */
+/* 큐브 뷰포트 (glass padding 안쪽, 1120:640 비율) */
 .adv-cube-viewport {
   position: relative;
   width: 100%;
-  height: 100%;
-  perspective: 1200px;
+  aspect-ratio: 1120 / 640;
   overflow: hidden;
   border: 1px solid white;
+  background: var(--reno-black);
 }
 
-/* adv 큐브 슬라이드 */
+/* adv 슬롯 슬라이드 */
 .adv-cube {
   position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  transition: transform 0.9s cubic-bezier(0.32, 0.72, 0, 1);
+  top: 0; left: 0; width: 100%; height: 100%;
 }
 
 .adv-slide {
@@ -666,88 +664,82 @@ body.hero-dark .scroll-slot span {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  backface-visibility: hidden;
+  transform: translateY(100%);
+  opacity: 0;
 }
-
-/* 각 면을 큐브 형태로 배치 — translateZ는 JS에서 높이의 절반으로 설정 */
-.adv-slide[data-slide="0"] { transform: rotateX(0deg) translateZ(var(--cube-z)); }
-.adv-slide[data-slide="1"] { transform: rotateX(90deg) translateZ(var(--cube-z)); }
-.adv-slide[data-slide="2"] { transform: rotateX(180deg) translateZ(var(--cube-z)); }
-.adv-slide[data-slide="3"] { transform: rotateX(270deg) translateZ(var(--cube-z)); }
+.adv-slide.ready {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease;
+}
+.adv-slide.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+.adv-slide.out {
+  transform: translateY(-100%);
+  opacity: 0;
+}
 
 .adv-visual-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
 }
 
-.adv-visual-logo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -60%);
-  width: 40%;
-  opacity: 0.4;
+/* 슬라이드 텍스트 오버레이 */
+.adv-slide-text {
+  position: absolute; inset: 0;
+  z-index: 2;
   pointer-events: none;
+  color: #fff;
 }
-
-.adv-visual-gradient {
+.adv-slide-title {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 180px;
-  background: linear-gradient(to bottom, transparent 0%, black 100%);
-  opacity: 0.16;
-  z-index: 9;
-  pointer-events: none;
+  left: 64px; top: 264px;
+  font-size: 40px; font-weight: 700; line-height: 1.4;
 }
-
-.adv-visual-info {
+.adv-slide-summary {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  color: white;
-  z-index: 10;
-  pointer-events: none;
+  left: 64px; bottom: 64px;
+  display: flex; gap: 80px;
 }
-
-.adv-visual-category {
-  display: inline-block;
-  font-size: 16px; font-weight: 500; line-height: 1.4;
-  padding: 8px 16px;
-  border: 1px solid white;
-  border-radius: 24px;
-  width: fit-content;
+.adv-slide-meta {
+  display: flex; flex-direction: column; justify-content: space-between;
+  height: 54px;
 }
-
-.adv-visual-name {
-  font-size: 24px; font-weight: 600; line-height: 1.4;
+.adv-slide-label {
+  font-size: 14px; font-weight: 400; line-height: 1;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+}
+.adv-slide-value {
+  font-size: 18px; font-weight: 500; line-height: 1;
+  letter-spacing: -0.36px;
 }
 
 /* 클라이언트 로고 바 (하단 고정) */
 .adv-clients {
   flex-shrink: 0;
   width: 100%;
-  padding: 0 var(--px);
+  padding: 0 120px;
 }
 .adv-clients-inner {
   display: flex; align-items: center; justify-content: space-between;
-  max-width: var(--cw); width: 100%; margin: 0 auto;
-  height: 75px;
+  width: 100%;
+  height: 100px;
 }
 .adv-client {
-  flex: 0 0 240px; height: 75px;
-  display: flex; align-items: center; justify-content: center; gap: 4px;
+  flex: 0 0 320px; height: 100px;
+  position: relative; overflow: hidden;
   background: none; border: none; cursor: pointer;
   opacity: 0.4; transition: opacity 0.3s;
 }
 .adv-client:hover { opacity: 0.7; }
 .adv-client.active { opacity: 1; }
-.adv-client img { max-height: 28px; width: auto; object-fit: contain; }
-.kakao-part1 { max-height: 24px; }
-.kakao-part2 { max-height: 32px; }
+.adv-client-logo {
+  position: absolute;
+  display: block;
+}
+.adv-client-logo img { width: 100%; height: 100%; display: block; }
 
 /* ===== AGENCY ===== */
 .agency {
@@ -1266,11 +1258,11 @@ body.hero-dark .scroll-slot span {
   /* Advertising */
   .adv-title { font-size: 52px; }
   .adv-desc { font-size: 20px; }
-  .adv-glass { padding: 20px; }
-  .adv-visual-name { font-size: 22px; }
-  .adv-visual-category { font-size: 14px; padding: 6px 14px; }
-  .adv-visual-info { padding: 24px; gap: 12px; }
+  .adv-glass { width: min(900px, calc(100% - 120px)); }
   .adv-visual-layer { padding-top: 100px; }
+  .adv-slide-title { font-size: 32px; left: 48px; top: 220px; }
+  .adv-slide-summary { left: 48px; bottom: 48px; gap: 60px; }
+  .adv-slide-value { font-size: 16px; }
   .marquee-text { font-size: 72px; }
   .carousel-glow { width: 900px; height: 900px; }
   .carousel-track.gathered .agency-card { margin: 0 -140px; }
@@ -1330,19 +1322,20 @@ body.hero-dark .scroll-slot span {
   .adv-title { font-size: 40px; margin-bottom: 30px; }
   .adv-desc { font-size: 18px; }
   .adv-visual-layer { padding-top: 80px; }
-  .adv-glass { padding: 12px; border-radius: 24px; }
-  .adv-visual-info { padding: 16px; gap: 10px; }
-  .adv-visual-category { font-size: 12px; padding: 5px 12px; }
-  .adv-visual-name { font-size: 18px; }
-  .adv-visual-gradient { height: 140px; }
+  .adv-slide-title { font-size: 28px; left: 36px; top: 180px; }
+  .adv-slide-summary { left: 36px; bottom: 36px; gap: 40px; }
+  .adv-slide-meta { height: 44px; }
+  .adv-slide-label { font-size: 12px; }
+  .adv-slide-value { font-size: 14px; }
+  .adv-glass { width: min(700px, calc(100% - 80px)); padding: 24px; border-radius: 30px; }
   .adv-intro-layer.minimized .adv-title { font-size: 16px; }
   .adv-intro-layer.minimized .adv-intro-inner { padding-top: 76px; }
   .marquee-text { font-size: 56px; }
   .carousel-glow { width: 600px; height: 600px; }
   .carousel-track.gathered .agency-card { margin: 0 -100px; }
-  .adv-clients-inner { height: 60px; }
-  .adv-client { flex: 0 0 160px; height: 60px; }
-  .adv-client img { max-height: 18px; }
+  .adv-clients { padding: 0 60px; }
+  .adv-clients-inner { height: 72px; }
+  .adv-client { flex: 0 0 220px; height: 72px; }
 
   /* Agency */
   .agency-title { font-size: 40px; margin-bottom: 30px; }
@@ -1413,22 +1406,20 @@ body.hero-dark .scroll-slot span {
   .adv-title { font-size: 28px; letter-spacing: -0.6px; margin-bottom: 20px; }
   .adv-desc { font-size: 15px; }
   .adv-visual-layer { padding-top: 64px; }
-  .adv-glass { padding: 8px; border-radius: 16px; }
-  .adv-visual-info { padding: 12px; gap: 8px; }
-  .adv-visual-category { font-size: 11px; padding: 4px 10px; }
-  .adv-visual-name { font-size: 14px; }
-  .adv-visual-gradient { height: 100px; }
-  .adv-cube-viewport { border-width: 0.5px; }
+  .adv-slide-title { font-size: 20px; left: 24px; top: 140px; }
+  .adv-slide-summary { left: 24px; bottom: 24px; gap: 32px; }
+  .adv-slide-meta { height: 36px; }
+  .adv-slide-label { font-size: 11px; }
+  .adv-slide-value { font-size: 13px; }
+  .adv-glass { width: calc(100% - 48px); padding: 16px; border-radius: 20px; }
   .adv-intro-layer.minimized .adv-title { font-size: 14px; }
   .adv-intro-layer.minimized .adv-intro-inner { padding-top: 60px; }
   .marquee-text { font-size: 32px; }
   .carousel-glow { width: 400px; height: 400px; }
   .carousel-track.gathered .agency-card { margin: 0 -80px; }
+  .adv-clients { padding: 0 24px; }
   .adv-clients-inner { height: auto; flex-wrap: wrap; }
-  .adv-client { flex: 0 0 50%; height: 48px; }
-  .adv-client img { max-height: 16px; }
-  .kakao-part1 { max-height: 14px; }
-  .kakao-part2 { max-height: 20px; }
+  .adv-client { flex: 0 0 50%; height: 56px; }
 
   /* Agency */
   .agency-intro-inner { padding-top: 38vh; }
