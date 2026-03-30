@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       var fillColor = document.body.classList.contains('hero-dark') ? '#fff' : '#101820';
       if (paused) {
-        pauseBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polygon points="8,4 20,12 8,20" fill="' + fillColor + '"/></svg>';
+        pauseBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polygon points="7.5,7 16.5,12 7.5,17.4" fill="' + fillColor + '"/></svg>';
       } else {
         pauseBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="13.5" y="6" width="3" height="12" fill="' + fillColor + '"/><rect x="7.5" y="6" width="3" height="12" fill="' + fillColor + '"/></svg>';
       }

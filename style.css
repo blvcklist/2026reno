@@ -971,7 +971,7 @@ body.hero-dark .scroll-slot span {
 
 .carousel-arrow {
   position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
-  width: 56px; height: 56px;
+  width: 80px; height: 80px;
   display: flex; align-items: center; justify-content: center;
   border-radius: 160px;
   background: rgba(255,255,255,0.24);
@@ -982,7 +982,7 @@ body.hero-dark .scroll-slot span {
   opacity: 0.9;
 }
 .carousel-arrow:hover { opacity: 1; background: rgba(255,255,255,0.36); }
-.carousel-arrow svg { width: 32px; height: 32px; }
+.carousel-arrow svg { width: 40px; height: 40px; }
 .arrow-left { left: calc(50% - min(600px, 42vw)); }
 .arrow-right { right: calc(50% - min(600px, 42vw)); }
 
@@ -1344,8 +1344,8 @@ body.hero-dark .scroll-slot span {
   .card-info { bottom: 24px; left: 24px; gap: 12px; }
   .card-label { font-size: 14px; padding: 6px 14px; }
   .card-name { font-size: 20px; }
-  .carousel-arrow { width: 48px; height: 48px; }
-  .carousel-arrow svg { width: 20px; height: 20px; }
+  .carousel-arrow { width: 64px; height: 64px; }
+  .carousel-arrow svg { width: 32px; height: 32px; }
   .arrow-left { left: 8px; }
   .arrow-right { right: 8px; }
   .skill-tag { font-size: 13px; padding: 8px 14px; border-radius: 16px; }
@@ -1427,8 +1427,8 @@ body.hero-dark .scroll-slot span {
   .card-info { bottom: 16px; left: 16px; gap: 8px; }
   .card-label { font-size: 12px; padding: 4px 10px; }
   .card-name { font-size: 16px; }
-  .carousel-arrow { width: 40px; height: 40px; }
-  .carousel-arrow svg { width: 18px; height: 18px; }
+  .carousel-arrow { width: 48px; height: 48px; }
+  .carousel-arrow svg { width: 24px; height: 24px; }
   .arrow-left { left: 4px; }
   .arrow-right { right: 4px; }
   .carousel-indicator { margin-top: 20px; gap: 6px; }

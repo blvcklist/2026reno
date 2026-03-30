@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!pauseBtn) return;
     var fill = '#101820';
     if (paused) {
-      pauseBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polygon points="8,4 20,12 8,20" fill="' + fill + '"/></svg>';
+      pauseBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polygon points="7.5,7 16.5,12 7.5,17.4" fill="' + fill + '"/></svg>';
     } else {
       pauseBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="13.5" y="6" width="3" height="12" fill="' + fill + '"/><rect x="7.5" y="6" width="3" height="12" fill="' + fill + '"/></svg>';
     }
