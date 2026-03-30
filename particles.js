@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // 슬라이드 전환 감지: 03 슬라이드 활성화 시 scatter → gather
   window.addEventListener('heroSlideChange', function () {
-    var slide = document.querySelector('.hero-slide[data-slide="2"]');
+    var slide = document.querySelector('.hero-slide[data-slide="1"]');
     if (slide && slide.classList.contains('active')) {
       startGather();
     } else {

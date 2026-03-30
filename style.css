@@ -966,7 +966,47 @@ body.hero-dark .scroll-slot span {
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
               opacity 0.6s ease;
   transform-style: preserve-3d;
-  background: var(--gray4);
+  background-color: var(--gray4);
+  background-size: cover;
+  background-position: center;
+}
+
+/* 카드 hover 딤 */
+.card-dim {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, #000 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.agency-card:hover .card-dim {
+  opacity: 1;
+}
+.card-info {
+  position: absolute; z-index: 1;
+  bottom: 32px; left: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+.agency-card:hover .card-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+.card-label {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #fff;
+  border-radius: 24px;
+  font-size: 16px; font-weight: 500; line-height: 1.4;
+  color: #fff;
+  width: fit-content;
+}
+.card-name {
+  font-size: 24px; font-weight: 700; line-height: 1.4;
+  color: #fff;
 }
 
 .agency-card.active-card {
@@ -994,18 +1034,6 @@ body.hero-dark .scroll-slot span {
               opacity 1.2s ease,
               margin 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.card-bg { position: absolute; inset: 0; }
-.card-bg img { width: 100%; height: 100%; object-fit: cover; }
-.card-dim { position: absolute; inset: 0; background: rgba(69,150,154,0.24); }
-.card-dim::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(1,30,31,0.5)); }
-
-.card-phone {
-  position: absolute; top: 7.8%; left: 21.2%; right: 21.2%; bottom: 7.8%;
-  background: white; border: 2.5px solid black; border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 3px 7px -3.5px rgba(0,0,0,0.04), 0 5.5px 17px -3.5px rgba(0,0,0,0.1);
-}
-.card-phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 
 .carousel-arrow {
   position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
@@ -1024,9 +1052,14 @@ body.hero-dark .scroll-slot span {
 .arrow-left { left: calc(50% - min(600px, 42vw)); }
 .arrow-right { right: calc(50% - min(600px, 42vw)); }
 
+.carousel-indicator {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; margin-top: 30px;
+  position: relative; z-index: 2;
+}
 .carousel-dots {
   display: flex; align-items: center; justify-content: center;
-  gap: 8px; padding: 16px 24px; margin-top: 30px;
+  gap: 8px; padding: 16px 24px;
   border-radius: 32px;
   background: rgba(255,255,255,0.24);
   backdrop-filter: blur(24px);
@@ -1034,9 +1067,19 @@ body.hero-dark .scroll-slot span {
   border-right: 1px solid rgba(0,0,0,0.04);
   border-bottom: 1px solid rgba(0,0,0,0.04);
   width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+  height: 56px;
 }
+.carousel-pause {
+  width: 56px; height: 56px; border-radius: 160px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.24);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: none; cursor: pointer;
+  border-right: 1px solid rgba(0,0,0,0.04);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.carousel-pause:hover { background: rgba(255,255,255,0.36); }
 .dot {
   width: 8px; height: 8px;
   border-radius: 999px;
@@ -1294,6 +1337,9 @@ body.hero-dark .scroll-slot span {
   .agency-title { font-size: 52px; margin-bottom: 32px; }
   .agency-desc { font-size: 20px; }
   .agency-card { width: 360px; height: 540px; }
+  .card-info { bottom: 28px; left: 28px; gap: 14px; }
+  .card-label { font-size: 14px; padding: 6px 14px; }
+  .card-name { font-size: 22px; }
   .agency-intro-layer.minimized .agency-title { font-size: 20px; }
   .agency-intro-layer.minimized .agency-intro-inner { padding-top: 96px; }
   .skill-tag { font-size: 14px; padding: 10px 16px; }
@@ -1358,6 +1404,9 @@ body.hero-dark .scroll-slot span {
   .agency-intro-layer.minimized .agency-title { font-size: 16px; }
   .agency-intro-layer.minimized .agency-intro-inner { padding-top: 76px; }
   .agency-card { width: 280px; height: 420px; }
+  .card-info { bottom: 24px; left: 24px; gap: 12px; }
+  .card-label { font-size: 14px; padding: 6px 14px; }
+  .card-name { font-size: 20px; }
   .carousel-arrow { width: 48px; height: 48px; }
   .carousel-arrow svg { width: 20px; height: 20px; }
   .arrow-left { left: 8px; }
@@ -1440,11 +1489,16 @@ body.hero-dark .scroll-slot span {
   .agency-intro-layer.minimized .agency-title { font-size: 14px; }
   .agency-intro-layer.minimized .agency-intro-inner { padding-top: 60px; }
   .agency-card { width: 220px; height: 330px; }
+  .card-info { bottom: 16px; left: 16px; gap: 8px; }
+  .card-label { font-size: 12px; padding: 4px 10px; }
+  .card-name { font-size: 16px; }
   .carousel-arrow { width: 40px; height: 40px; }
   .carousel-arrow svg { width: 18px; height: 18px; }
   .arrow-left { left: 4px; }
   .arrow-right { right: 4px; }
-  .carousel-dots { gap: 6px; margin-top: 20px; padding: 12px 16px; }
+  .carousel-indicator { margin-top: 20px; gap: 6px; }
+  .carousel-dots { gap: 6px; padding: 12px 16px; }
+  .carousel-pause { width: 40px; height: 40px; }
   .dot { width: 6px; height: 6px; }
   .dot.active { width: 24px; }
   .skill-tag { font-size: 12px; padding: 8px 12px; border-radius: 14px; }

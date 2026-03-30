@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
   var total = originalCards.length;
   var CLONES = total; // 앞뒤로 전체 세트를 복제
   var AUTO_DURATION = 5000;
+  var paused = false;
+  var pauseBtn = document.querySelector('.carousel-pause');
 
   // 앞뒤에 클론 추가
   for (var i = 0; i < CLONES; i++) {
@@ -109,6 +111,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var activeProg = dots[realIndex].querySelector('.dot-progress');
     if (activeProg) {
       activeProg.style.animation = 'dotFill ' + AUTO_DURATION + 'ms linear forwards';
+      if (paused) {
+        activeProg.style.animationPlayState = 'paused';
+      }
     }
   }
 
@@ -142,9 +147,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // progress 애니메이션 완료 → 다음
+  // progress 애니메이션 완료 → 다음 (pause 상태면 무시)
   dotsContainer.addEventListener('animationend', function (e) {
-    if (e.target.classList.contains('dot-progress')) {
+    if (e.target.classList.contains('dot-progress') && !paused) {
       goTo(current + 1);
     }
   });
@@ -167,20 +172,48 @@ document.addEventListener('DOMContentLoaded', function () {
     if (Math.abs(diff) > 50) goTo(current + (diff < 0 ? 1 : -1));
   });
 
-  // Hover 일시정지
-  var paused = false;
+  // 일시정지/재생
+  function pauseProgress() {
+    var realIndex = ((current - CLONES) % total + total) % total;
+    var p = dots[realIndex].querySelector('.dot-progress');
+    if (p) p.style.animationPlayState = 'paused';
+  }
+
+  function resumeProgress() {
+    var realIndex = ((current - CLONES) % total + total) % total;
+    var p = dots[realIndex].querySelector('.dot-progress');
+    if (p) p.style.animationPlayState = 'running';
+  }
+
+  function updatePauseIcon() {
+    if (!pauseBtn) return;
+    var fill = '#101820';
+    if (paused) {
+      pauseBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polygon points="8,4 20,12 8,20" fill="' + fill + '"/></svg>';
+    } else {
+      pauseBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="13.5" y="6" width="3" height="12" fill="' + fill + '"/><rect x="7.5" y="6" width="3" height="12" fill="' + fill + '"/></svg>';
+    }
+  }
+
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', function () {
+      paused = !paused;
+      if (paused) {
+        pauseProgress();
+      } else {
+        resumeProgress();
+      }
+      updatePauseIcon();
+    });
+  }
+
+  // Hover 일시정지 (수동 pause 상태가 아닐 때만)
   if (area) {
     area.addEventListener('mouseenter', function () {
-      paused = true;
-      var realIndex = ((current - CLONES) % total + total) % total;
-      var p = dots[realIndex].querySelector('.dot-progress');
-      if (p) p.style.animationPlayState = 'paused';
+      if (!paused) pauseProgress();
     });
     area.addEventListener('mouseleave', function () {
-      paused = false;
-      var realIndex = ((current - CLONES) % total + total) % total;
-      var p = dots[realIndex].querySelector('.dot-progress');
-      if (p) p.style.animationPlayState = 'running';
+      if (!paused) resumeProgress();
     });
   }
 
