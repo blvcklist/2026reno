@@ -155,7 +155,8 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (item) {
       var prog = item.querySelector('.indicator-gauge-progress');
       if (prog) {
-        prog.addEventListener('animationend', function () {
+        prog.addEventListener('animationend', function (e) {
+          e.stopPropagation(); // fullPage 간섭 방지
           if (!paused) goTo(idx + 1);
         });
       }

@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function resize() {
     var parent = canvas.parentElement;
-    W = parent.offsetWidth;
-    H = parent.offsetHeight;
+    W = parent.offsetWidth || window.innerWidth;
+    H = parent.offsetHeight || window.innerHeight;
     DPR = Math.min(devicePixelRatio, 2);
     canvas.width = W * DPR;
     canvas.height = H * DPR;

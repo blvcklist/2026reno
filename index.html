@@ -6,6 +6,7 @@
   <title>RENO COMMUNICATIONS</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.min.css">
   <link rel="stylesheet" href="style.css">
   <script type="importmap">
     { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/" } }
@@ -36,22 +37,23 @@
     </div>
   </nav>
 
+  <div id="fullpage">
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero section">
     <div class="hero-slides">
       <div class="hero-slide active" data-slide="0" data-dark="false">
         <canvas id="cubeCanvas"></canvas>
         <div class="hero-text">
-          <p class="hero-subtitle">사람과 브랜드, 생각과 기술을 잇는 새로운 가치</p>
+          <p class="hero-subtitle hero-fadein-item">사람과 브랜드, 생각과 기술을 잇는 새로운 가치</p>
           <h1 class="hero-title">
-            <span class="line"><strong>R</strong>EAL <strong>E</strong>VOLUTION,</span>
-            <span class="line"><strong>N</strong>EW <strong>O</strong>PPORTUNITY</span>
+            <span class="line hero-fadein-item"><strong>R</strong>EAL <strong>E</strong>VOLUTION,</span>
+            <span class="line hero-fadein-item"><strong>N</strong>EW <strong>O</strong>PPORTUNITY</span>
           </h1>
           <div class="hero-desc">
-            <p>진정한 혁신, 새로운 기회</p>
-            <p class="semi">리노가 만듭니다.</p>
+            <p class="hero-fadein-item">진정한 혁신, 새로운 기회</p>
+            <p class="semi hero-fadein-item">리노가 만듭니다.</p>
           </div>
-          <a href="#about" class="hero-about-btn">
+          <a href="#about" class="hero-about-btn hero-fadein-item">
             <span>About</span>
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
               <path d="M10 20H30" stroke="currentColor" stroke-width="1.8"/>
@@ -141,7 +143,7 @@
   </section>
 
   <!-- Advertising -->
-  <section class="advertising" id="advertising">
+  <section class="advertising section" id="advertising">
     <!-- Layer 1: Title (fade-in → hold → fade-out) -->
     <div class="adv-layer adv-intro-layer">
       <div class="adv-intro-inner">
@@ -262,7 +264,7 @@
   </section>
 
   <!-- Agency -->
-  <section class="agency" id="agency">
+  <section class="agency section" id="agency">
     <!-- Layer 1: Title (fade-in → hold → slide out) -->
     <div class="agency-layer agency-intro-layer">
       <div class="agency-intro-inner">
@@ -367,7 +369,7 @@
   </section>
 
   <!-- We Are -->
-  <section class="weare" id="about" data-gnb-dark="true">
+  <section class="weare section" id="about" data-gnb-dark="true">
     <div class="weare-inner">
       <div class="weare-left">
         <h2 class="weare-title">
@@ -408,7 +410,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer" id="contact" data-gnb-dark="true">
+  <footer class="footer section fp-auto-height" id="contact" data-gnb-dark="true">
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-left">
@@ -456,7 +458,10 @@
       <p class="footer-copy">Copyright ⓒ RENOCOMMS. All Rights Reserved.</p>
     </div>
   </footer>
+  </div><!-- /fullpage -->
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.min.js"></script>
   <script src="hero-slider.js"></script>
   <script src="bulb-particles.js"></script>
   <script src="hero-intro.js"></script>

@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function resize() {
     var parent = canvas.parentElement;
-    W = parent.offsetWidth;
-    H = parent.offsetHeight;
+    W = parent.offsetWidth || window.innerWidth;
+    H = parent.offsetHeight || window.innerHeight;
     canvas.width = W * DPR;
     canvas.height = H * DPR;
     canvas.style.width = W + 'px';

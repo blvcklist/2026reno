@@ -43,9 +43,7 @@
   --white: var(--reno-white);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* scroll-behavior: smooth 제거 — fullPage.js가 스크롤 처리 */
 
 body {
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -176,14 +174,11 @@ strong { font-weight: 700; }
 
 /* ===== HERO (전체폭, 콘텐츠만 컨테이너 내) ===== */
 .hero {
-  position: sticky;
-  top: 0;
+  position: relative;
   width: 100%;
-  height: 100vh;
-  min-height: 700px;
+  height: 100%;
   background: var(--reno-white);
   overflow: hidden;
-  z-index: 0;
 }
 
 #cubeCanvas {
@@ -351,7 +346,6 @@ body.hero-dark .indicator-pause svg polygon {
 }
 
 
-/* 히어로 순차 페이드인 */
 .hero-fadein-item {
   opacity: 0;
   transform: translateY(30px);
@@ -503,10 +497,8 @@ body.hero-dark .scroll-slot span {
 /* ===== ADVERTISING ===== */
 .advertising {
   position: relative;
-  z-index: 1;
   width: 100%;
-  height: 100vh;
-  min-height: 700px;
+  height: 100%;
   background: var(--reno-white);
   overflow: hidden;
 }
@@ -531,7 +523,7 @@ body.hero-dark .scroll-slot span {
   margin: 0 auto;
   padding: 0;
   padding-top: 43vh;
-  transition: padding-top 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: padding-top 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Layer 2: Visual (아래에서 올라옴) */
@@ -541,7 +533,7 @@ body.hero-dark .scroll-slot span {
   z-index: 3;
   padding-top: 120px;
   transform: translateY(100%);
-  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 1.0s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .adv-visual-layer.active {
   transform: translateY(0);
@@ -571,8 +563,8 @@ body.hero-dark .scroll-slot span {
 .adv-intro-layer .adv-desc {
   opacity: 0;
   transform: translateY(60px);
-  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .adv-intro-layer .adv-title.anim-in,
 .adv-intro-layer .adv-desc.anim-in {
@@ -587,17 +579,17 @@ body.hero-dark .scroll-slot span {
 }
 .adv-intro-layer.minimized .adv-intro-inner {
   padding-top: 120px;
-  transition: padding-top 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: padding-top 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .adv-intro-layer.minimized .adv-title {
   font-size: 24px;
   letter-spacing: 0;
   margin-bottom: 0;
   opacity: 0.5;
-  transition: font-size 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-              letter-spacing 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-              margin-bottom 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: font-size 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              letter-spacing 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              margin-bottom 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .adv-intro-layer.minimized .adv-desc {
   opacity: 0;
@@ -744,10 +736,8 @@ body.hero-dark .scroll-slot span {
 /* ===== AGENCY ===== */
 .agency {
   position: relative;
-  z-index: 1;
   width: 100%;
-  height: 100vh;
-  min-height: 700px;
+  height: 100%;
   background: var(--reno-white);
   overflow: hidden;
 }
@@ -770,6 +760,7 @@ body.hero-dark .scroll-slot span {
   margin: 0 auto;
   padding: 0;
   padding-top: 43vh;
+  transition: padding-top 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   transition: padding-top 1.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -797,8 +788,8 @@ body.hero-dark .scroll-slot span {
 .agency-intro-layer .agency-desc {
   opacity: 0;
   transform: translateY(60px);
-  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .agency-intro-layer .agency-title.anim-in,
 .agency-intro-layer .agency-desc.anim-in {
@@ -813,17 +804,17 @@ body.hero-dark .scroll-slot span {
 }
 .agency-intro-layer.minimized .agency-intro-inner {
   padding-top: 120px;
-  transition: padding-top 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: padding-top 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .agency-intro-layer.minimized .agency-title {
   font-size: 24px;
   letter-spacing: 0;
   margin-bottom: 0;
   opacity: 0.5;
-  transition: font-size 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-              letter-spacing 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-              margin-bottom 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: font-size 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              letter-spacing 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              margin-bottom 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .agency-intro-layer.minimized .agency-desc {
   opacity: 0;
@@ -842,7 +833,7 @@ body.hero-dark .scroll-slot span {
   align-items: center;
   justify-content: center;
   transform: translateY(100%);
-  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 1.0s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .agency-visual-layer.active {
   transform: translateY(0);
@@ -875,7 +866,8 @@ body.hero-dark .scroll-slot span {
   filter: blur(40px);
   pointer-events: none;
   z-index: 0;
-  transition: background 0.8s ease;
+  opacity: 0;
+  transition: background 0.8s ease, opacity 1.5s ease;
 }
 
 .carousel-viewport {
@@ -964,9 +956,9 @@ body.hero-dark .scroll-slot span {
   margin: 0 -180px;
   transform: scale(0.8);
   opacity: 0.6;
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 1.2s ease,
-              margin 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 1.0s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 1.0s ease,
+              margin 1.0s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .carousel-arrow {
@@ -1080,9 +1072,8 @@ body.hero-dark .scroll-slot span {
 /* ===== WE ARE (전체폭 다크 배경) ===== */
 .weare {
   position: relative;
-  z-index: 1;
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   background: var(--reno-black);
   display: flex; align-items: center;
 }
@@ -1180,7 +1171,7 @@ body.hero-dark .scroll-slot span {
 .reveal {
   opacity: 0;
   transform: translateY(80px);
-  transition: opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.visible {
   opacity: 1;
@@ -1231,6 +1222,27 @@ body.hero-dark .scroll-slot span {
 .parallax {
   will-change: transform;
   transition: transform 0.1s linear;
+}
+
+/* ===== fullPage.js overrides ===== */
+/* 초기화 전 첫 섹션만 표시 (FOUC 방지) */
+#fullpage .section:not(:first-child) {
+  visibility: hidden;
+}
+.fp-enabled #fullpage .section {
+  visibility: visible;
+}
+#fullpage .section {
+  position: relative;
+}
+/* GNB가 fullPage 위에 표시되도록 */
+.gnb {
+  z-index: 1000;
+}
+/* footer auto-height */
+.footer.fp-auto-height {
+  height: auto !important;
+  min-height: 0 !important;
 }
 
 /* ===== RESPONSIVE ===== */

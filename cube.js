@@ -229,8 +229,8 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
   // --- Resize ---
   function resize() {
     const hero = canvas.parentElement;
-    const w = hero.clientWidth;
-    const h = hero.clientHeight;
+    const w = hero.clientWidth || window.innerWidth;
+    const h = hero.clientHeight || window.innerHeight;
     if (w === 0 || h === 0) return;
     renderer.setSize(w, h);
     camera.aspect = w / h;

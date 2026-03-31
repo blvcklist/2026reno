@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var area = document.querySelector('.agency-visual-layer');
 
   var total = originalCards.length;
-  var CLONES = total; // 앞뒤로 전체 세트를 복제
+  var CLONES = total;
   var AUTO_DURATION = 5000;
   var paused = false;
   var pauseBtn = document.querySelector('.carousel-pause');
@@ -30,8 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var allCards = Array.prototype.slice.call(track.querySelectorAll('.agency-card'));
   var allTotal = allCards.length;
-  // 실제 인덱스: CLONES 오프셋 (첫 번째 원본 카드 = index CLONES)
-  var current = CLONES; // 첫 번째 원본 카드부터 시작
+  var current = CLONES;
 
   // dots 생성
   dotsContainer.innerHTML = '';
@@ -47,14 +46,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var gap = 16;
   var isTransitioning = false;
+  var started = false;
 
-  function getCardW() {
-    return allCards[0].offsetWidth;
-  }
+  function getCardW() { return allCards[0].offsetWidth; }
 
   function positionTrack(animated) {
     var cardW = getCardW();
     var vpW = viewport.offsetWidth;
+    if (!cardW || !vpW) return; // 아직 레이아웃 안 됨
     var offset = current * (cardW + gap);
     var center = (vpW - cardW) / 2;
 
@@ -65,9 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     track.style.transform = 'translateX(' + (-offset + center) + 'px)';
 
-    if (!animated) {
-      void track.offsetHeight; // force reflow
-    }
+    if (!animated) void track.offsetHeight;
   }
 
   var glowEl = document.getElementById('carouselGlow');
@@ -81,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
       allCards[i].style.setProperty('--side-dir', dir);
       if (absDiff === 0) {
         allCards[i].classList.add('active-card');
-        // glow 색상 연동
         var glowColor = allCards[i].getAttribute('data-glow');
         if (glowEl && glowColor) {
           var r = parseInt(glowColor.slice(1,3), 16);
@@ -96,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // dot 업데이트
     var realIndex = ((current - CLONES) % total + total) % total;
     for (var j = 0; j < dots.length; j++) {
       var p = dots[j].querySelector('.dot-progress');
@@ -111,9 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var activeProg = dots[realIndex].querySelector('.dot-progress');
     if (activeProg) {
       activeProg.style.animation = 'dotFill ' + AUTO_DURATION + 'ms linear forwards';
-      if (paused) {
-        activeProg.style.animationPlayState = 'paused';
-      }
+      if (paused) activeProg.style.animationPlayState = 'paused';
     }
   }
 
@@ -123,17 +116,13 @@ document.addEventListener('DOMContentLoaded', function () {
     if (animated !== false) animated = true;
     positionTrack(animated);
     updateCards();
-
-    if (animated) {
-      isTransitioning = true;
-    }
+    if (animated) isTransitioning = true;
   }
 
-  // 트랜지션 끝나면 경계 넘은 경우 순간 이동
+  // transitionend — track 자체만 처리, 버블링 차단
   track.addEventListener('transitionend', function (e) {
-    // track 자체의 transform 트랜지션만 처리 (자식 이벤트 무시)
+    e.stopPropagation(); // fullPage 간섭 방지
     if (e.target !== track) return;
-
     isTransitioning = false;
 
     if (current >= CLONES + total) {
@@ -147,8 +136,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // progress 애니메이션 완료 → 다음 (pause 상태면 무시)
+  // animationend — 버블링 차단
   dotsContainer.addEventListener('animationend', function (e) {
+    e.stopPropagation(); // fullPage 간섭 방지
     if (e.target.classList.contains('dot-progress') && !paused) {
       goTo(current + 1);
     }
@@ -158,9 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (leftBtn) leftBtn.addEventListener('click', function () { goTo(current - 1); });
   for (var d = 0; d < dots.length; d++) {
     (function (i) {
-      dots[i].addEventListener('click', function () {
-        goTo(CLONES + i);
-      });
+      dots[i].addEventListener('click', function () { goTo(CLONES + i); });
     })(d);
   }
 
@@ -178,13 +166,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var p = dots[realIndex].querySelector('.dot-progress');
     if (p) p.style.animationPlayState = 'paused';
   }
-
   function resumeProgress() {
     var realIndex = ((current - CLONES) % total + total) % total;
     var p = dots[realIndex].querySelector('.dot-progress');
     if (p) p.style.animationPlayState = 'running';
   }
-
   function updatePauseIcon() {
     if (!pauseBtn) return;
     var fill = '#101820';
@@ -198,26 +184,20 @@ document.addEventListener('DOMContentLoaded', function () {
   if (pauseBtn) {
     pauseBtn.addEventListener('click', function () {
       paused = !paused;
-      if (paused) {
-        pauseProgress();
-      } else {
-        resumeProgress();
-      }
+      if (paused) pauseProgress(); else resumeProgress();
       updatePauseIcon();
     });
   }
 
-  // Hover 일시정지 (수동 pause 상태가 아닐 때만)
   if (area) {
-    area.addEventListener('mouseenter', function () {
-      if (!paused) pauseProgress();
-    });
-    area.addEventListener('mouseleave', function () {
-      if (!paused) resumeProgress();
-    });
+    area.addEventListener('mouseenter', function () { if (!paused) pauseProgress(); });
+    area.addEventListener('mouseleave', function () { if (!paused) resumeProgress(); });
   }
 
+  // resize — 디바운스된 핸들러 사용
   window.addEventListener('resize', function () {
+    if (!started) return;
+    // 자체 디바운스 (공용과 별도 — track 위치만 업데이트)
     positionTrack(false);
   });
 
@@ -226,22 +206,18 @@ document.addEventListener('DOMContentLoaded', function () {
   positionTrack(false);
   updateCards();
 
-  // 영역 진입 시 펼쳐지면서 캐러셀 시작
-  var started = false;
-  var carouselObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting && !started) {
-        started = true;
-        // gathered 제거 → 카드가 좌우로 펼쳐짐
-        track.classList.remove('gathered');
-        // 펼쳐진 후 자동재생 시작
-        setTimeout(function () {
-          // 자동재생은 dot progress animationend로 트리거됨
-          updateCards();
-        }, 1400);
-      }
-    });
-  }, { threshold: 0.2 });
+  // 캐러셀 시작
+  function startCarousel() {
+    if (started) return;
+    started = true;
+    track.classList.remove('gathered');
+    setTimeout(function () {
+      positionTrack(false);
+      updateCards();
+      // 카드 펼침 완료 후 glow 서서히 등장
+      if (glowEl) glowEl.style.opacity = '1';
+    }, 1200);
+  }
 
-  carouselObserver.observe(area);
+  window.addEventListener('agencyEnter', startCarousel);
 });
