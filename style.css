@@ -372,7 +372,7 @@ body.hero-dark .indicator-pause svg polygon {
 
 .hero-title {
   font-size: 60px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1;
   letter-spacing: -1.2px;
   margin-bottom: 40px;
@@ -556,7 +556,7 @@ body.hero-dark .scroll-slot span {
   font: var(--h2);
   letter-spacing: -1.2px;
   margin-bottom: 40px;
-  font-weight: 400;
+  font-weight: 300;
 }
 .adv-title strong { font-weight: 700; }
 
@@ -782,7 +782,7 @@ body.hero-dark .scroll-slot span {
   font: var(--h2);
   letter-spacing: -1.2px;
   margin-bottom: 40px;
-  font-weight: 400;
+  font-weight: 300;
 }
 .agency-title strong { font-weight: 700; }
 
