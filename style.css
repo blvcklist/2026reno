@@ -1249,6 +1249,32 @@ body.hero-dark .scroll-slot span {
 
 /* ===== RESPONSIVE ===== */
 
+/* --- Large Desktop (1920+) --- */
+@media (min-width: 1921px) {
+  :root { --cw: 1600px; --px: 160px; }
+
+  .hero-title { font-size: 72px; }
+  .hero-subtitle { font-size: 28px; }
+  .hero-desc { font-size: 28px; }
+  .hero-about-btn { font-size: 28px; margin-top: 180px; }
+
+  .adv-title { font-size: 72px; }
+  .adv-desc { font-size: 28px; }
+  .adv-glass { width: min(1400px, calc(100% - 200px)); }
+  .adv-slide-title { font-size: 48px; }
+  .marquee-text { font-size: 100px; }
+
+  .agency-title { font-size: 72px; }
+  .agency-desc { font-size: 28px; }
+  .agency-card { width: 480px; height: 680px; }
+
+  .weare-title { font-size: 72px; }
+  .weare-desc { font-size: 20px; }
+  .record-value { font-size: 72px; }
+  .record-label { font-size: 28px; width: 320px; }
+  .record-label-wrap { width: 320px; }
+}
+
 /* --- Laptop (1024 ~ 1440) --- */
 @media (max-width: 1440px) {
   :root { --px: 80px; }
@@ -1310,7 +1336,7 @@ body.hero-dark .scroll-slot span {
 @media (max-width: 1024px) {
   :root { --px: 40px; }
 
-  /* GNB: 링크 숨김 */
+  /* GNB */
   .gnb { height: 60px; }
   .gnb-inner { padding: 6px 16px; }
   .gnb-link { display: none; }
@@ -1319,13 +1345,14 @@ body.hero-dark .scroll-slot span {
   .gnb-ci-img { width: 28px; height: 28px; }
   .gnb-download { height: 36px; font-size: 11px; padding-left: 18px; gap: 8px; }
   .gnb-download-icon { width: 28px; height: 28px; padding: 4px; }
+  .gnb.sticky .gnb-inner { height: 52px; padding: 6px; }
 
-  /* Hero */
-  .hero-text { left: var(--px); top: 30%; }
-  .hero-subtitle { font-size: 16px; margin-bottom: 18px; }
-  .hero-title { font-size: 40px; margin-bottom: 30px; }
-  .hero-desc { font-size: 16px; }
-  .hero-about-btn { font-size: 20px; gap: 12px; margin-top: 40px; }
+  /* Hero — 서브타이틀 18px, 타이틀 40px, 본문 17px 비율 유지 */
+  .hero-text { left: var(--px); top: 28%; }
+  .hero-subtitle { font-size: 18px; margin-bottom: 16px; }
+  .hero-title { font-size: 40px; margin-bottom: 28px; }
+  .hero-desc { font-size: 17px; }
+  .hero-about-btn { font-size: 18px; gap: 12px; margin-top: 48px; }
   .hero-about-btn svg { width: 28px; height: 28px; }
   .hero-indicator { left: var(--px); bottom: 30px; }
   .hero-indicator-select { gap: 18px; padding: 12px 20px; }
@@ -1333,13 +1360,13 @@ body.hero-dark .scroll-slot span {
   .indicator-num { font-size: 14px; }
   .hero-scroll { bottom: 20px; }
 
-  /* Advertising */
-  .adv-title { font-size: 40px; margin-bottom: 30px; }
-  .adv-desc { font-size: 18px; }
+  /* Advertising — 타이틀 40px 통일, 본문 17px */
+  .adv-title { font-size: 40px; margin-bottom: 24px; }
+  .adv-desc { font-size: 17px; }
   .adv-visual-layer { padding-top: 80px; }
-  .adv-slide-title { font-size: 28px; left: 36px; top: 180px; }
+  .adv-slide-title { font-size: 26px; left: 36px; top: 180px; }
   .adv-slide-summary { left: 36px; bottom: 36px; gap: 40px; }
-  .adv-slide-meta { height: 44px; }
+  .adv-slide-meta { height: 42px; }
   .adv-slide-label { font-size: 12px; }
   .adv-slide-value { font-size: 14px; }
   .adv-glass { width: min(700px, calc(100% - 80px)); padding: 24px; border-radius: 30px; }
@@ -1351,14 +1378,14 @@ body.hero-dark .scroll-slot span {
   .adv-clients-inner { height: 72px; }
   .adv-client { flex: 0 0 220px; height: 72px; }
 
-  /* Agency */
-  .agency-title { font-size: 40px; margin-bottom: 30px; }
-  .agency-desc { font-size: 18px; }
+  /* Agency — adv와 동일 비율 */
+  .agency-title { font-size: 40px; margin-bottom: 24px; }
+  .agency-desc { font-size: 17px; }
   .agency-intro-layer.minimized .agency-title { font-size: 16px; }
   .agency-intro-layer.minimized .agency-intro-inner { padding-top: 76px; }
   .agency-card { width: 280px; height: 420px; }
   .card-info { bottom: 24px; left: 24px; gap: 12px; }
-  .card-label { font-size: 14px; padding: 6px 14px; }
+  .card-label { font-size: 13px; padding: 6px 14px; }
   .card-name { font-size: 20px; }
   .carousel-arrow { width: 64px; height: 64px; }
   .carousel-arrow-icon { width: 32px; height: 28px; }
@@ -1367,21 +1394,24 @@ body.hero-dark .scroll-slot span {
   .skill-tag { font-size: 13px; padding: 8px 14px; border-radius: 16px; }
   .skills-marquee { bottom: 48px; }
 
-  /* We Are */
-  .weare-inner { flex-direction: column; padding: 80px var(--px); gap: 60px; }
+  /* We Are — 타이틀 40px로 다른 섹션과 통일 */
+  .weare-inner { flex-direction: column; padding: 80px var(--px); gap: 56px; }
   .weare-left { padding-top: 0; }
-  .weare-title { font-size: 44px; }
-  .weare-desc { font-size: 16px; margin-bottom: 40px; }
+  .weare-title { font-size: 40px; margin-bottom: 24px; }
+  .weare-desc { font-size: 16px; line-height: 1.6; margin-bottom: 36px; }
   .weare-more { font-size: 18px; gap: 16px; }
   .weare-right { width: 100%; gap: 24px; }
-  .record-label { font-size: 20px; width: 200px; }
-  .record-label-wrap { width: 200px; }
-  .record-value { font-size: 44px; }
-  .record-value small { font-size: 20px; }
+  .record-label { font-size: 18px; width: 180px; }
+  .record-label-wrap { width: 180px; }
+  .record-value { font-size: 40px; }
+  .record-value small { font-size: 18px; }
 
   /* Footer */
   .footer { padding: 48px 0; }
+  .footer-inner { gap: 32px; }
   .footer-awards { gap: 20px; flex-wrap: wrap; }
+  .footer-info { font-size: 14px; }
+  .footer-copy { font-size: 14px; }
   .footer-right-logo img:first-child { width: 140px; height: 42px; }
   .footer-right-logo img:last-child { width: 140px; height: 10px; }
 }
@@ -1398,25 +1428,25 @@ body.hero-dark .scroll-slot span {
   .gnb-download { height: 32px; font-size: 11px; padding-left: 14px; gap: 6px; }
   .gnb-download-icon { width: 24px; height: 24px; padding: 3px; }
   .gnb-download-ic { width: 18px; height: 18px; }
+  .gnb.sticky .gnb-inner { height: 44px; padding: 4px; }
 
-  /* Hero */
-  .hero { height: 100svh; min-height: 560px; }
-  .hero-text { left: var(--px); top: auto; bottom: 160px; }
-  .hero-subtitle { font-size: 14px; margin-bottom: 14px; }
-  .hero-title { font-size: 28px; letter-spacing: -0.8px; margin-bottom: 24px; }
-  .hero-desc { font-size: 14px; }
-  .hero-about-btn { font-size: 16px; gap: 10px; margin-top: 32px; }
+  /* Hero — 서브타이틀 15px, 타이틀 32px, 본문 15px */
+  .hero-text { left: var(--px); top: auto; bottom: 140px; }
+  .hero-subtitle { font-size: 15px; margin-bottom: 12px; }
+  .hero-title { font-size: 32px; letter-spacing: -0.8px; margin-bottom: 20px; }
+  .hero-desc { font-size: 15px; line-height: 1.5; }
+  .hero-about-btn { font-size: 16px; gap: 10px; margin-top: 28px; }
   .hero-about-btn svg { width: 24px; height: 24px; }
   .hero-indicator { left: var(--px); bottom: 24px; gap: 8px; }
   .hero-indicator-select { gap: 14px; padding: 10px 16px; }
-  .indicator-num { font-size: 12px; }
+  .indicator-num { font-size: 13px; }
   .indicator-gauge { width: 40px; }
-  .indicator-pause { width: 40px; height: 40px; }
+  .indicator-pause { width: 44px; height: 44px; }
   .hero-scroll { display: none; }
 
-  /* Advertising */
-  .adv-intro-inner { padding-top: 38vh; }
-  .adv-title { font-size: 28px; letter-spacing: -0.6px; margin-bottom: 20px; }
+  /* Advertising — 타이틀 32px 통일, 본문 15px */
+  .adv-intro-inner { padding-top: 36vh; }
+  .adv-title { font-size: 32px; letter-spacing: -0.6px; margin-bottom: 16px; }
   .adv-desc { font-size: 15px; }
   .adv-visual-layer { padding-top: 64px; }
   .adv-slide-title { font-size: 20px; left: 24px; top: 140px; }
@@ -1433,15 +1463,15 @@ body.hero-dark .scroll-slot span {
   .adv-clients-inner { height: auto; flex-wrap: wrap; }
   .adv-client { flex: 0 0 50%; height: 56px; }
 
-  /* Agency */
-  .agency-intro-inner { padding-top: 38vh; }
-  .agency-title { font-size: 28px; letter-spacing: -0.6px; margin-bottom: 20px; }
+  /* Agency — adv와 동일 비율 */
+  .agency-intro-inner { padding-top: 36vh; }
+  .agency-title { font-size: 32px; letter-spacing: -0.6px; margin-bottom: 16px; }
   .agency-desc { font-size: 15px; }
   .agency-intro-layer.minimized .agency-title { font-size: 14px; }
   .agency-intro-layer.minimized .agency-intro-inner { padding-top: 60px; }
-  .agency-card { width: 220px; height: 330px; }
+  .agency-card { width: 240px; height: 360px; }
   .card-info { bottom: 16px; left: 16px; gap: 8px; }
-  .card-label { font-size: 12px; padding: 4px 10px; }
+  .card-label { font-size: 12px; padding: 5px 12px; }
   .card-name { font-size: 16px; }
   .carousel-arrow { width: 48px; height: 48px; }
   .carousel-arrow-icon { width: 24px; height: 21px; }
@@ -1449,36 +1479,125 @@ body.hero-dark .scroll-slot span {
   .arrow-right { right: 4px; }
   .carousel-indicator { margin-top: 20px; gap: 6px; }
   .carousel-dots { gap: 6px; padding: 12px 16px; }
-  .carousel-pause { width: 40px; height: 40px; }
+  .carousel-pause { width: 44px; height: 44px; }
   .dot { width: 6px; height: 6px; }
   .dot.active { width: 24px; }
   .skill-tag { font-size: 12px; padding: 8px 12px; border-radius: 14px; }
   .skills-marquee { bottom: 32px; }
   .skills-track { gap: 4px; }
 
-  /* We Are */
+  /* We Are — 타이틀 32px로 다른 섹션과 통일 */
   .weare-inner { flex-direction: column; padding: 60px var(--px); gap: 40px; }
   .weare-left { padding-top: 0; }
-  .weare-title { font-size: 36px; margin-bottom: 20px; }
-  .weare-desc { font-size: 14px; margin-bottom: 32px; }
+  .weare-title { font-size: 32px; margin-bottom: 16px; }
+  .weare-desc { font-size: 15px; line-height: 1.6; margin-bottom: 28px; }
   .weare-more { font-size: 16px; gap: 12px; }
   .weare-more svg { width: 24px; height: 24px; }
   .weare-right { width: 100%; gap: 20px; }
   .record-label { font-size: 16px; width: 140px; }
   .record-label-wrap { width: 140px; }
   .record-label-sub { font-size: 12px; }
-  .record-value { font-size: 36px; }
+  .record-value { font-size: 32px; }
   .record-value small { font-size: 16px; }
 
   /* Footer */
   .footer { padding: 40px 0; }
   .footer-inner { gap: 24px; }
-  .footer-top { flex-direction: column; gap: 32px; }
-  .footer-awards { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .footer-info { font-size: 12px; }
+  .footer-top { flex-direction: column; gap: 28px; }
+  .footer-awards { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer-info { font-size: 13px; }
   .footer-row { flex-wrap: wrap; gap: 8px; }
   .footer-right-logo { align-self: flex-start; }
   .footer-right-logo img:first-child { width: 120px; height: 36px; }
   .footer-right-logo img:last-child { width: 120px; height: 9px; }
-  .footer-copy { font-size: 12px; }
+  .footer-copy { font-size: 13px; }
+
+  /* 노치 디바이스 safe area */
+  .gnb { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+  .footer-inner { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+}
+
+/* --- Small Mobile (< 480) --- */
+@media (max-width: 480px) {
+  :root { --px: 20px; }
+
+  /* GNB */
+  .gnb { height: 48px; }
+  .gnb-ci { width: 36px; height: 36px; }
+  .gnb-ci-img { width: 22px; height: 22px; }
+  .gnb-download { height: 30px; font-size: 10px; padding-left: 12px; gap: 4px; }
+  .gnb-download-icon { width: 22px; height: 22px; padding: 2px; }
+
+  /* Hero — 서브타이틀 13px, 타이틀 26px, 본문 13px */
+  .hero-text { bottom: 120px; }
+  .hero-subtitle { font-size: 13px; margin-bottom: 10px; }
+  .hero-title { font-size: 26px; margin-bottom: 16px; }
+  .hero-desc { font-size: 13px; }
+  .hero-about-btn { font-size: 14px; gap: 8px; margin-top: 24px; }
+  .hero-about-btn svg { width: 20px; height: 20px; }
+  .hero-indicator { bottom: 16px; gap: 6px; }
+  .hero-indicator-select { gap: 10px; padding: 8px 12px; height: 40px; }
+  .indicator-num { font-size: 11px; }
+  .indicator-gauge { width: 28px; }
+
+  /* Advertising — 타이틀 26px 통일, 본문 13px */
+  .adv-intro-inner { padding-top: 34vh; }
+  .adv-title { font-size: 26px; margin-bottom: 12px; }
+  .adv-desc { font-size: 13px; }
+  .adv-glass { width: calc(100% - 40px); padding: 12px; border-radius: 16px; }
+  .adv-visual-layer { padding-top: 56px; }
+  .adv-slide-title { font-size: 16px; left: 16px; top: 100px; }
+  .adv-slide-summary { left: 16px; bottom: 16px; gap: 20px; }
+  .adv-slide-meta { height: 30px; }
+  .adv-slide-label { font-size: 10px; }
+  .adv-slide-value { font-size: 11px; }
+  .adv-intro-layer.minimized .adv-title { font-size: 12px; }
+  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 52px; }
+  .marquee-text { font-size: 24px; }
+  .adv-client { height: 48px; }
+  .carousel-glow { width: 280px; height: 280px; }
+
+  /* Agency — 타이틀 26px 통일, 본문 13px */
+  .agency-intro-inner { padding-top: 34vh; }
+  .agency-title { font-size: 26px; margin-bottom: 12px; }
+  .agency-desc { font-size: 13px; }
+  .agency-intro-layer.minimized .agency-title { font-size: 12px; }
+  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 52px; }
+  .agency-card { width: 200px; height: 300px; }
+  .card-info { bottom: 12px; left: 12px; gap: 6px; }
+  .card-label { font-size: 11px; padding: 4px 10px; border-radius: 12px; }
+  .card-name { font-size: 14px; }
+  .carousel-arrow { width: 44px; height: 44px; }
+  .carousel-arrow-icon { width: 20px; height: 18px; }
+  .carousel-indicator { margin-top: 14px; }
+  .carousel-dots { gap: 4px; padding: 8px 12px; }
+  .dot { width: 5px; height: 5px; }
+  .dot.active { width: 20px; }
+  .skill-tag { font-size: 11px; padding: 6px 10px; border-radius: 12px; }
+  .skills-marquee { bottom: 24px; }
+  .carousel-track.gathered .agency-card { margin: 0 -60px; }
+
+  /* We Are — 타이틀 26px로 통일 */
+  .weare-inner { padding: 48px var(--px); gap: 32px; }
+  .weare-title { font-size: 26px; margin-bottom: 14px; }
+  .weare-desc { font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
+  .weare-more { font-size: 14px; gap: 10px; }
+  .weare-more svg { width: 20px; height: 20px; }
+  .record-label { font-size: 14px; width: 100px; }
+  .record-label-wrap { width: 100px; }
+  .record-label-sub { font-size: 11px; }
+  .record-value { font-size: 26px; }
+  .record-value small { font-size: 14px; }
+
+  /* Footer */
+  .footer { padding: 32px 0; }
+  .footer-inner { gap: 20px; padding: 0 var(--px); }
+  .award svg, .award-icon { width: 24px; height: 24px; }
+  .award-t { font-size: 11px; }
+  .award-d { font-size: 10px; }
+  .footer-info { font-size: 11px; gap: 6px; }
+  .footer-row { gap: 6px; }
+  .footer-copy { font-size: 11px; }
+  .footer-right-logo img:first-child { width: 100px; height: 30px; }
+  .footer-right-logo img:last-child { width: 100px; height: 8px; }
 }
