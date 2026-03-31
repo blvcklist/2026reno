@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
       positionTrack(false);
       updateCards();
-      // 카드 펼침 완료 후 glow 서서히 등장
+      // 카드 펼침 완료 후 glow 페이드인
       if (glowEl) glowEl.style.opacity = '1';
     }, 1200);
   }

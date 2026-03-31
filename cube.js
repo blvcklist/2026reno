@@ -283,8 +283,13 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
   const tmpMatrix = new THREE.Matrix4();
   const tmpEuler = new THREE.Euler();
 
+  var heroSection = canvas.closest('.section');
+
   function animate(time) {
     requestAnimationFrame(animate);
+
+    // hero 섹션 비활성 시 렌더링 스킵
+    if (heroSection && !heroSection.classList.contains('active')) return;
 
     if (startTime < 0) {
       startTime = time;
@@ -370,5 +375,6 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 
     renderer.render(scene, camera);
   }
+
   requestAnimationFrame(animate);
 })();

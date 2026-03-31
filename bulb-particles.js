@@ -278,9 +278,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  var bulbSlide = canvas.closest('.hero-slide');
+
   function animate() {
     requestAnimationFrame(animate);
     if (!initialized) return;
+    // 슬라이드 비활성 시 렌더링 스킵
+    if (bulbSlide && !bulbSlide.classList.contains('active')) return;
     update();
     draw();
   }

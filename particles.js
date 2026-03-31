@@ -303,7 +303,14 @@ document.addEventListener('DOMContentLoaded', function () {
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
 
+  var particleSlide = canvas.closest('.hero-slide');
+
   function render() {
+    requestAnimationFrame(render);
+
+    // 슬라이드 비활성 시 렌더링 스킵
+    if (particleSlide && !particleSlide.classList.contains('active')) return;
+
     updateParticles();
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(0.792, 0.122, 0.188, 1.0);
@@ -330,7 +337,6 @@ document.addEventListener('DOMContentLoaded', function () {
     gl.vertexAttribPointer(aSize, 1, gl.FLOAT, false, 0, 0);
 
     gl.drawArrays(gl.POINTS, 0, TOTAL);
-    requestAnimationFrame(render);
   }
   requestAnimationFrame(render);
 });
