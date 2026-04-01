@@ -158,7 +158,13 @@ $(document).ready(function () {
         if (!section) return;
 
         updateGnbDark(section);
-        if (gnb) gnb.classList.remove('sticky');
+        if (gnb) {
+          if (index === 1) {
+            gnb.classList.remove('sticky');
+          } else {
+            gnb.classList.add('sticky');
+          }
+        }
 
         if (section.classList.contains('advertising')) playAdvSequence();
         if (section.classList.contains('agency')) playAgencySequence();
@@ -174,6 +180,13 @@ $(document).ready(function () {
           if (heroScroll) heroScroll.style.opacity = '0';
         }
         if (nextSection) updateGnbDark(nextSection);
+        if (gnb) {
+          if (nextIndex === 1) {
+            gnb.classList.remove('sticky');
+          } else {
+            gnb.classList.add('sticky');
+          }
+        }
       } catch (err) { /* prevent fullPage internal state corruption */ }
     }
   });

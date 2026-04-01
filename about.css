@@ -1,0 +1,940 @@
+/* ===== About Page ===== */
+
+/* ===== Hero ===== */
+.ab-hero {
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--reno-white);
+}
+.ab-hero-inner {
+  text-align: center;
+}
+.ab-hero-title {
+  font-size: 96px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.92px;
+  color: var(--reno-black);
+  margin-bottom: 40px;
+}
+.ab-hero-sub {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.96px;
+  color: var(--reno-black);
+  margin-bottom: 4px;
+}
+.ab-hero-sub strong { font-weight: 600; }
+.ab-hero-desc {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.96px;
+  color: var(--reno-black);
+}
+.ab-hero-desc strong { font-weight: 600; }
+
+/* ===== Common Section Titles ===== */
+.ab-section-title {
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.6px;
+  color: var(--reno-black);
+}
+.ab-section-title-white {
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.6px;
+  color: white;
+}
+.ab-section-desc {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--reno-black);
+  margin-top: 40px;
+}
+.ab-big-title {
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.6px;
+  color: var(--reno-black);
+  text-align: center;
+}
+.ab-whatwedo .ab-big-title,
+.ab-contact-hero .ab-big-title {
+  font-size: 96px;
+  letter-spacing: -1.92px;
+}
+
+/* ===== Link: 잇다 ===== */
+.ab-link {
+  padding: 120px 0 160px;
+  overflow: hidden;
+}
+.ab-link-header {
+  max-width: var(--cw);
+  margin: 0 auto;
+  padding: 0 var(--px);
+  text-align: right;
+  margin-bottom: 80px;
+}
+.ab-link-item {
+  position: relative;
+  max-width: var(--cw);
+  margin: 0 auto 60px;
+  padding: 0 var(--px);
+  background: white;
+  isolation: isolate;
+}
+.ab-link-img {
+  width: 50%;
+  aspect-ratio: 708/720;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.ab-link-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ab-link-item.right .ab-link-img {
+  margin-left: auto;
+}
+.ab-link-text {
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -1.28px;
+  color: white;
+  mix-blend-mode: difference;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  z-index: 2;
+}
+
+/* ===== Make: 만들다 ===== */
+.ab-make {
+  width: 100%;
+  min-height: 100vh;
+  background: #222;
+  display: flex;
+  align-items: center;
+}
+.ab-make-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 120px;
+  width: 100%;
+  max-width: var(--cw);
+  margin: 0 auto;
+  padding: 120px var(--px);
+}
+.ab-make-left { flex: 0 0 auto; padding-top: 120px; }
+.ab-make-desc {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: white;
+  margin-top: 40px;
+}
+.ab-make-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.ab-record {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 16px 0;
+}
+.ab-record-label {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.4;
+  width: 400px;
+  flex-shrink: 0;
+}
+.ab-record-label-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 400px;
+  flex-shrink: 0;
+}
+.ab-record-label-sub {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: white;
+}
+.ab-record-value {
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.6px;
+}
+.ab-record-value small {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.ab-record-divider {
+  width: 100%;
+  height: 1px;
+  background: #ddd;
+  opacity: 0.24;
+}
+.ab-record-awards {
+  align-items: flex-start;
+}
+.ab-award-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ab-award-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.ab-award-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: brightness(0) invert(0.8);
+}
+.ab-award-info { color: #ccc; }
+.ab-award-t { font-size: 16px; font-weight: 500; line-height: 1.4; }
+.ab-award-d { font-size: 14px; font-weight: 400; line-height: 1.4; }
+
+/* ===== Draw: 그리다 ===== */
+.ab-draw {
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+.red-bg { background: #CC1F26; }
+.ab-draw-title {
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.6px;
+  color: white;
+}
+.ab-draw-quote {
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -1.28px;
+  color: white;
+  text-align: center;
+  max-width: 1300px;
+  padding: 0 var(--px);
+}
+.ab-symbol {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  font-size: 120px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+.ab-symbol-plus { font-size: 48px; }
+.ab-symbol-labels {
+  display: flex;
+  gap: 120px;
+  font-size: 18px;
+  font-weight: 400;
+  color: white;
+  letter-spacing: 1px;
+}
+.ab-reno-logo-full {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.ab-reno-logo-full img:first-child { width: 400px; }
+.ab-reno-logo-full img:last-child { width: 400px; }
+
+/* ===== Partners ===== */
+.ab-partners {
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ab-partners-inner { text-align: center; }
+.ab-partners-desc {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--reno-black);
+  margin-top: 40px;
+}
+.ab-partners-grid {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.ab-partners-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 200px;
+  font-weight: 700;
+  letter-spacing: -4px;
+  color: var(--reno-black);
+  opacity: 0.04;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.ab-logo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 320px);
+  gap: 40px 0;
+  max-width: var(--cw);
+  padding: 0 var(--px);
+  position: relative;
+  z-index: 1;
+}
+.ab-logo-cell {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.ab-logo-cell:hover { opacity: 1; }
+.ab-logo-cell img { max-width: 160px; max-height: 48px; object-fit: contain; }
+
+/* ===== What We Do ===== */
+.ab-whatwedo {
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== History ===== */
+.ab-history {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 120px 0 160px;
+  overflow: hidden;
+  background: #F5F5F5;
+}
+.ab-history-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 200px;
+  font-weight: 700;
+  letter-spacing: -4px;
+  color: var(--reno-black);
+  opacity: 0.04;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.ab-history-inner {
+  display: flex;
+  gap: 120px;
+  max-width: var(--cw);
+  margin: 0 auto;
+  padding: 0 var(--px);
+  position: relative;
+  z-index: 1;
+}
+.ab-history-left { flex: 0 0 420px; }
+.ab-history-title {
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.6px;
+  color: var(--reno-black);
+  margin-bottom: 32px;
+}
+.ab-history-quote {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--reno-black);
+  margin-bottom: 24px;
+}
+.ab-history-desc {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--reno-black);
+  margin-bottom: 48px;
+}
+.ab-history-year {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--reno-black);
+}
+.ab-history-right { flex: 1; padding-top: 20px; }
+.ab-history-list { margin-bottom: 40px; }
+.ab-history-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--reno-black);
+  margin-bottom: 16px;
+}
+.ab-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--reno-black);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+.ab-history-awards {
+  border-top: 2px solid #333;
+}
+.ab-history-award-row {
+  display: flex;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid #ddd;
+}
+.ab-history-award-name {
+  flex: 0 0 409px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.ab-history-award-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin: 0 60px;
+}
+.ab-history-award-detail {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--reno-black);
+}
+.ab-history-award-detail p:first-child {
+  color: #666;
+}
+.ab-history-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 80px;
+  padding: 16px 24px;
+}
+.ab-history-ind-item {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--reno-black);
+  opacity: 0.24;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ab-history-ind-item.active {
+  font-weight: 700;
+  opacity: 1;
+}
+.ab-ind-gauge {
+  width: 80px;
+  height: 2px;
+  background: rgba(16,24,32,0.24);
+  border-radius: 24px;
+  position: relative;
+}
+.ab-ind-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 80%;
+  background: var(--reno-black);
+  border-radius: 2px;
+}
+
+/* ===== Contact Hero ===== */
+.ab-contact-hero {
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--reno-white);
+}
+.ab-contact-hero-inner { text-align: center; }
+.ab-contact-sub {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--reno-black);
+  margin-top: 40px;
+}
+.ab-contact-desc {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--reno-black);
+  margin-top: 16px;
+}
+
+/* ===== Contact Sections ===== */
+.ab-contact-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 160px 0;
+  overflow: hidden;
+}
+.ab-contact-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 200px;
+  font-weight: 700;
+  letter-spacing: -4px;
+  color: var(--reno-black);
+  opacity: 0.04;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.ab-contact-div-title {
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.6px;
+  color: var(--reno-black);
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 1;
+}
+.ab-contact-list {
+  max-width: var(--cw);
+  width: 100%;
+  padding: 0 var(--px);
+  position: relative;
+  z-index: 1;
+}
+.ab-contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--reno-black);
+}
+.ab-contact-row:first-child {
+  border-top: 1px solid var(--reno-black);
+}
+.ab-contact-name {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #333;
+}
+.ab-contact-role {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #333;
+  margin-top: 8px;
+}
+.ab-contact-info { text-align: right; }
+.ab-contact-email {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #333;
+}
+.ab-contact-phone {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #333;
+  margin-top: 8px;
+}
+
+/* ===== Location ===== */
+.ab-location {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0;
+}
+.ab-location-inner {
+  display: flex;
+  gap: 80px;
+  max-width: var(--cw);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--px);
+  align-items: flex-start;
+}
+.ab-location-left { flex: 1; }
+.ab-location-addr {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--reno-black);
+  margin-top: 40px;
+}
+.ab-location-recruit {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--reno-black);
+  margin-top: 80px;
+}
+.ab-join-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 24px;
+  padding: 16px 24px;
+  background: var(--reno-black);
+  border: none;
+  border-radius: 32px;
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  transition: opacity 0.3s;
+}
+.ab-join-btn:hover { opacity: 0.7; }
+.ab-join-btn svg { width: 40px; height: 40px; color: white; }
+.ab-location-map { flex: 0 0 720px; }
+
+/* Map placeholder */
+.ab-map-placeholder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 720/400;
+}
+.ab-map-line-h {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--reno-black);
+}
+.ab-map-line-v {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--reno-black);
+}
+.ab-map-pin {
+  position: absolute;
+  top: 52%;
+  left: 58%;
+  text-align: center;
+}
+.ab-map-pin-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.24;
+  color: var(--reno-black);
+  margin-bottom: 4px;
+}
+.ab-map-pin-dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #CC1F26;
+  margin: 0 auto;
+}
+.ab-map-station {
+  position: absolute;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--reno-black);
+}
+.ab-map-station em {
+  color: #CC1F26;
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* ===== Scroll Reveal ===== */
+.ab-reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ab-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== GNB overrides for About page ===== */
+body { overflow-x: hidden; }
+
+/* Sticky GNB adjustments for About page */
+.gnb.sticky {
+  top: 16px;
+  left: 64px;
+  right: 64px;
+}
+.gnb.sticky .gnb-inner {
+  padding-left: 24px;
+  padding-right: 8px;
+}
+
+/* Page title hidden by default, shown on sticky */
+.gnb-page-title {
+  display: none;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--reno-black);
+  white-space: nowrap;
+  padding-left: 16px;
+}
+.gnb.sticky .gnb-page-title {
+  display: block;
+}
+.gnb.sticky .gnb-logo {
+  display: none;
+}
+
+/* Sticky-only links hidden by default */
+.gnb-link-sticky {
+  display: none !important;
+}
+.gnb.sticky .gnb-link-default {
+  display: none !important;
+}
+.gnb.sticky .gnb-link-sticky {
+  display: flex !important;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1440px) {
+  .ab-hero-title { font-size: 80px; margin-bottom: 36px; }
+  .ab-hero-sub, .ab-hero-desc { font-size: 28px; }
+  .ab-big-title { font-size: 60px; }
+  .ab-whatwedo .ab-big-title,
+  .ab-contact-hero .ab-big-title { font-size: 80px; }
+  .ab-section-title, .ab-section-title-white { font-size: 60px; }
+  .ab-section-desc { font-size: 20px; }
+  .ab-link-text { font-size: 48px; }
+  .ab-make-desc { font-size: 20px; }
+  .ab-record-label { font-size: 28px; width: 320px; }
+  .ab-record-label-wrap { width: 320px; }
+  .ab-record-value { font-size: 64px; }
+  .ab-record-value small { font-size: 28px; }
+  .ab-history-left { flex: 0 0 380px; }
+  .ab-history-title { font-size: 60px; }
+  .ab-history-quote { font-size: 28px; }
+  .ab-history-desc { font-size: 20px; }
+  .ab-history-year { font-size: 32px; }
+  .ab-draw-title { font-size: 60px; }
+  .ab-draw-quote { font-size: 48px; }
+  .ab-symbol { font-size: 100px; }
+  .ab-reno-logo-full img { width: 320px !important; }
+  .ab-contact-div-title { font-size: 60px; }
+  .ab-contact-sub { font-size: 28px; margin-top: 36px; }
+  .ab-contact-desc { font-size: 28px; }
+  .ab-contact-name { font-size: 20px; }
+  .ab-contact-role { font-size: 16px; }
+  .ab-contact-email, .ab-contact-phone { font-size: 20px; }
+  .ab-location-addr { font-size: 20px; }
+  .ab-location-recruit { font-size: 20px; }
+  .ab-join-btn { font-size: 20px; }
+  .ab-location-map { flex: 0 0 560px; }
+  .ab-partners-desc { font-size: 20px; }
+  .ab-partners-bg-text, .ab-history-bg-text, .ab-contact-bg-text { font-size: 160px; }
+  .gnb.sticky { left: 40px; right: 40px; }
+}
+
+@media (max-width: 1024px) {
+  .ab-hero-title { font-size: 64px; margin-bottom: 32px; }
+  .ab-hero-sub, .ab-hero-desc { font-size: 24px; }
+  .ab-big-title { font-size: 48px; }
+  .ab-whatwedo .ab-big-title,
+  .ab-contact-hero .ab-big-title { font-size: 64px; }
+  .ab-section-title, .ab-section-title-white { font-size: 48px; }
+  .ab-section-desc { font-size: 18px; }
+  .ab-link-text { font-size: 40px; }
+  .ab-make-inner { flex-direction: column; gap: 60px; }
+  .ab-make-left { padding-top: 0; }
+  .ab-make-desc { font-size: 18px; }
+  .ab-record-label { font-size: 24px; width: 240px; }
+  .ab-record-label-wrap { width: 240px; }
+  .ab-record-label-sub { font-size: 14px; }
+  .ab-record-value { font-size: 52px; }
+  .ab-record-value small { font-size: 24px; }
+  .ab-history-inner { flex-direction: column; gap: 60px; }
+  .ab-history-left { flex: none; }
+  .ab-history-title { font-size: 48px; }
+  .ab-history-quote { font-size: 24px; }
+  .ab-history-desc { font-size: 18px; }
+  .ab-history-year { font-size: 28px; }
+  .ab-draw-title { font-size: 48px; }
+  .ab-draw-quote { font-size: 40px; }
+  .ab-symbol { font-size: 80px; }
+  .ab-reno-logo-full img { width: 260px !important; }
+  .ab-logo-grid { grid-template-columns: repeat(4, 1fr); padding: 0 40px; }
+  .ab-contact-div-title { font-size: 48px; }
+  .ab-contact-sub { font-size: 20px; margin-top: 24px; }
+  .ab-contact-desc { font-size: 20px; }
+  .ab-contact-name { font-size: 18px; }
+  .ab-contact-role { font-size: 14px; }
+  .ab-contact-email, .ab-contact-phone { font-size: 18px; }
+  .ab-location-addr { font-size: 18px; }
+  .ab-location-recruit { font-size: 18px; }
+  .ab-join-btn { font-size: 18px; }
+  .ab-location-inner { flex-direction: column; }
+  .ab-location-map { flex: none; width: 100%; }
+  .ab-partners-desc { font-size: 18px; }
+  .ab-partners-bg-text, .ab-history-bg-text, .ab-contact-bg-text { font-size: 120px; }
+  .ab-history-award-name { flex: 0 0 240px; }
+  .ab-history-award-icon { margin: 0 30px; }
+  .gnb.sticky { left: 24px; right: 24px; }
+}
+
+@media (max-width: 768px) {
+  .ab-hero { min-height: 560px; }
+  .ab-hero-title { font-size: 48px; margin-bottom: 24px; }
+  .ab-hero-sub, .ab-hero-desc { font-size: 18px; }
+  .ab-big-title { font-size: 36px; }
+  .ab-whatwedo .ab-big-title,
+  .ab-contact-hero .ab-big-title { font-size: 40px; }
+  .ab-section-title, .ab-section-title-white { font-size: 36px; }
+  .ab-section-desc { font-size: 16px; }
+  .ab-link-img { width: 70%; }
+  .ab-link-text { font-size: 32px; }
+  .ab-make-inner { padding: 80px var(--px); }
+  .ab-make-desc { font-size: 16px; }
+  .ab-record-label { font-size: 18px; width: 160px; }
+  .ab-record-label-wrap { width: 160px; }
+  .ab-record-label-sub { font-size: 13px; }
+  .ab-record-value { font-size: 40px; }
+  .ab-record-value small { font-size: 18px; }
+  .ab-make-right { gap: 28px; }
+  .ab-history-title { font-size: 36px; }
+  .ab-history-quote { font-size: 20px; }
+  .ab-history-desc { font-size: 16px; }
+  .ab-history-year { font-size: 20px; }
+  .ab-history-award-name { flex: 0 0 160px; font-size: 14px; }
+  .ab-history-award-icon { width: 32px; height: 32px; margin: 0 16px; }
+  .ab-draw-title { font-size: 36px; }
+  .ab-draw-quote { font-size: 32px; }
+  .ab-symbol { font-size: 60px; gap: 20px; }
+  .ab-symbol-labels { gap: 60px; font-size: 14px; }
+  .ab-reno-logo-full img { width: 200px !important; }
+  .ab-logo-grid { grid-template-columns: repeat(3, 1fr); }
+  .ab-contact-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .ab-contact-info { text-align: left; }
+  .ab-contact-div-title { font-size: 36px; }
+  .ab-contact-sub { font-size: 20px; margin-top: 24px; }
+  .ab-contact-desc { font-size: 20px; }
+  .ab-contact-name { font-size: 18px; }
+  .ab-contact-role { font-size: 14px; }
+  .ab-contact-email, .ab-contact-phone { font-size: 16px; }
+  .ab-location-addr { font-size: 16px; }
+  .ab-location-recruit { font-size: 16px; }
+  .ab-join-btn { font-size: 18px; padding: 12px 20px; gap: 16px; }
+  .ab-partners-desc { font-size: 16px; }
+  .ab-partners-bg-text, .ab-history-bg-text, .ab-contact-bg-text { font-size: 80px; }
+  .ab-draw { min-height: 480px; }
+  .gnb.sticky { left: 16px; right: 16px; }
+  .gnb-link-sticky { display: none !important; }
+  .gnb.sticky .gnb-link-sticky { display: none !important; }
+}
+
+@media (max-width: 480px) {
+  .ab-hero-title { font-size: 32px; margin-bottom: 20px; }
+  .ab-hero-sub, .ab-hero-desc { font-size: 14px; }
+  .ab-big-title { font-size: 28px; }
+  .ab-whatwedo .ab-big-title,
+  .ab-contact-hero .ab-big-title { font-size: 32px; }
+  .ab-section-title, .ab-section-title-white { font-size: 28px; }
+  .ab-section-desc { font-size: 14px; }
+  .ab-link-img { width: 85%; }
+  .ab-link-text { font-size: 24px; }
+  .ab-link-header { margin-bottom: 48px; }
+  .ab-make-inner { padding: 60px var(--px); }
+  .ab-make-desc { font-size: 14px; }
+  .ab-record-label { width: 120px; font-size: 16px; }
+  .ab-record-label-wrap { width: 120px; }
+  .ab-record-label-sub { font-size: 12px; }
+  .ab-record-value { font-size: 32px; }
+  .ab-record-value small { font-size: 16px; }
+  .ab-make-right { gap: 20px; }
+  .ab-history-title { font-size: 28px; }
+  .ab-history-quote { font-size: 18px; }
+  .ab-history-desc { font-size: 14px; }
+  .ab-history-year { font-size: 18px; }
+  .ab-history-award-row { flex-wrap: wrap; gap: 8px; }
+  .ab-history-award-name { flex: 0 0 100%; }
+  .ab-draw-title { font-size: 28px; }
+  .ab-draw-quote { font-size: 24px; }
+  .ab-symbol { font-size: 48px; gap: 16px; }
+  .ab-symbol-plus { font-size: 28px; }
+  .ab-symbol-labels { gap: 40px; font-size: 12px; }
+  .ab-reno-logo-full img { width: 160px !important; }
+  .ab-logo-grid { grid-template-columns: repeat(2, 1fr); }
+  .ab-contact-name { font-size: 16px; }
+  .ab-contact-role { font-size: 14px; }
+  .ab-contact-email, .ab-contact-phone { font-size: 14px; }
+  .ab-contact-div-title { font-size: 28px; }
+  .ab-contact-sub { font-size: 16px; margin-top: 20px; }
+  .ab-contact-desc { font-size: 16px; }
+  .ab-location-addr { font-size: 14px; }
+  .ab-location-recruit { font-size: 14px; }
+  .ab-join-btn { font-size: 16px; padding: 12px 20px; gap: 12px; }
+  .ab-partners-desc { font-size: 14px; }
+  .ab-partners-bg-text, .ab-history-bg-text, .ab-contact-bg-text { font-size: 48px; }
+  .ab-draw { min-height: 400px; }
+  .gnb.sticky { left: 12px; right: 12px; }
+}

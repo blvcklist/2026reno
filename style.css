@@ -98,7 +98,7 @@ strong { font-weight: 700; }
 /* Sticky On: pill 형태 내부 Nav */
 .gnb.sticky {
   background: transparent;
-  top: 10px;
+  top: 16px;
 }
 
 .gnb-inner {
