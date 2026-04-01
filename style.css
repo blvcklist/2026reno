@@ -1060,8 +1060,8 @@ body.hero-dark .scroll-slot span {
 .skills-row { overflow: hidden; margin-bottom: 8px; }
 .skills-row:last-child { margin-bottom: 0; }
 .skills-track { display: flex; gap: 6px; white-space: nowrap; width: max-content; }
-.skills-left { animation: sLeft 40s linear infinite; }
-.skills-right { animation: sRight 40s linear infinite; }
+.skills-left { animation: sLeft 60s linear infinite; }
+.skills-right { animation: sRight 60s linear infinite; }
 @keyframes sLeft { from { transform: translateX(0); } to { transform: translateX(-33.333%); } }
 @keyframes sRight { from { transform: translateX(-33.333%); } to { transform: translateX(0); } }
 
