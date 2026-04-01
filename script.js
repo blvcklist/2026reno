@@ -179,10 +179,6 @@ $(document).ready(function () {
     onLeave: function (index, nextIndex, direction) {
       try {
         var nextSection = sections[nextIndex - 1];
-        if (index === 1) {
-          var heroScroll = document.querySelector('.hero-scroll');
-          if (heroScroll) heroScroll.style.opacity = '0';
-        }
         if (nextSection) updateGnbDark(nextSection);
         if (gnb) gnb.classList.toggle('sticky', nextIndex !== 1);
       } catch (err) { /* prevent fullPage internal state corruption */ }
