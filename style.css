@@ -92,13 +92,15 @@ strong { font-weight: 700; }
   right: 0;
   z-index: 100;
   height: 80px;
+  background: rgba(255,255,255,0.24);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   transition: background 0.3s, top 0.3s;
 }
 
-/* Sticky On: pill 형태 내부 Nav */
+/* Sticky On */
 .gnb.sticky {
-  background: transparent;
-  top: 16px;
+  /* 기본 GNB와 동일한 형태 유지 */
 }
 
 .gnb-inner {
@@ -115,13 +117,7 @@ strong { font-weight: 700; }
 }
 
 .gnb.sticky .gnb-inner {
-  height: 64px;
-  border-radius: 999px;
-  border: 1px solid #D9D9D9;
-  padding: 8px;
-  background: rgba(255,255,255,0.24);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  /* 기본 gnb-inner와 동일 */
 }
 
 .gnb-logo { flex-shrink: 0; }
@@ -312,11 +308,17 @@ body.gnb-dark .gnb .gnb-link {
 body.gnb-dark .gnb .gnb-ci-img {
   filter: brightness(0) invert(1);
 }
-body.gnb-dark .gnb.sticky .gnb-inner {
-  border-color: rgba(255,255,255,0.15);
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+body.gnb-dark .gnb {
+  background: rgba(16,24,32,0.4);
+}
+body.gnb-red .gnb .gnb-link {
+  color: #fff;
+}
+body.gnb-red .gnb .gnb-ci-img {
+  filter: brightness(0) invert(1);
+}
+body.gnb-red .gnb {
+  background: rgba(204,31,38,0.24);
 }
 
 /* 인디케이터 반전 */

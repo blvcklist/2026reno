@@ -122,18 +122,30 @@ $(document).ready(function () {
   function updateGnbDark(sectionEl) {
     if (!gnb) return;
     var isDark = false;
-    if (sectionEl && sectionEl.classList.contains('hero') && document.body.classList.contains('hero-dark')) {
-      isDark = true;
+    var isRed = false;
+
+    if (sectionEl && sectionEl.classList.contains('hero')) {
+      var activeSlide = sectionEl.querySelector('.hero-slide.active');
+      if (activeSlide) {
+        if (activeSlide.getAttribute('data-dark') === 'true') isDark = true;
+        if (activeSlide.getAttribute('data-gnb-red') === 'true') { isRed = true; isDark = false; }
+      }
+      if (!isRed && document.body.classList.contains('hero-dark')) isDark = true;
     }
     if (sectionEl && sectionEl.getAttribute('data-gnb-dark') === 'true') {
       isDark = true;
     }
+    if (sectionEl && sectionEl.classList.contains('red-bg')) {
+      isRed = true;
+      isDark = false;
+    }
     document.body.classList.toggle('gnb-dark', isDark);
+    document.body.classList.toggle('gnb-red', isRed);
   }
 
   window.addEventListener('heroSlideChange', function () {
-    var active = document.querySelector('.section.active');
-    if (active && active.classList.contains('hero')) updateGnbDark(active);
+    var heroSection = document.querySelector('.hero.section');
+    if (heroSection) updateGnbDark(heroSection);
   });
 
   // ========== fullPage 초기화 ==========
@@ -158,13 +170,7 @@ $(document).ready(function () {
         if (!section) return;
 
         updateGnbDark(section);
-        if (gnb) {
-          if (index === 1) {
-            gnb.classList.remove('sticky');
-          } else {
-            gnb.classList.add('sticky');
-          }
-        }
+        if (gnb) gnb.classList.toggle('sticky', index !== 1);
 
         if (section.classList.contains('advertising')) playAdvSequence();
         if (section.classList.contains('agency')) playAgencySequence();
@@ -180,13 +186,7 @@ $(document).ready(function () {
           if (heroScroll) heroScroll.style.opacity = '0';
         }
         if (nextSection) updateGnbDark(nextSection);
-        if (gnb) {
-          if (nextIndex === 1) {
-            gnb.classList.remove('sticky');
-          } else {
-            gnb.classList.add('sticky');
-          }
-        }
+        if (gnb) gnb.classList.toggle('sticky', nextIndex !== 1);
       } catch (err) { /* prevent fullPage internal state corruption */ }
     }
   });

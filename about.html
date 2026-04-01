@@ -20,15 +20,11 @@
           <img src="images/reno-ci.svg" alt="RENO" class="gnb-ci-img">
         </div>
       </a>
-      <span class="gnb-page-title">ABOUT</span>
       <div class="gnb-btns">
-        <a href="index.html#advertising" class="gnb-link gnb-link-default">ADVERTISING BUSINESS DIV.</a>
-        <a href="index.html#agency" class="gnb-link gnb-link-default">AGENCY BUSINESS DIV.</a>
-        <a href="about.html" class="gnb-link gnb-link-default">ABOUT RENO</a>
-        <a href="#contact" class="gnb-link gnb-link-default">CONTACT US</a>
-        <a href="#" class="gnb-link gnb-link-sticky" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">WHO WE ARE</a>
-        <a href="#" class="gnb-link gnb-link-sticky" onclick="document.querySelector('.ab-whatwedo').scrollIntoView({behavior:'smooth'});return false;">WHAT WE DO</a>
-        <a href="#contact" class="gnb-link gnb-link-sticky">CONTACT</a>
+        <a href="index.html#advertising" class="gnb-link">ADVERTISING DIV.</a>
+        <a href="index.html#agency" class="gnb-link">AGENCY DIV.</a>
+        <a href="about.html" class="gnb-link">ABOUT</a>
+        <a href="#contact" class="gnb-link">CONTACT</a>
         <a href="#" class="gnb-download">
           <span>회사소개서</span>
           <span class="gnb-download-icon">
@@ -42,18 +38,28 @@
   <!-- Hero -->
   <section class="ab-hero">
     <div class="ab-hero-inner">
-      <h1 class="ab-hero-title"><strong>WHO WE ARE</strong></h1>
-      <p class="ab-hero-sub">RENO. <strong>R</strong>EAL <strong>E</strong>VOLUTION, <strong>N</strong>EW <strong>O</strong>PPORTUNITY</p>
-      <p class="ab-hero-desc">진정한 <strong>혁신,</strong> 새로운 <strong>기회를</strong></p>
+      <h1 class="ab-hero-title ab-typing" data-text="WHO WE ARE"></h1>
+      <p class="ab-hero-sub ab-typing" data-text="RENO. REAL EVOLUTION, NEW OPPORTUNITY" data-bold="0-6,11,22,26"></p>
+      <p class="ab-hero-desc ab-typing" data-text="진정한 혁신, 새로운 기회를" data-bold="4-6,12-13"></p>
+    </div>
+    <div class="ab-hero-arrow">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <path d="M24 10V38" stroke="#101820" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M16 30L24 38L32 30" stroke="#101820" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
   </section>
 
-  <!-- Link: 잇다 -->
-  <section class="ab-link">
-    <div class="ab-link-header ab-reveal">
+  <!-- Link: 잇다 (헤더) -->
+  <section class="ab-link-hero">
+    <div class="ab-reveal">
       <h2 class="ab-section-title">잇다</h2>
       <p class="ab-section-desc">리노커뮤니케이션즈의 모든 성과는<br>고객 가치와 연결됩니다.</p>
     </div>
+  </section>
+
+  <!-- Link: 잇다 (이미지) -->
+  <section class="ab-link">
     <div class="ab-link-item ab-reveal left">
       <div class="ab-link-img"><img src="images/about-link-1.jpg" alt="사람과 브랜드를 잇다"></div>
       <h3 class="ab-link-text">사람과 브랜드를 잇다</h3>
@@ -148,7 +154,7 @@
     <p class="ab-draw-quote">고객의 물음표를 느낌표로 바꾸는<br>경험을 그립니다.</p>
   </section>
 
-  <section class="ab-draw">
+  <section class="ab-draw red-bg">
     <div class="ab-reno-logo-full">
       <img src="images/footer-reno.svg" alt="RENO">
       <img src="images/footer-communications.svg" alt="COMMUNICATIONS">
@@ -423,6 +429,26 @@
       });
     })();
 
+    // GNB dark/red mode on scroll
+    (function () {
+      var darkSections = document.querySelectorAll('.ab-make, .footer[data-gnb-dark]');
+      var redSections = document.querySelectorAll('.ab-draw.red-bg');
+      window.addEventListener('scroll', function () {
+        var isDark = false;
+        var isRed = false;
+        darkSections.forEach(function (el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < 80 && rect.bottom > 0) isDark = true;
+        });
+        redSections.forEach(function (el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < 80 && rect.bottom > 0) isRed = true;
+        });
+        document.body.classList.toggle('gnb-dark', isDark);
+        document.body.classList.toggle('gnb-red', isRed);
+      });
+    })();
+
     // Scroll reveal
     (function () {
       var reveals = document.querySelectorAll('.ab-reveal');
@@ -432,6 +458,76 @@
         });
       }, { threshold: 0.15 });
       reveals.forEach(function (el) { observer.observe(el); });
+    })();
+
+    // Typewriter animation for hero lines
+    (function () {
+      var els = document.querySelectorAll('.ab-typing');
+      if (!els.length) return;
+      var charDelay = 40;
+      var lineGap = 200;
+      var startDelay = 300;
+
+      function parseBoldIndices(attr) {
+        var set = {};
+        if (!attr) return set;
+        attr.split(',').forEach(function (part) {
+          part = part.trim();
+          if (part.indexOf('-') !== -1) {
+            var range = part.split('-');
+            for (var i = parseInt(range[0]); i <= parseInt(range[1]); i++) set[i] = true;
+          } else {
+            set[parseInt(part)] = true;
+          }
+        });
+        return set;
+      }
+
+      var allChars = [];
+      var lineBreaks = [];
+
+      els.forEach(function (el, lineIdx) {
+        var text = el.getAttribute('data-text');
+        var boldSet = parseBoldIndices(el.getAttribute('data-bold'));
+
+        text.split('').forEach(function (char, i) {
+          var span = document.createElement('span');
+          span.textContent = char === ' ' ? '\u00A0' : char;
+          span.className = 'ab-typing-char';
+          if (boldSet[i]) span.style.fontWeight = '600';
+          el.appendChild(span);
+          allChars.push(span);
+        });
+
+        if (lineIdx < els.length - 1) {
+          lineBreaks.push(allChars.length);
+        }
+      });
+
+      var cursor = document.createElement('span');
+      cursor.className = 'ab-typing-cursor';
+
+      var idx = 0;
+      function typeNext() {
+        if (idx >= allChars.length) {
+          if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
+          return;
+        }
+
+        if (lineBreaks.indexOf(idx) !== -1) {
+          setTimeout(function () { typeNext(); }, lineGap);
+          lineBreaks.splice(lineBreaks.indexOf(idx), 1);
+          return;
+        }
+
+        var span = allChars[idx];
+        span.classList.add('show');
+        span.parentNode.insertBefore(cursor, span.nextSibling);
+        idx++;
+        setTimeout(typeNext, charDelay);
+      }
+
+      setTimeout(typeNext, startDelay);
     })();
 
     // Smooth anchor scroll

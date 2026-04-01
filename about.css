@@ -2,6 +2,7 @@
 
 /* ===== Hero ===== */
 .ab-hero {
+  position: relative;
   width: 100%;
   height: 100vh;
   min-height: 700px;
@@ -38,6 +39,48 @@
   color: var(--reno-black);
 }
 .ab-hero-desc strong { font-weight: 600; }
+.ab-hero-arrow {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: abArrowBounce 2s ease-in-out infinite;
+}
+@keyframes abArrowBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ===== Typing Animation ===== */
+.ab-typing {
+  display: block;
+  text-align: center;
+}
+.ab-typing-char {
+  display: inline;
+  opacity: 0;
+  font-weight: inherit;
+}
+.ab-typing-char.show {
+  opacity: 1;
+}
+.ab-typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  background: var(--reno-black);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: abCursorBlink 0.6s step-end infinite;
+}
+.ab-hero-sub .ab-typing-cursor,
+.ab-hero-desc .ab-typing-cursor {
+  height: 0.85em;
+}
+@keyframes abCursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 
 /* ===== Common Section Titles ===== */
 .ab-section-title {
@@ -76,6 +119,40 @@
 }
 
 /* ===== Link: 잇다 ===== */
+.ab-link-combined,
+.ab-link-make-combined {
+  background: white;
+}
+.ab-link-hero {
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ab-link-hero .ab-section-title {
+  text-align: center;
+}
+.ab-link-hero .ab-section-desc {
+  text-align: center;
+}
+.ab-link-page {
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 0 var(--px);
+}
+.ab-link-page .ab-link-item {
+  margin: 0 auto;
+  max-width: var(--cw);
+  width: 100%;
+}
 .ab-link {
   padding: 120px 0 160px;
   overflow: hidden;
@@ -278,6 +355,9 @@
 }
 .ab-reno-logo-full img:first-child { width: 400px; }
 .ab-reno-logo-full img:last-child { width: 400px; }
+.red-bg .ab-reno-logo-full img {
+  filter: brightness(0) invert(1);
+}
 
 /* ===== Partners ===== */
 .ab-partners {
@@ -546,10 +626,10 @@
   pointer-events: none;
 }
 .ab-contact-div-title {
-  font-size: 80px;
-  font-weight: 700;
+  font-size: 64px;
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: -1.6px;
+  letter-spacing: -1.28px;
   color: var(--reno-black);
   margin-bottom: 60px;
   position: relative;
@@ -717,45 +797,8 @@
 
 /* ===== GNB overrides for About page ===== */
 body { overflow-x: hidden; }
-
-/* Sticky GNB adjustments for About page */
-.gnb.sticky {
-  top: 16px;
-  left: 64px;
-  right: 64px;
-}
-.gnb.sticky .gnb-inner {
-  padding-left: 24px;
-  padding-right: 8px;
-}
-
-/* Page title hidden by default, shown on sticky */
-.gnb-page-title {
-  display: none;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--reno-black);
-  white-space: nowrap;
-  padding-left: 16px;
-}
-.gnb.sticky .gnb-page-title {
-  display: block;
-}
-.gnb.sticky .gnb-logo {
-  display: none;
-}
-
-/* Sticky-only links hidden by default */
-.gnb-link-sticky {
-  display: none !important;
-}
-.gnb.sticky .gnb-link-default {
-  display: none !important;
-}
-.gnb.sticky .gnb-link-sticky {
-  display: flex !important;
-}
+.gnb-page-title { display: none; }
+.gnb-link-sticky { display: none !important; }
 
 /* ===== Responsive ===== */
 @media (max-width: 1440px) {
@@ -781,7 +824,7 @@ body { overflow-x: hidden; }
   .ab-draw-quote { font-size: 48px; }
   .ab-symbol { font-size: 100px; }
   .ab-reno-logo-full img { width: 320px !important; }
-  .ab-contact-div-title { font-size: 60px; }
+  .ab-contact-div-title { font-size: 52px; }
   .ab-contact-sub { font-size: 28px; margin-top: 36px; }
   .ab-contact-desc { font-size: 28px; }
   .ab-contact-name { font-size: 20px; }
@@ -793,7 +836,6 @@ body { overflow-x: hidden; }
   .ab-location-map { flex: 0 0 560px; }
   .ab-partners-desc { font-size: 20px; }
   .ab-partners-bg-text, .ab-history-bg-text, .ab-contact-bg-text { font-size: 160px; }
-  .gnb.sticky { left: 40px; right: 40px; }
 }
 
 @media (max-width: 1024px) {
@@ -824,7 +866,7 @@ body { overflow-x: hidden; }
   .ab-symbol { font-size: 80px; }
   .ab-reno-logo-full img { width: 260px !important; }
   .ab-logo-grid { grid-template-columns: repeat(4, 1fr); padding: 0 40px; }
-  .ab-contact-div-title { font-size: 48px; }
+  .ab-contact-div-title { font-size: 40px; }
   .ab-contact-sub { font-size: 20px; margin-top: 24px; }
   .ab-contact-desc { font-size: 20px; }
   .ab-contact-name { font-size: 18px; }
@@ -839,7 +881,6 @@ body { overflow-x: hidden; }
   .ab-partners-bg-text, .ab-history-bg-text, .ab-contact-bg-text { font-size: 120px; }
   .ab-history-award-name { flex: 0 0 240px; }
   .ab-history-award-icon { margin: 0 30px; }
-  .gnb.sticky { left: 24px; right: 24px; }
 }
 
 @media (max-width: 768px) {
@@ -875,7 +916,7 @@ body { overflow-x: hidden; }
   .ab-logo-grid { grid-template-columns: repeat(3, 1fr); }
   .ab-contact-row { flex-direction: column; align-items: flex-start; gap: 12px; }
   .ab-contact-info { text-align: left; }
-  .ab-contact-div-title { font-size: 36px; }
+  .ab-contact-div-title { font-size: 32px; }
   .ab-contact-sub { font-size: 20px; margin-top: 24px; }
   .ab-contact-desc { font-size: 20px; }
   .ab-contact-name { font-size: 18px; }
@@ -887,9 +928,6 @@ body { overflow-x: hidden; }
   .ab-partners-desc { font-size: 16px; }
   .ab-partners-bg-text, .ab-history-bg-text, .ab-contact-bg-text { font-size: 80px; }
   .ab-draw { min-height: 480px; }
-  .gnb.sticky { left: 16px; right: 16px; }
-  .gnb-link-sticky { display: none !important; }
-  .gnb.sticky .gnb-link-sticky { display: none !important; }
 }
 
 @media (max-width: 480px) {
@@ -927,7 +965,7 @@ body { overflow-x: hidden; }
   .ab-contact-name { font-size: 16px; }
   .ab-contact-role { font-size: 14px; }
   .ab-contact-email, .ab-contact-phone { font-size: 14px; }
-  .ab-contact-div-title { font-size: 28px; }
+  .ab-contact-div-title { font-size: 24px; }
   .ab-contact-sub { font-size: 16px; margin-top: 20px; }
   .ab-contact-desc { font-size: 16px; }
   .ab-location-addr { font-size: 14px; }
@@ -936,5 +974,4 @@ body { overflow-x: hidden; }
   .ab-partners-desc { font-size: 14px; }
   .ab-partners-bg-text, .ab-history-bg-text, .ab-contact-bg-text { font-size: 48px; }
   .ab-draw { min-height: 400px; }
-  .gnb.sticky { left: 12px; right: 12px; }
 }
