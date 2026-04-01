@@ -429,23 +429,26 @@
       });
     })();
 
-    // GNB dark/red mode on scroll
+    // GNB mode on scroll (default / dark / red)
     (function () {
-      var darkSections = document.querySelectorAll('.ab-make, .footer[data-gnb-dark]');
-      var redSections = document.querySelectorAll('.ab-draw.red-bg');
+      var allSections = document.querySelectorAll('.ab-hero, .ab-link-hero, .ab-link, .ab-make, .ab-draw, .ab-partners, .ab-partners-grid, .ab-whatwedo, .ab-history, .ab-contact-hero, .ab-contact-section, .ab-location, .footer');
       window.addEventListener('scroll', function () {
-        var isDark = false;
-        var isRed = false;
-        darkSections.forEach(function (el) {
+        var mode = 'default';
+        var gnbY = 40;
+        allSections.forEach(function (el) {
           var rect = el.getBoundingClientRect();
-          if (rect.top < 80 && rect.bottom > 0) isDark = true;
+          if (rect.top <= gnbY && rect.bottom > gnbY) {
+            if (el.classList.contains('ab-make') || el.getAttribute('data-gnb-dark') === 'true') {
+              mode = 'dark';
+            } else if (el.classList.contains('red-bg')) {
+              mode = 'red';
+            } else {
+              mode = 'default';
+            }
+          }
         });
-        redSections.forEach(function (el) {
-          var rect = el.getBoundingClientRect();
-          if (rect.top < 80 && rect.bottom > 0) isRed = true;
-        });
-        document.body.classList.toggle('gnb-dark', isDark);
-        document.body.classList.toggle('gnb-red', isRed);
+        document.body.classList.toggle('gnb-dark', mode === 'dark');
+        document.body.classList.toggle('gnb-red', mode === 'red');
       });
     })();
 

@@ -119,34 +119,32 @@ $(document).ready(function () {
 
   // ========== GNB ==========
 
-  function updateGnbDark(sectionEl) {
+  function updateGnbMode(sectionEl) {
     if (!gnb) return;
-    var isDark = false;
-    var isRed = false;
+    var mode = 'default';
 
     if (sectionEl && sectionEl.classList.contains('hero')) {
       var activeSlide = sectionEl.querySelector('.hero-slide.active');
       if (activeSlide) {
-        if (activeSlide.getAttribute('data-dark') === 'true') isDark = true;
-        if (activeSlide.getAttribute('data-gnb-red') === 'true') { isRed = true; isDark = false; }
+        if (activeSlide.getAttribute('data-gnb-red') === 'true') {
+          mode = 'red';
+        } else if (activeSlide.getAttribute('data-dark') === 'true' || document.body.classList.contains('hero-dark')) {
+          mode = 'dark';
+        }
       }
-      if (!isRed && document.body.classList.contains('hero-dark')) isDark = true;
+    } else if (sectionEl) {
+      if (sectionEl.classList.contains('red-bg')) {
+        mode = 'red';
+      } else if (sectionEl.getAttribute('data-gnb-dark') === 'true') {
+        mode = 'dark';
+      }
     }
-    if (sectionEl && sectionEl.getAttribute('data-gnb-dark') === 'true') {
-      isDark = true;
-    }
-    if (sectionEl && sectionEl.classList.contains('red-bg')) {
-      isRed = true;
-      isDark = false;
-    }
-    document.body.classList.toggle('gnb-dark', isDark);
-    document.body.classList.toggle('gnb-red', isRed);
+    document.body.classList.toggle('gnb-dark', mode === 'dark');
+    document.body.classList.toggle('gnb-red', mode === 'red');
   }
+  // 하위호환 alias
+  var updateGnbDark = updateGnbMode;
 
-  window.addEventListener('heroSlideChange', function () {
-    var heroSection = document.querySelector('.hero.section');
-    if (heroSection) updateGnbDark(heroSection);
-  });
 
   // ========== fullPage 초기화 ==========
 
