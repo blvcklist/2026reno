@@ -85,10 +85,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function activate(withFadeIn) {
     var isDark = false;
+    var isRed = false;
     for (var i = 0; i < total; i++) {
       if (i === idx) {
         slides[i].classList.add('active');
         if (slides[i].getAttribute('data-dark') === 'true') isDark = true;
+        if (slides[i].getAttribute('data-gnb-red') === 'true') isRed = true;
       } else {
         slides[i].classList.remove('active');
       }
@@ -99,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       document.body.classList.remove('hero-dark');
     }
+    document.body.classList.toggle('gnb-red', isRed);
 
     window.dispatchEvent(new Event('heroSlideChange'));
 
