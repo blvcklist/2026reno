@@ -215,7 +215,7 @@ body.hero-dark #cubeCanvas {
 /* 텍스트 그룹: 컨테이너 내 좌측 배치 */
 .hero-text {
   position: absolute;
-  left: calc(50% - var(--cw) / 2);
+  left: var(--px);
   top: 33%;
   z-index: 2;
   display: flex;
@@ -413,7 +413,7 @@ body.hero-dark .hero-about-btn { color: #fff; }
 /* 인디케이터: 컨테이너 내 좌하단 */
 .hero-indicator {
   position: absolute;
-  left: calc(50% - var(--cw) / 2);
+  left: var(--px);
   bottom: 40px;
   z-index: 2;
   display: flex;
@@ -1291,9 +1291,7 @@ body.hero-dark .scroll-slot span {
   .gnb-ci { width: 52px; height: 52px; }
   .gnb-ci-img { width: 34px; height: 34px; }
 
-  /* Hero — 뷰포트가 --cw(1440px)보다 좁으면 좌측 정렬 */
-  .hero-text { left: var(--px); }
-  .hero-indicator { left: var(--px); }
+  /* Hero */
   .hero-subtitle { font-size: 20px; }
   .hero-title { font-size: 52px; }
   .hero-desc { font-size: 20px; }
