@@ -1340,90 +1340,196 @@ body.hero-dark .scroll-slot span {
 @media (max-width: 1280px) {
   :root { --px: 60px; }
 
+  /* GNB */
+  .gnb { height: 64px; }
+  .gnb-inner { padding: 6px 16px; }
   .gnb-link { font-size: 13px; padding: 0 10px; }
-  .gnb-btns { gap: 8px; }
-  .gnb-download { padding-left: 16px; gap: 8px; }
+  .gnb-btns { gap: 8px; height: 52px; }
+  .gnb-download { font-size: 10px; padding-left: 16px; height: 36px; gap: 8px; }
+  .gnb-download-icon { width: 28px; height: 28px; padding: 4px; }
+  .gnb-ci { width: 48px; height: 48px; }
+  .gnb-ci-img { width: 30px; height: 30px; }
 
-  .hero-subtitle { font-size: 18px; }
-  .hero-title { font-size: 46px; }
+  /* Hero */
+  .hero-subtitle { font-size: 18px; margin-bottom: 18px; }
+  .hero-title { font-size: 46px; margin-bottom: 32px; }
   .hero-desc { font-size: 18px; }
-  .hero-about-btn { font-size: 20px; margin-top: 48px; }
+  .hero-about-btn { font-size: 20px; gap: 14px; margin-top: 48px; }
+  .hero-about-btn svg { width: 28px; height: 28px; }
+  .hero-indicator { bottom: 32px; }
+  .hero-indicator-select { gap: 20px; padding: 14px 20px; height: 50px; }
+  .indicator-num { font-size: 15px; }
+  .indicator-gauge { width: 64px; }
+  .indicator-pause { width: 50px; height: 50px; }
 
-  .adv-title { font-size: 46px; }
+  /* Advertising */
+  .adv-title { font-size: 46px; margin-bottom: 32px; }
   .adv-desc { font-size: 18px; }
-  .adv-glass { width: min(800px, calc(100% - 100px)); }
+  .adv-glass { width: min(800px, calc(100% - 100px)); padding: 32px 34px; border-radius: 36px; }
+  .adv-visual-layer { padding-top: 92px; }
   .adv-slide-title { font-size: 28px; left: 40px; top: 200px; }
   .adv-slide-summary { left: 40px; bottom: 40px; gap: 48px; }
+  .adv-slide-label { font-size: 13px; }
+  .adv-slide-value { font-size: 15px; }
+  .adv-slide-meta { height: 48px; }
   .marquee-text { font-size: 64px; }
+  .adv-intro-layer.minimized .adv-title { font-size: 18px; }
+  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 84px; }
+  .adv-clients-inner { height: 88px; }
+  .adv-client { flex: 0 0 280px; height: 88px; }
 
-  .agency-title { font-size: 46px; }
+  /* Agency */
+  .agency-title { font-size: 46px; margin-bottom: 28px; }
   .agency-desc { font-size: 18px; }
   .agency-card { width: 320px; height: 480px; }
+  .card-info { bottom: 26px; left: 26px; gap: 12px; }
+  .card-label { font-size: 13px; padding: 6px 12px; }
+  .card-name { font-size: 20px; }
+  .carousel-arrow { width: 56px; height: 56px; }
+  .carousel-arrow-icon { width: 28px; height: 30px; }
+  .carousel-glow { width: 800px; height: 800px; }
+  .carousel-indicator { margin-top: 32px; }
+  .carousel-dots { gap: 7px; padding: 14px 20px; height: 50px; }
+  .carousel-pause { width: 50px; height: 50px; }
+  .carousel-track.gathered .agency-card { margin: 0 -120px; }
+  .agency-intro-layer.minimized .agency-title { font-size: 18px; }
+  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 84px; }
+  .skill-tag { font-size: 13px; padding: 9px 14px; border-radius: 16px; }
+  .skills-marquee { bottom: 52px; }
 
-  .weare-inner { gap: 60px; }
-  .weare-title { font-size: 46px; }
+  /* We Are */
+  .weare-inner { gap: 60px; padding: 100px var(--px); }
+  .weare-title { font-size: 46px; margin-bottom: 24px; }
+  .weare-desc { font-size: 15px; margin-bottom: 56px; }
+  .weare-more { font-size: 18px; gap: 16px; }
+  .weare-more svg { width: 28px; height: 28px; }
+  .weare-right { gap: 24px; }
   .record-label { font-size: 18px; width: 200px; }
   .record-label-wrap { width: 200px; }
+  .record-label-sub { font-size: 13px; }
   .record-value { font-size: 46px; }
   .record-value small { font-size: 18px; }
+  .record-divider { margin: 0; }
+
+  /* Footer */
+  .footer { padding: 60px 0; }
+  .footer-inner { gap: 32px; }
+  .footer-awards { gap: 28px; }
+  .award-t { font-size: 13px; }
+  .award-d { font-size: 11px; }
+  .footer-info { font-size: 14px; }
+  .footer-row { gap: 16px; }
+  .footer-copy { font-size: 14px; }
+  .footer-right-logo img:first-child { width: 200px; height: 59px; }
+  .footer-right-logo img:last-child { width: 200px; height: 14px; }
 }
 
 /* --- 노트북 짧은 화면 높이 대응 (768px~900px) --- */
 @media (max-height: 900px) and (min-width: 1025px) {
+  /* Hero */
   .hero-text { top: 26%; }
+  .hero-subtitle { margin-bottom: 16px; }
+  .hero-title { margin-bottom: 28px; }
   .hero-about-btn { margin-top: 36px; }
   .hero-indicator { bottom: 28px; }
   .hero-scroll { bottom: 20px; }
 
+  /* Advertising */
   .adv-intro-inner { padding-top: 38vh; }
   .adv-visual-layer { padding-top: 88px; }
   .adv-intro-layer.minimized .adv-intro-inner { padding-top: 84px; }
   .adv-glass { padding: 28px 32px; }
   .adv-clients-inner { height: 80px; }
+  .adv-client { height: 80px; }
+  .adv-slide-title { top: 180px; }
+  .adv-slide-summary { bottom: 36px; }
 
+  /* Agency */
   .agency-intro-inner { padding-top: 38vh; }
   .agency-intro-layer.minimized .agency-intro-inner { padding-top: 84px; }
   .agency-card { height: 480px; }
   .carousel-indicator { margin-top: 28px; }
   .skills-marquee { bottom: 48px; }
+  .skill-tag { padding: 8px 14px; }
 
+  /* We Are */
   .weare-inner { padding-top: 80px; padding-bottom: 80px; }
   .weare-desc { margin-bottom: 48px; }
+  .weare-right { gap: 20px; }
+
+  /* Footer */
+  .footer { padding: 56px 0; }
+  .footer-inner { gap: 28px; }
 }
 
 @media (max-height: 768px) and (min-width: 1025px) {
+  /* Hero */
   .hero-text { top: 22%; }
-  .hero-subtitle { font-size: 17px; margin-bottom: 14px; }
-  .hero-title { font-size: 44px; margin-bottom: 24px; }
-  .hero-desc { font-size: 17px; }
-  .hero-about-btn { margin-top: 28px; font-size: 18px; }
-  .hero-about-btn svg { width: 28px; height: 28px; }
-  .hero-indicator { bottom: 20px; }
-  .hero-indicator-select { padding: 12px 20px; height: 48px; }
+  .hero-subtitle { font-size: 16px; margin-bottom: 12px; }
+  .hero-title { font-size: 40px; margin-bottom: 20px; }
+  .hero-desc { font-size: 16px; }
+  .hero-about-btn { margin-top: 24px; font-size: 17px; gap: 12px; }
+  .hero-about-btn svg { width: 26px; height: 26px; }
+  .hero-indicator { bottom: 16px; }
+  .hero-indicator-select { padding: 10px 16px; height: 44px; gap: 16px; }
+  .indicator-num { font-size: 13px; }
+  .indicator-gauge { width: 56px; }
+  .indicator-pause { width: 44px; height: 44px; }
+  .hero-scroll { display: none; }
 
-  .adv-intro-inner { padding-top: 34vh; }
-  .adv-visual-layer { padding-top: 76px; }
-  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 72px; }
-  .adv-title { margin-bottom: 24px; }
-  .adv-glass { padding: 20px 24px; border-radius: 32px; }
-  .adv-slide-title { font-size: 24px; top: 160px; }
-  .adv-clients-inner { height: 68px; }
-  .adv-client { height: 68px; }
+  /* Advertising */
+  .adv-intro-inner { padding-top: 32vh; }
+  .adv-title { font-size: 40px; margin-bottom: 20px; }
+  .adv-desc { font-size: 16px; }
+  .adv-visual-layer { padding-top: 72px; }
+  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 68px; }
+  .adv-intro-layer.minimized .adv-title { font-size: 16px; }
+  .adv-glass { padding: 18px 22px; border-radius: 28px; }
+  .adv-slide-title { font-size: 22px; left: 32px; top: 140px; }
+  .adv-slide-summary { left: 32px; bottom: 28px; gap: 36px; }
+  .adv-slide-label { font-size: 11px; }
+  .adv-slide-value { font-size: 13px; }
+  .adv-slide-meta { height: 38px; }
+  .adv-clients-inner { height: 60px; }
+  .adv-client { height: 60px; }
+  .marquee-text { font-size: 56px; }
 
-  .agency-intro-inner { padding-top: 34vh; }
-  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 72px; }
-  .agency-title { margin-bottom: 24px; }
-  .agency-card { width: 300px; height: 420px; }
-  .carousel-indicator { margin-top: 20px; }
-  .skills-marquee { bottom: 36px; }
+  /* Agency */
+  .agency-intro-inner { padding-top: 32vh; }
+  .agency-title { font-size: 40px; margin-bottom: 20px; }
+  .agency-desc { font-size: 16px; }
+  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 68px; }
+  .agency-intro-layer.minimized .agency-title { font-size: 16px; }
+  .agency-card { width: 280px; height: 400px; }
+  .card-info { bottom: 20px; left: 20px; gap: 10px; }
+  .card-label { font-size: 12px; }
+  .card-name { font-size: 18px; }
+  .carousel-arrow { width: 52px; height: 52px; }
+  .carousel-indicator { margin-top: 16px; }
+  .carousel-dots { padding: 10px 16px; height: 44px; }
+  .carousel-pause { width: 44px; height: 44px; }
+  .skills-marquee { bottom: 28px; }
+  .skill-tag { font-size: 12px; padding: 7px 12px; border-radius: 14px; }
 
-  .weare-inner { padding-top: 60px; padding-bottom: 60px; gap: 48px; }
-  .weare-title { font-size: 44px; }
-  .weare-desc { margin-bottom: 36px; }
-  .record-value { font-size: 44px; }
+  /* We Are */
+  .weare-inner { padding-top: 48px; padding-bottom: 48px; gap: 40px; }
+  .weare-title { font-size: 40px; margin-bottom: 18px; }
+  .weare-desc { font-size: 14px; margin-bottom: 28px; }
+  .weare-more { font-size: 17px; gap: 12px; }
+  .weare-more svg { width: 26px; height: 26px; }
+  .weare-right { gap: 16px; }
+  .record-label { font-size: 17px; }
+  .record-value { font-size: 40px; }
+  .record-value small { font-size: 17px; }
 
-  .footer { padding: 48px 0; }
-  .footer-inner { gap: 28px; }
+  /* Footer */
+  .footer { padding: 40px 0; }
+  .footer-inner { gap: 24px; }
+  .footer-awards { gap: 20px; }
+  .award-t { font-size: 12px; }
+  .award-d { font-size: 10px; }
+  .footer-info { font-size: 13px; }
+  .footer-copy { font-size: 13px; }
 }
 
 /* --- Tablet (768 ~ 1024) --- */

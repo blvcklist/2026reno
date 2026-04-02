@@ -838,6 +838,80 @@ body { overflow-x: hidden; }
   .ab-partners-bg-text, .ab-history-bg-text, .ab-contact-bg-text { font-size: 160px; }
 }
 
+/* --- Laptop Small (1024 ~ 1280) — 소형 노트북 해상도 --- */
+@media (max-width: 1280px) {
+  .ab-hero { min-height: 600px; }
+  .ab-hero-title { font-size: 68px; margin-bottom: 32px; letter-spacing: -1.6px; }
+  .ab-hero-sub, .ab-hero-desc { font-size: 24px; letter-spacing: -0.72px; }
+  .ab-hero-arrow svg { width: 40px; height: 40px; }
+
+  .ab-big-title { font-size: 52px; }
+  .ab-whatwedo .ab-big-title,
+  .ab-contact-hero .ab-big-title { font-size: 68px; letter-spacing: -1.6px; }
+  .ab-section-title, .ab-section-title-white { font-size: 52px; }
+  .ab-section-desc { font-size: 18px; margin-top: 32px; }
+
+  .ab-link { padding: 100px 0 130px; }
+  .ab-link-item { margin: 0 auto 48px; }
+  .ab-link-text { font-size: 42px; }
+
+  .ab-make-inner { gap: 80px; padding: 100px var(--px); }
+  .ab-make-left { padding-top: 80px; }
+  .ab-make-desc { font-size: 18px; margin-top: 32px; }
+  .ab-record-label { font-size: 24px; width: 280px; }
+  .ab-record-label-wrap { width: 280px; }
+  .ab-record-label-sub { font-size: 14px; }
+  .ab-record-value { font-size: 56px; letter-spacing: -1.2px; }
+  .ab-record-value small { font-size: 24px; }
+  .ab-make-right { gap: 32px; }
+  .ab-award-icon { width: 30px; height: 30px; }
+  .ab-award-t { font-size: 14px; }
+  .ab-award-d { font-size: 13px; }
+
+  .ab-draw { min-height: 540px; }
+  .ab-draw-title { font-size: 52px; }
+  .ab-draw-quote { font-size: 42px; letter-spacing: -1px; }
+  .ab-symbol { font-size: 88px; gap: 28px; }
+  .ab-symbol-plus { font-size: 40px; }
+  .ab-symbol-labels { gap: 100px; font-size: 16px; }
+  .ab-reno-logo-full img { width: 280px !important; }
+
+  .ab-partners-desc { font-size: 18px; margin-top: 32px; }
+  .ab-logo-grid { grid-template-columns: repeat(4, 280px); gap: 32px 0; }
+  .ab-logo-cell { height: 88px; }
+  .ab-logo-cell img { max-width: 140px; max-height: 42px; }
+  .ab-partners-bg-text, .ab-history-bg-text, .ab-contact-bg-text { font-size: 140px; }
+
+  .ab-history { padding: 100px 0 130px; }
+  .ab-history-inner { gap: 80px; }
+  .ab-history-left { flex: 0 0 340px; }
+  .ab-history-title { font-size: 52px; margin-bottom: 28px; }
+  .ab-history-quote { font-size: 24px; margin-bottom: 20px; }
+  .ab-history-desc { font-size: 18px; margin-bottom: 40px; }
+  .ab-history-year { font-size: 28px; }
+  .ab-history-item { font-size: 15px; }
+  .ab-history-award-name { flex: 0 0 340px; font-size: 15px; }
+  .ab-history-award-icon { width: 36px; height: 36px; margin: 0 40px; }
+  .ab-history-indicator { margin-top: 64px; gap: 20px; }
+
+  .ab-contact-section { padding: 120px 0; }
+  .ab-contact-div-title { font-size: 46px; margin-bottom: 48px; }
+  .ab-contact-sub { font-size: 24px; margin-top: 32px; }
+  .ab-contact-desc { font-size: 24px; }
+  .ab-contact-row { padding: 28px 0; }
+  .ab-contact-name { font-size: 18px; }
+  .ab-contact-role { font-size: 15px; }
+  .ab-contact-email, .ab-contact-phone { font-size: 18px; }
+
+  .ab-location { padding: 100px 0; }
+  .ab-location-inner { gap: 60px; }
+  .ab-location-addr { font-size: 18px; margin-top: 32px; }
+  .ab-location-recruit { font-size: 18px; margin-top: 60px; }
+  .ab-join-btn { font-size: 18px; gap: 20px; padding: 14px 22px; }
+  .ab-join-btn svg { width: 36px; height: 36px; }
+  .ab-location-map { flex: 0 0 480px; }
+}
+
 @media (max-width: 1024px) {
   .ab-hero-title { font-size: 64px; margin-bottom: 32px; }
   .ab-hero-sub, .ab-hero-desc { font-size: 24px; }
