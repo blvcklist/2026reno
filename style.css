@@ -63,15 +63,10 @@ strong { font-weight: 700; }
 .glass-shine {
   position: relative;
   overflow: hidden;
-  background-image:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.6) 0%,
-      rgba(255,255,255,0.15) 30%,
-      rgba(255,255,255,0.0) 50%,
-      rgba(255,255,255,0.1) 70%,
-      rgba(255,255,255,0.35) 100%
-    );
+  background: linear-gradient(272deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.00) 98.39%);
+  box-shadow: 10px 10px 16px 0 rgba(0, 0, 0, 0.04) inset;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid rgba(255,255,255,0.7);
   border-left: 1px solid rgba(255,255,255,0.4);
 }
