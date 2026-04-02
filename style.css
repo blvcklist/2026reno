@@ -1312,7 +1312,7 @@ body.hero-dark .scroll-slot span {
   .carousel-glow { width: 900px; height: 900px; }
   .carousel-track.gathered .agency-card { margin: 0 -140px; }
   .adv-intro-layer.minimized .adv-title { font-size: 20px; }
-  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 96px; }
+  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 104px; }
 
   /* Agency */
   .agency-title { font-size: 52px; margin-bottom: 32px; }
@@ -1322,7 +1322,7 @@ body.hero-dark .scroll-slot span {
   .card-label { font-size: 14px; padding: 6px 14px; }
   .card-name { font-size: 22px; }
   .agency-intro-layer.minimized .agency-title { font-size: 20px; }
-  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 96px; }
+  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 104px; }
   .skill-tag { font-size: 14px; padding: 10px 16px; }
 
   /* We Are */
@@ -1374,7 +1374,7 @@ body.hero-dark .scroll-slot span {
   .adv-slide-meta { height: 48px; }
   .marquee-text { font-size: 64px; }
   .adv-intro-layer.minimized .adv-title { font-size: 18px; }
-  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 84px; }
+  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 96px; }
   .adv-clients-inner { height: 88px; }
   .adv-client { flex: 0 0 280px; height: 88px; }
 
@@ -1393,7 +1393,7 @@ body.hero-dark .scroll-slot span {
   .carousel-pause { width: 50px; height: 50px; }
   .carousel-track.gathered .agency-card { margin: 0 -120px; }
   .agency-intro-layer.minimized .agency-title { font-size: 18px; }
-  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 84px; }
+  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 96px; }
   .skill-tag { font-size: 13px; padding: 9px 14px; border-radius: 16px; }
   .skills-marquee { bottom: 52px; }
 
@@ -1437,7 +1437,7 @@ body.hero-dark .scroll-slot span {
   /* Advertising */
   .adv-intro-inner { padding-top: 38vh; }
   .adv-visual-layer { padding-top: 88px; }
-  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 84px; }
+  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 100px; }
   .adv-glass { padding: 28px 32px; }
   .adv-clients-inner { height: 80px; }
   .adv-client { height: 80px; }
@@ -1446,7 +1446,7 @@ body.hero-dark .scroll-slot span {
 
   /* Agency */
   .agency-intro-inner { padding-top: 38vh; }
-  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 84px; }
+  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 100px; }
   .agency-card { height: 480px; }
   .carousel-indicator { margin-top: 28px; }
   .skills-marquee { bottom: 48px; }
@@ -1483,7 +1483,7 @@ body.hero-dark .scroll-slot span {
   .adv-title { font-size: 40px; margin-bottom: 20px; }
   .adv-desc { font-size: 16px; }
   .adv-visual-layer { padding-top: 72px; }
-  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 68px; }
+  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 92px; }
   .adv-intro-layer.minimized .adv-title { font-size: 16px; }
   .adv-glass { padding: 18px 22px; border-radius: 28px; }
   .adv-slide-title { font-size: 22px; left: 32px; top: 140px; }
@@ -1499,7 +1499,7 @@ body.hero-dark .scroll-slot span {
   .agency-intro-inner { padding-top: 32vh; }
   .agency-title { font-size: 40px; margin-bottom: 20px; }
   .agency-desc { font-size: 16px; }
-  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 68px; }
+  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 92px; }
   .agency-intro-layer.minimized .agency-title { font-size: 16px; }
   .agency-card { width: 280px; height: 400px; }
   .card-info { bottom: 20px; left: 20px; gap: 10px; }
