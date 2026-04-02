@@ -1291,7 +1291,9 @@ body.hero-dark .scroll-slot span {
   .gnb-ci { width: 52px; height: 52px; }
   .gnb-ci-img { width: 34px; height: 34px; }
 
-  /* Hero */
+  /* Hero — 뷰포트가 --cw(1440px)보다 좁으면 좌측 정렬 */
+  .hero-text { left: var(--px); }
+  .hero-indicator { left: var(--px); }
   .hero-subtitle { font-size: 20px; }
   .hero-title { font-size: 52px; }
   .hero-desc { font-size: 20px; }
@@ -1332,6 +1334,96 @@ body.hero-dark .scroll-slot span {
   .record-label-wrap { width: 220px; }
   .record-value { font-size: 52px; }
   .record-value small { font-size: 20px; }
+}
+
+/* --- Laptop Small (1024 ~ 1280) — 일반 노트북 해상도 --- */
+@media (max-width: 1280px) {
+  :root { --px: 60px; }
+
+  .gnb-link { font-size: 13px; padding: 0 10px; }
+  .gnb-btns { gap: 8px; }
+  .gnb-download { padding-left: 16px; gap: 8px; }
+
+  .hero-subtitle { font-size: 18px; }
+  .hero-title { font-size: 46px; }
+  .hero-desc { font-size: 18px; }
+  .hero-about-btn { font-size: 20px; margin-top: 48px; }
+
+  .adv-title { font-size: 46px; }
+  .adv-desc { font-size: 18px; }
+  .adv-glass { width: min(800px, calc(100% - 100px)); }
+  .adv-slide-title { font-size: 28px; left: 40px; top: 200px; }
+  .adv-slide-summary { left: 40px; bottom: 40px; gap: 48px; }
+  .marquee-text { font-size: 64px; }
+
+  .agency-title { font-size: 46px; }
+  .agency-desc { font-size: 18px; }
+  .agency-card { width: 320px; height: 480px; }
+
+  .weare-inner { gap: 60px; }
+  .weare-title { font-size: 46px; }
+  .record-label { font-size: 18px; width: 200px; }
+  .record-label-wrap { width: 200px; }
+  .record-value { font-size: 46px; }
+  .record-value small { font-size: 18px; }
+}
+
+/* --- 노트북 짧은 화면 높이 대응 (768px~900px) --- */
+@media (max-height: 900px) and (min-width: 1025px) {
+  .hero-text { top: 26%; }
+  .hero-about-btn { margin-top: 36px; }
+  .hero-indicator { bottom: 28px; }
+  .hero-scroll { bottom: 20px; }
+
+  .adv-intro-inner { padding-top: 38vh; }
+  .adv-visual-layer { padding-top: 88px; }
+  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 84px; }
+  .adv-glass { padding: 28px 32px; }
+  .adv-clients-inner { height: 80px; }
+
+  .agency-intro-inner { padding-top: 38vh; }
+  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 84px; }
+  .agency-card { height: 480px; }
+  .carousel-indicator { margin-top: 28px; }
+  .skills-marquee { bottom: 48px; }
+
+  .weare-inner { padding-top: 80px; padding-bottom: 80px; }
+  .weare-desc { margin-bottom: 48px; }
+}
+
+@media (max-height: 768px) and (min-width: 1025px) {
+  .hero-text { top: 22%; }
+  .hero-subtitle { font-size: 17px; margin-bottom: 14px; }
+  .hero-title { font-size: 44px; margin-bottom: 24px; }
+  .hero-desc { font-size: 17px; }
+  .hero-about-btn { margin-top: 28px; font-size: 18px; }
+  .hero-about-btn svg { width: 28px; height: 28px; }
+  .hero-indicator { bottom: 20px; }
+  .hero-indicator-select { padding: 12px 20px; height: 48px; }
+
+  .adv-intro-inner { padding-top: 34vh; }
+  .adv-visual-layer { padding-top: 76px; }
+  .adv-intro-layer.minimized .adv-intro-inner { padding-top: 72px; }
+  .adv-title { margin-bottom: 24px; }
+  .adv-glass { padding: 20px 24px; border-radius: 32px; }
+  .adv-slide-title { font-size: 24px; top: 160px; }
+  .adv-clients-inner { height: 68px; }
+  .adv-client { height: 68px; }
+
+  .agency-intro-inner { padding-top: 34vh; }
+  .agency-intro-layer.minimized .agency-intro-inner { padding-top: 72px; }
+  .agency-title { margin-bottom: 24px; }
+  .agency-card { width: 300px; height: 420px; }
+  .carousel-indicator { margin-top: 20px; }
+  .skills-marquee { bottom: 36px; }
+
+  .weare-inner { padding-top: 60px; padding-bottom: 60px; gap: 48px; }
+  .weare-title { font-size: 44px; }
+  .weare-desc { margin-bottom: 36px; }
+  .record-value { font-size: 44px; }
+
+  .footer { padding: 48px 0; }
+  .footer-inner { gap: 28px; }
 }
 
 /* --- Tablet (768 ~ 1024) --- */
