@@ -124,15 +124,19 @@ $(document).ready(function () {
     var mode = 'default';
 
     if (sectionEl && sectionEl.classList.contains('hero')) {
+      // 히어로: 현재 활성 슬라이드 기반
       var activeSlide = sectionEl.querySelector('.hero-slide.active');
       if (activeSlide) {
         if (activeSlide.getAttribute('data-gnb-red') === 'true') {
           mode = 'red';
-        } else if (activeSlide.getAttribute('data-dark') === 'true' || document.body.classList.contains('hero-dark')) {
+        } else if (activeSlide.getAttribute('data-dark') === 'true') {
           mode = 'dark';
         }
       }
     } else if (sectionEl) {
+      // 히어로가 아닌 섹션: hero-dark 강제 제거
+      document.body.classList.remove('hero-dark');
+
       if (sectionEl.classList.contains('red-bg')) {
         mode = 'red';
       } else if (sectionEl.getAttribute('data-gnb-dark') === 'true') {

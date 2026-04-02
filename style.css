@@ -1277,8 +1277,8 @@ body.hero-dark .scroll-slot span {
   .record-label-wrap { width: 320px; }
 }
 
-/* --- Laptop (1024 ~ 1440) --- */
-@media (max-width: 1440px) {
+/* --- Laptop (1024 ~ 1512) — 13"/14" 맥북 기본 해상도 포함 --- */
+@media (max-width: 1512px) {
   :root { --px: 80px; }
 
   /* GNB */
@@ -1424,8 +1424,8 @@ body.hero-dark .scroll-slot span {
   .footer-right-logo img:last-child { width: 200px; height: 14px; }
 }
 
-/* --- 노트북 짧은 화면 높이 대응 (768px~900px) --- */
-@media (max-height: 900px) and (min-width: 1025px) {
+/* --- 노트북 짧은 화면 높이 대응 — 브라우저 크롬 포함 ~960px 이하 --- */
+@media (max-height: 960px) and (min-width: 1025px) {
   /* Hero */
   .hero-text { top: 26%; }
   .hero-subtitle { margin-bottom: 16px; }
@@ -1462,7 +1462,8 @@ body.hero-dark .scroll-slot span {
   .footer-inner { gap: 28px; }
 }
 
-@media (max-height: 768px) and (min-width: 1025px) {
+/* 13" 맥북 브라우저 실제 뷰포트 높이: ~800-870px */
+@media (max-height: 860px) and (min-width: 1025px) {
   /* Hero */
   .hero-text { top: 22%; }
   .hero-subtitle { font-size: 16px; margin-bottom: 12px; }

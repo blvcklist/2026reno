@@ -801,7 +801,8 @@ body { overflow-x: hidden; }
 .gnb-link-sticky { display: none !important; }
 
 /* ===== Responsive ===== */
-@media (max-width: 1440px) {
+/* --- Laptop (1024 ~ 1512) — 13"/14" 맥북 기본 해상도 포함 --- */
+@media (max-width: 1512px) {
   .ab-hero-title { font-size: 80px; margin-bottom: 36px; }
   .ab-hero-sub, .ab-hero-desc { font-size: 28px; }
   .ab-big-title { font-size: 60px; }

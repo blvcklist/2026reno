@@ -96,12 +96,19 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    if (isDark) {
-      document.body.classList.add('hero-dark');
-    } else {
-      document.body.classList.remove('hero-dark');
+    // 히어로 섹션이 현재 활성 상태일 때만 GNB 모드 변경
+    var heroSection = document.querySelector('.hero');
+    var isHeroActive = heroSection && heroSection.classList.contains('active');
+
+    if (isHeroActive) {
+      if (isDark) {
+        document.body.classList.add('hero-dark');
+      } else {
+        document.body.classList.remove('hero-dark');
+      }
+      document.body.classList.toggle('gnb-dark', isDark && !isRed);
+      document.body.classList.toggle('gnb-red', isRed);
     }
-    document.body.classList.toggle('gnb-red', isRed);
 
     window.dispatchEvent(new Event('heroSlideChange'));
 
