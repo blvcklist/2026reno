@@ -210,7 +210,7 @@ body.hero-dark #cubeCanvas {
 /* 텍스트 그룹: 컨테이너 내 좌측 배치 */
 .hero-text {
   position: absolute;
-  left: var(--px);
+  left: max(var(--px), calc(50% - var(--cw) / 2));
   top: 33%;
   z-index: 2;
   display: flex;
@@ -408,7 +408,7 @@ body.hero-dark .hero-about-btn { color: #fff; }
 /* 인디케이터: 컨테이너 내 좌하단 */
 .hero-indicator {
   position: absolute;
-  left: var(--px);
+  left: max(var(--px), calc(50% - var(--cw) / 2));
   bottom: 40px;
   z-index: 2;
   display: flex;
