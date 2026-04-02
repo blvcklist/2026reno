@@ -161,7 +161,7 @@ strong { font-weight: 700; }
   background: white; border-radius: 999px;
 }
 
-.gnb-download-ic { width: 24px; height: 24px; }
+.gnb-download-ic { width: 20px; height: 18px; }
 
 /* ===== HERO (전체폭, 콘텐츠만 컨테이너 내) ===== */
 .hero {
