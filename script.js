@@ -124,12 +124,17 @@ $(document).ready(function () {
     var mode = 'default';
 
     if (sectionEl && sectionEl.classList.contains('hero')) {
-      // 히어로: 현재 활성 슬라이드 기반
+      // 히어로: 현재 활성 슬라이드 기반으로 hero-dark + GNB 모드 복원
       var activeSlide = sectionEl.querySelector('.hero-slide.active');
       if (activeSlide) {
-        if (activeSlide.getAttribute('data-gnb-red') === 'true') {
+        var isDark = activeSlide.getAttribute('data-dark') === 'true';
+        var isRed = activeSlide.getAttribute('data-gnb-red') === 'true';
+
+        document.body.classList.toggle('hero-dark', isDark);
+
+        if (isRed) {
           mode = 'red';
-        } else if (activeSlide.getAttribute('data-dark') === 'true') {
+        } else if (isDark) {
           mode = 'dark';
         }
       }
@@ -183,7 +188,23 @@ $(document).ready(function () {
     onLeave: function (index, nextIndex, direction) {
       try {
         var nextSection = sections[nextIndex - 1];
-        if (nextSection) updateGnbDark(nextSection);
+        if (!nextSection) return;
+
+        // GNB 스타일만 즉시 전환 (hero-dark는 afterLoad에서 처리)
+        var gnbMode = 'default';
+        if (nextSection.classList.contains('hero')) {
+          var activeSlide = nextSection.querySelector('.hero-slide.active');
+          if (activeSlide) {
+            if (activeSlide.getAttribute('data-gnb-red') === 'true') gnbMode = 'red';
+            else if (activeSlide.getAttribute('data-dark') === 'true') gnbMode = 'dark';
+          }
+        } else {
+          if (nextSection.classList.contains('red-bg')) gnbMode = 'red';
+          else if (nextSection.getAttribute('data-gnb-dark') === 'true') gnbMode = 'dark';
+        }
+        document.body.classList.toggle('gnb-dark', gnbMode === 'dark');
+        document.body.classList.toggle('gnb-red', gnbMode === 'red');
+
         if (gnb) gnb.classList.toggle('sticky', nextIndex !== 1);
       } catch (err) { /* prevent fullPage internal state corruption */ }
     }
