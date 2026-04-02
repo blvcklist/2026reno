@@ -523,7 +523,7 @@ body.hero-dark .scroll-slot span {
   max-width: var(--cw);
   width: 100%;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 var(--px);
   padding-top: 43vh;
   transition: padding-top 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -761,7 +761,7 @@ body.hero-dark .scroll-slot span {
   max-width: var(--cw);
   width: 100%;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 var(--px);
   padding-top: 43vh;
   transition: padding-top 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   transition: padding-top 1.4s cubic-bezier(0.22, 1, 0.36, 1);
