@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var activeProg = dots[realIndex].querySelector('.dot-progress');
     if (activeProg) {
       activeProg.style.animation = 'dotFill ' + AUTO_DURATION + 'ms linear forwards';
-      if (paused) activeProg.style.animationPlayState = 'paused';
+     // if (paused) activeProg.style.animationPlayState = 'paused';
     }
   }
 
